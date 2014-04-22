@@ -153,22 +153,30 @@ function btnDetect_Callback(hObject, eventdata, handles)
 
 clear arrayAudio;
 
+%get the train file path
 folderPath = get(handles.txtTrainFolder,'String');
+%get the test file path
 samplePath = get(handles.txtPathFile, 'String');
+%init variables
 matchedLabel = '1';
 currentProbability = 0;
+%check the user check Gauss model or GMM
 isGauss = get(handles.rdGauss, 'Value');
-for (n = 1:2)
-    tempF = strcat(folderPath, '\', int2str(n), '.wav');
+
+fnames = dir(strcat(folderPath,'\','*.wav'));
+numfids = length(fnames);
+
+for (n = 1:numfids)
+    tempF = strcat(folderPath, '\', fnames(n).name);
     temp = 0;
     if (isGauss == 1)
-        arrayAudio(n) = AudioData(tempF,int2str(n));
+        arrayAudio(n) = AudioData(tempF,fnames(n).name);
         temp = arrayAudio(n).calculateProbability(samplePath);
     end
     if (isGauss == 0)
-        AudioGMM.numberOfLoop = int2str(get(handles.txtNumberLoop, 'String'));
-        AudioGMM.numberOfGauss = int2str(get(handles.txtNumberGauss, 'String'));
-        arrayAudio(n) = AudioGMM(tempF,int2str(n));
+        %AudioGMM.numberOfLoop = int2str(get(handles.txtNumberLoop, 'String'));
+        %AudioGMM.numberOfGauss = int2str(get(handles.txtNumberGauss, 'String'));
+        arrayAudio(n) = AudioGMM(tempF,fnames(n).name);
         temp = arrayAudio(n).calculate(samplePath);
     end  
     
@@ -178,7 +186,7 @@ for (n = 1:2)
         matchedLabel = arrayAudio(n).label;
     end
 end
-h = msgbox(strcat('The label is  ',matchedLabel),'Result');
+h = msgbox(strcat('The label is   ',matchedLabel, '   with the propapility  ', num2str(currentProbability)),'Result');
 
 
 % --- Executes on button press in rdGauss.
