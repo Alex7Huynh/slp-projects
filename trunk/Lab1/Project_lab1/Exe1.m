@@ -174,9 +174,12 @@ for (n = 1:numfids)
         temp = arrayAudio(n).calculateProbability(samplePath);
     end
     if (isGauss == 0)
-        %AudioGMM.numberOfLoop = int2str(get(handles.txtNumberLoop, 'String'));
-        %AudioGMM.numberOfGauss = int2str(get(handles.txtNumberGauss, 'String'));
-        arrayAudio(n) = AudioGMM(tempF,fnames(n).name);
+        te = fnames(n).name;
+        txtLoop = get(handles.txtNumberLoop, 'String');
+        txtGauss = get(handles.txtNumberGauss, 'String');
+        numLoop = str2num(txtLoop);
+        numGauss = str2num(txtGauss);
+        arrayAudio(n) = AudioGMM(tempF,fnames(n).name, numLoop, numGauss);
         temp = arrayAudio(n).calculate(samplePath);
     end  
     
