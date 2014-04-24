@@ -22,7 +22,7 @@ function varargout = Exe1(varargin)
 
 % Edit the above text to modify the response to help Exe1
 
-% Last Modified by GUIDE v2.5 17-Apr-2014 19:28:01
+% Last Modified by GUIDE v2.5 22-Apr-2014 18:42:19
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -189,7 +189,8 @@ for (n = 1:numfids)
         matchedLabel = arrayAudio(n).label;
     end
 end
-h = msgbox(strcat('The label is   ',matchedLabel, '   with the propapility  ', num2str(currentProbability)),'Result');
+announcement = sprintf('The label is %s with the probability %f',matchedLabel, currentProbability);
+h = msgbox(announcement,'Result');
 
 
 % --- Executes on button press in rdGauss.
@@ -252,6 +253,29 @@ function txtNumberLoop_Callback(hObject, eventdata, handles)
 % --- Executes during object creation, after setting all properties.
 function txtNumberLoop_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to txtNumberLoop (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit5_Callback(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit5 as text
+%        str2double(get(hObject,'String')) returns contents of edit5 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit5_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
