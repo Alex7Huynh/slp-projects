@@ -1,0 +1,141 @@
+﻿HTK = HIDDEN MARKOV TOOLKIT
+
+HTK HMM = HTKLIB + HTK TOOL
+
+WAV-> MFCC
+
+MUCTIEU = SYSTEM NHAN DANG TIENG NOI
+SPEEH RECOGNITION
+
+B0. CAI DAT
+- DOWNLOAD, COMPILE HTK, AUDACITY
+- PERL TOOL
+- BIN
+
+B1. CHUAN BI DATA
+1.1 WAVE: CHIA 2 TAP = 230 + 20
+- TRAIN SET: GIU NGUYEN
+- TEST SET: CAT RA TUNG TU
+1.2 TEXT: CHIA RA 2 TAP = 230 + 20XN
+
+1.3. SOAN DICT ->DICT
+- TU = WORD, SYLLABLE = AM TIET
+CHAFO	CH  A  <F> O   SP
+BUOORI	B U OO <R> I SP
+...
+...
+
+NOTE: CHUA 1 DONG TRONG TRONG CAC FILE SOAN THAO
+
+1.3 SOAN TRANSCRIPTION
+- PROMPTS:
+FILENAME	CHAO BUOORI SASNG
+
+- PROMPTS -> WORDS.MLF
+
+1.4 SOAN MONOPHONES0, MONOPHONES1 (SP)
+
+1.5. WORDS.MLF -> PHONES0.MLF & PHONES1.MLF
+HLEd -d dict  -i phones0.mlf  mkphones0.led   words.mlf
+HLEd -d dict  -i phones1.mlf  mkphones1.led   words.mlf
+
+1.6. WAV -> MFCC
+cmd: Hcopy -C config -S mfc.scp  
+- TAO FILE MFC.SCP:
+abc.wav	abc.mfc 
+c:/1.wav	d:/1.mfc
+
+B2. Khoi tao mô hình
+cmd: HCompV -C config -f 0.01 -m -S train.scp -M hmm0 proto
+- train.scp: danh sach cac file mfc cho train
+abc.mfc
+d:/1.mfc
+- tao thu mục hmm0
+
+B3. trong thư mục hmm0, tạo mô hình chuẩn
+- tạo hmmdefs: copy hàng loạt từ proto (theo list của monophones0)
+- tạo macros: copy từ ~o của proto (trong hmm0) và ~v của vFloors
+
+HMMDEFS & MACROS = MÔ HÌNH CỦA MÌNH
+
+B4. Training 3 vòng -> hmm3
+cmd x 3 : HERest -C config -I phones0.mlf -S train.scp -H hmm0/macros -H hmm0/hmmdefs -M hmm1 monophones0
+- TẠO THƯ MỤC HMM1, hmm2, hmm3 TRƯỚC KHI CHẠY
+- RA: HMMDEFS & MACROS ĐÃ ĐƯỢC SỬA LẠI, lưu trong hmm3
+
+B5. THÊM SP VÀO DANH SÁCH MÔ HÌNh
+- tạo hmm4, copy mô hình của hmm3 vào hmm4
+- sửa hmmdefs trong hmm4: bổ sung SP
+
+b6. liên kết sil & sp
+cmd: HHEd -H hmm4/macros -H hmm4/hmmdefs -M hmm5 sil.hed monophones1
+- tạo hmm5 
+
+b7. train 2 vòng hmm5 -> hmm7
+- note: dùng monophones1 thay cho 0
+
+b8. xac định cach doc chinh cho tư trong wav
+- tạo ra file aligned.mlf
+- clone/copy phones1.mlf -> aligned.mlf
+
+b9. train 2 vong nua -> hmm9
+- note: dùng aligned.mlf thay cho phones1.mlf
+
+b10. tạo triphones:
+chào = ch à o
+chào = ch+à     ch-à+o    à-o
+
+		v-à-o
+
+chì = ch+ì    ch-ì
+
+- sửa text/prompt: wintri.mlf
+cmd: HLEd -n triphones1 -i wintri.mlf mktri.led aligned.mlf
+- sửa mô hình
+cmd: HHEd -B -H hmm9/macros -H hmm9/hmmdefs -M hmm10
+ mktri.hed monophones1
+(tạo hmm10)
+
+b10. train 2 vòng -> hmm12
+- note: dùng triphones1 thay cho monophones1
+- note: thêm yêu cầu output "stats" cho b11
+cmd: HERest -B -C config -I wintri.mlf -s stats -S train.scp -H hmm11/macros -H hmm11/hmmdefs -M hmm12 triphones1
+
+b11. Liên phần share/chung
+cmd: HHEd -B -H hmm12/macros -H hmm12/hmmdefs -M hmm13 tree.hed triphones1 > log
+- ra được hmm13
+
+b12. train 2 vòng -> hmm15
+note: dùng tiedlist thay cho triphones1
+
+---------
+
+TEST:
+
+B1. Chuan bi data:
+- wav -> mfcc
+- test.scp: danh dach file test
+- tạo Grammar: file gram.txt (BNF)
+$tu = CHÀO | BUỔI | A | C | ...| ... | Z;
+(SENT-START $tu  SENT-END)
+
+
+trong đó SENT-START & SENT-END thêm vào DICT
+SENT-START	[]	sil
+SENT-END	[]	sil
+ 
+- Parse gram ra wdnet: HParse  gram.TXT    wdnet
+
+- cmd: HVite -H hmm15/macros -H hmm15/hmmdefs -S test.scp 
+-i recout.mlf -w wdnet -p 0.0 -s 5.0 dict tiedlist
+
+
+
+CAU TRUC: FILE RECOUT.MLF = Y CHANG FILE WORDS.MLF CUA MINH
+
+b2. THỐNG KÊ KẾT QUẢ:
+CMD: HResults -I truth.mlf  tiedlist   recout.mlf
+
+
+
+
