@@ -44,14 +44,15 @@
             this.btnCreateHmmdefs = new System.Windows.Forms.Button();
             this.btnCreateMacros = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnInitModelHmm0 = new System.Windows.Forms.Button();
+            this.btnTrainHmm1_3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.btnTrainHMM11_12 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -208,25 +209,25 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnInitModelHmm0
             // 
-            this.button2.Location = new System.Drawing.Point(29, 327);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(312, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Step7: Init Model (hmm0)";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnInitModelHmm0.Location = new System.Drawing.Point(29, 327);
+            this.btnInitModelHmm0.Name = "btnInitModelHmm0";
+            this.btnInitModelHmm0.Size = new System.Drawing.Size(312, 23);
+            this.btnInitModelHmm0.TabIndex = 13;
+            this.btnInitModelHmm0.Text = "Step7: Init Model (hmm0)";
+            this.btnInitModelHmm0.UseVisualStyleBackColor = true;
+            this.btnInitModelHmm0.Click += new System.EventHandler(this.btnInitModelHmm0_Click);
             // 
-            // button3
+            // btnTrainHmm1_3
             // 
-            this.button3.Location = new System.Drawing.Point(29, 428);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(312, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "Step 9: Run Train (3 times) to HMM3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnTrainHmm1_3.Location = new System.Drawing.Point(29, 428);
+            this.btnTrainHmm1_3.Name = "btnTrainHmm1_3";
+            this.btnTrainHmm1_3.Size = new System.Drawing.Size(312, 23);
+            this.btnTrainHmm1_3.TabIndex = 14;
+            this.btnTrainHmm1_3.Text = "Step 9: Run Train (3 times) to HMM3";
+            this.btnTrainHmm1_3.UseVisualStyleBackColor = true;
+            this.btnTrainHmm1_3.Click += new System.EventHandler(this.btnTrainHmm1_3_Click);
             // 
             // button4
             // 
@@ -288,19 +289,30 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // btnTrainHMM11_12
+            // 
+            this.btnTrainHMM11_12.Location = new System.Drawing.Point(28, 638);
+            this.btnTrainHMM11_12.Name = "btnTrainHMM11_12";
+            this.btnTrainHMM11_12.Size = new System.Drawing.Size(312, 23);
+            this.btnTrainHMM11_12.TabIndex = 21;
+            this.btnTrainHMM11_12.Text = "Step 15: Training twices to hmm12";
+            this.btnTrainHMM11_12.UseVisualStyleBackColor = true;
+            this.btnTrainHMM11_12.Click += new System.EventHandler(this.btnTrainHMM11_12_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(368, 682);
+            this.Controls.Add(this.btnTrainHMM11_12);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnTrainHmm1_3);
+            this.Controls.Add(this.btnInitModelHmm0);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCreateMacros);
             this.Controls.Add(this.btnCreateHmmdefs);
@@ -342,14 +354,15 @@
         private System.Windows.Forms.Button btnCreateHmmdefs;
         private System.Windows.Forms.Button btnCreateMacros;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnInitModelHmm0;
+        private System.Windows.Forms.Button btnTrainHmm1_3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btnTrainHMM11_12;
     }
 }
 
