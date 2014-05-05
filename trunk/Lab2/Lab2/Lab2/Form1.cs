@@ -90,6 +90,7 @@ namespace Lab2
                 }
             }
             lstWord = lstWord.Distinct().ToList();
+            // MINH add code here for add new line
             lstWord.Sort();
             StreamWriter fDICT = new StreamWriter("DICT");
             for (int i = 0; i < lstWord.Count - 1; ++i)
@@ -97,6 +98,7 @@ namespace Lab2
                 fDICT.WriteLine(lstWord[i]);
             }
             fDICT.Write(lstWord[lstWord.Count-1]);
+            fDICT.WriteLine();
             fDICT.Close();
 
 
@@ -278,6 +280,94 @@ namespace Lab2
             }
             fHmmdefs.Close();
             MessageBox.Show("Create hmmdefs successfully!", "Info");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_MFC);
+            if (string.IsNullOrEmpty(CommandHelper.GetOutput()))
+            {
+                MessageBox.Show("Create MFCC successfully!", "Info");
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD);
+            if (string.IsNullOrEmpty(CommandHelper.GetOutput()))
+            {
+                MessageBox.Show("Run HMM0 successfully!", "Info");
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            var hmm3Path = Application.StartupPath + "\\hmm3";
+            var hmm4Path = Application.StartupPath + "\\hmm4";
+
+            foreach (var file in Directory.GetFiles(hmm3Path))
+                File.Copy(file, Path.Combine(hmm4Path, Path.GetFileName(file)));
+
+
+            StreamReader sReader = new StreamReader(hmm4Path + "\\hmmdefs");
+            var hmmDef = sReader.ReadToEnd();
+            sReader.Close();
+            var copyText = hmmDef.Substring(hmmDef.LastIndexOf("~h"));
+            copyText = copyText.Replace("sil", "sp");
+            StreamWriter fHmmdefs = new StreamWriter(hmm4Path + "\\hmmdefs");
+            hmmDef = hmmDef + copyText;
+            fHmmdefs.WriteLine(hmmDef);
+            fHmmdefs.Close();
+
+            MessageBox.Show("Run successfully!", "Info");
+           
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            var src = Application.StartupPath + "\\phones1.mlf ";
+            var dest = Application.StartupPath;
+            File.Copy(src, Path.Combine(dest, "aligned.mlf"));
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9);
+            MessageBox.Show("Run successfully!", "Info");
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_CREATEWINTRI);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10);
+            MessageBox.Show("Run successfully!", "Info");
         }
     }
 }
