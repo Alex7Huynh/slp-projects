@@ -16,3 +16,11 @@ E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Form1.resources
 E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
 E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\GenerateResource.read.1.tlog
 E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.exe
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.pdb
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.exe
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.pdb
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.csprojResolveAssemblyReference.cache
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Form1.resources
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.csproj.GenerateResource.Cache
