@@ -291,7 +291,7 @@ namespace Lab2
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnInitModelHmm0_Click(object sender, EventArgs e)
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD);
             if (string.IsNullOrEmpty(CommandHelper.GetOutput()))
@@ -300,7 +300,7 @@ namespace Lab2
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnTrainHmm1_3_Click(object sender, EventArgs e)
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN);
@@ -318,22 +318,68 @@ namespace Lab2
         private void button5_Click(object sender, EventArgs e)
         {
 
-            var hmm3Path = Application.StartupPath + "\\hmm3";
-            var hmm4Path = Application.StartupPath + "\\hmm4";
+            //var hmm3Path = Application.StartupPath + "\\hmm3";
+            //var hmm4Path = Application.StartupPath + "\\hmm4";
 
-            foreach (var file in Directory.GetFiles(hmm3Path))
-                File.Copy(file, Path.Combine(hmm4Path, Path.GetFileName(file)));
+            //foreach (var file in Directory.GetFiles(hmm3Path))
+            //    File.Copy(file, Path.Combine(hmm4Path, Path.GetFileName(file)));
 
 
-            StreamReader sReader = new StreamReader(hmm4Path + "\\hmmdefs");
-            var hmmDef = sReader.ReadToEnd();
-            sReader.Close();
-            var copyText = hmmDef.Substring(hmmDef.LastIndexOf("~h"));
-            copyText = copyText.Replace("sil", "sp");
-            StreamWriter fHmmdefs = new StreamWriter(hmm4Path + "\\hmmdefs");
-            hmmDef = hmmDef + copyText;
-            fHmmdefs.WriteLine(hmmDef);
-            fHmmdefs.Close();
+            //StreamReader sReader = new StreamReader(hmm4Path + "\\hmmdefs");
+            //var hmmDef = sReader.ReadToEnd();
+            //sReader.Close();
+            //var copyText = hmmDef.Substring(hmmDef.LastIndexOf("~h"));
+            //copyText = copyText.Replace("sil", "sp");
+            //StreamWriter fHmmdefs = new StreamWriter(hmm4Path + "\\hmmdefs");
+            //hmmDef = hmmDef + copyText;
+            //fHmmdefs.WriteLine(hmmDef);
+            //fHmmdefs.Close();
+
+            string str;
+            int num3;
+            File.Copy("HMM3/hmmdefs", "HMM4/hmmdefs", true);
+            File.Copy("HMM3/macros", "HMM4/macros", true);
+            using (StreamReader reader = new StreamReader("HMM4/hmmdefs"))
+            {
+                str = reader.ReadToEnd();
+            }
+            int index = str.IndexOf("sil");
+            string str2 = str.Substring(index - 4);
+            index = str2.IndexOf("<STATE> 3");
+            int num2 = str2.IndexOf("<STATE>", (int)(index + 0x16));
+            string str3 = str2.Substring(index + 0x15, num2 - (index + 0x15));
+            StreamWriter writer = new StreamWriter("HMM4/hmmdefs");
+            writer.Write(str);
+            writer.WriteLine("~h \"sp\"");
+            writer.WriteLine("<BEGINHMM>");
+            writer.WriteLine("<NUMSTATES> 3");
+            writer.WriteLine("<STATE> 2");
+            writer.WriteLine("<MEAN> 39");
+            writer.Write(str3);
+            writer.WriteLine("<TRANSP> 3");
+            index = str2.IndexOf("<TRANSP> 5");
+            num2 = str2.IndexOf("<ENDHMM>");
+            string[] strArray = str2.Substring(index + 11, num2 - (index + 11)).Split(new char[] { '\n' });
+            string[] strArray2 = strArray[0].Split(new char[] { ' ' });
+            string str4 = " ";
+            for (num3 = 1; num3 <= 3; num3++)
+            {
+                str4 = str4 + strArray2[num3] + " ";
+            }
+            str4 = str4.Substring(0, str4.Length - 1);
+            writer.WriteLine(str4);
+            strArray2 = strArray[2].Split(new char[] { ' ' });
+            str4 = " " + strArray2[1] + " " + strArray2[3] + " " + strArray2[4];
+            writer.WriteLine(str4);
+            strArray2 = strArray[4].Split(new char[] { ' ' });
+            str4 = " ";
+            for (num3 = 1; num3 <= 3; num3++)
+            {
+                str4 = str4 + strArray2[num3] + " ";
+            }
+            writer.WriteLine(str4);
+            writer.WriteLine("<ENDHMM>");
+            writer.Close();
 
             MessageBox.Show("Run successfully!", "Info");
            
@@ -367,6 +413,37 @@ namespace Lab2
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_CREATEWINTRI);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10);
+            UpdateFileWintri();
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void UpdateFileWintri()
+        {
+            string str;
+            using (StreamReader reader = new StreamReader("wintri.mlf"))
+            {
+                str = reader.ReadToEnd();
+            }
+
+            string[] strArray = str.Split(new char[] { '\n' });
+            StreamWriter writer = new StreamWriter("wintri.mlf");
+            foreach (string strTmp in strArray)
+            {
+                string tmp = strTmp.Trim();
+                if (strTmp.Contains(".lab\""))
+                {
+                     tmp = "\"*/" + tmp.Substring(1);
+                }
+                writer.WriteLine(tmp);
+            }
+
+            writer.Close();
+        }
+
+        private void btnTrainHMM11_12_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12);
             MessageBox.Show("Run successfully!", "Info");
         }
     }
