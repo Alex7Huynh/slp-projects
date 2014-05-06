@@ -42,5 +42,15 @@ namespace Lab2
 
         public const string CMD_STEP15_TRAINTOHMM12 =
             "HERest -B -C config\\config -I wintri.mlf -s stats -S train.scp -H hmm11/macros -H hmm11/hmmdefs -M hmm12 triphones1";
+
+
+        public const string CMD_TEST_STEP1_CREATEMFCC =
+            "HCopy -T 1 -C config\\config.hcopy -S mfcc-test.scp";
+
+        public const string CMD_TEST_STEP1_PARSEGRAM = "HParse  gram.txt   wdnet";
+        public const string CMD_TEST_STEP1_RUN = 
+            "HVite -H hmm15/macros -H hmm15/hmmdefs -S test.scp -i recout.mlf -w wdnet -p 0.0 -s 5.0 dict tiedlist";
+
+        public const string CMD_TEST_STEP2_RESULT = "HResults -I test.mlf tiedlist recout.mlf";
     }
 }

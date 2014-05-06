@@ -493,5 +493,75 @@ namespace Lab2
             fFulllist.Close();
             MessageBox.Show("Create fulllist successfully!", "Info");
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // create mfcc - test
+            StreamWriter fMFC = new StreamWriter("mfcc-test.scp");
+            string testFilePath = tbTestFilePath.Text;
+            string lastFolder = testFilePath.Substring(testFilePath.LastIndexOf('\\') + 1);
+
+            string[] files = System.IO.Directory.GetFiles(testFilePath, "*.wav");
+
+            foreach (var file in files)
+            {
+                string filename = file.Replace(testFilePath, "");
+                string filename2 = filename.Replace("wav", "mfc");
+                fMFC.WriteLine(lastFolder + filename + "  MFCTest" + filename2);
+            }
+            fMFC.Close();
+
+            // create gram txt
+            StreamReader reader = new StreamReader("gram-source.txt");
+            string txtGram = reader.ReadToEnd();
+            var words = txtGram.Split(' ').ToList();
+            string result = "$(tu) = {0}";
+            string txt = string.Empty;
+            int iCount = 0;
+            foreach (var word in words)
+            {
+                txt += Word.ConvertUnicodeToTelex(word);
+                if (iCount < words.Count)
+                {
+                    txt += " | ";
+                }
+            }
+            StreamWriter gramWriter = new StreamWriter("gram.txt");
+            result = string.Format(result, txt);
+            gramWriter.WriteLine(result);
+            gramWriter.WriteLine("$(tu)");
+            //gramWriter.WriteLine("(SENT-START $(tu) SENT-END)");
+            gramWriter.Close();
+            // change the dict
+            //StreamReader dictReader = new StreamReader("DICT");
+            //string dictText = dictReader.ReadToEnd();
+            //dictReader.Close();
+            //dictText = dictText.Remove(dictText.LastIndexOf("\r\n"));
+            //using (StreamWriter dictWriter = new StreamWriter("DICT"))
+            //{
+            //    dictWriter.WriteLine(dictText);
+            //    dictWriter.WriteLine("SENT-START  []	sil");
+            //    dictWriter.WriteLine("SENT-END	[]	sil");
+            //}
+            
+            // parse gram
+            var src = Application.StartupPath + "\\words.mlf";
+            var dest = Application.StartupPath;
+            File.Copy(src, Path.Combine(dest, "recout.mlf"));
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN);
+            MessageBox.Show("Run successfully!", "Info");
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            StreamWriter test = new StreamWriter("test.mlf");
+            test.Close();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT);
+            MessageBox.Show("Run successfully!", "Info");
+
+        }
     }
 }
