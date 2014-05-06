@@ -43,6 +43,14 @@ namespace Lab2
         public const string CMD_STEP15_TRAINTOHMM12 =
             "HERest -B -C config\\config -I wintri.mlf -s stats -S train.scp -H hmm11/macros -H hmm11/hmmdefs -M hmm12 triphones1";
 
+        public const string CMD_STEP16_TRAINTOHMM13 =
+            "HHEd -B -H hmm12/macros -H hmm12/hmmdefs -M hmm13 config\\tree.hed triphones1 > log";
+
+        public const string CMD_STEP17_TRAINTOHMM14 =
+            "HERest -B -C config\\config -I wintri.mlf -s stats -S train.scp -H hmm13/macros -H hmm13/hmmdefs -M hmm14 tiedlist";
+
+        public const string CMD_STEP17_TRAINTOHMM15 =
+            "HERest -B -C config\\config -I wintri.mlf -s stats -S train.scp -H hmm14/macros -H hmm14/hmmdefs -M hmm15 tiedlist";
 
         public const string CMD_TEST_STEP1_CREATEMFCC =
             "HCopy -T 1 -C config\\config.hcopy -S mfcc-test.scp";
