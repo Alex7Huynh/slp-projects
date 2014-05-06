@@ -54,6 +54,8 @@
             this.button9 = new System.Windows.Forms.Button();
             this.btnTrainHMM11_12 = new System.Windows.Forms.Button();
             this.btnCreateFulllist = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -300,15 +302,25 @@
             this.btnTrainHMM11_12.UseVisualStyleBackColor = true;
             this.btnTrainHMM11_12.Click += new System.EventHandler(this.btnTrainHMM11_12_Click);
             // 
-            // btnCreateFulllist
+            // button2
             // 
-            this.btnCreateFulllist.Location = new System.Drawing.Point(109, 124);
-            this.btnCreateFulllist.Name = "btnCreateFulllist";
-            this.btnCreateFulllist.Size = new System.Drawing.Size(128, 23);
-            this.btnCreateFulllist.TabIndex = 22;
-            this.btnCreateFulllist.Text = "monophone0 --> fulllist";
-            this.btnCreateFulllist.UseVisualStyleBackColor = true;
-            this.btnCreateFulllist.Click += new System.EventHandler(this.btnCreateFulllist_Click);
+            this.button2.Location = new System.Drawing.Point(29, 667);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(312, 23);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "Test - Step 1: Prepare data ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(29, 696);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(311, 23);
+            this.button3.TabIndex = 23;
+            this.button3.Text = "Test - Step 2: Get Result";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
@@ -316,6 +328,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(712, 364);
             this.Controls.Add(this.btnCreateFulllist);
+           
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnTrainHMM11_12);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -376,6 +391,8 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button btnTrainHMM11_12;
         private System.Windows.Forms.Button btnCreateFulllist;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
