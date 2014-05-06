@@ -53,6 +53,7 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.btnTrainHMM11_12 = new System.Windows.Forms.Button();
+            this.btnCreateFulllist = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -94,7 +95,7 @@
             // 
             // btnCreatePROMPTS
             // 
-            this.btnCreatePROMPTS.Location = new System.Drawing.Point(109, 124);
+            this.btnCreatePROMPTS.Location = new System.Drawing.Point(109, 153);
             this.btnCreatePROMPTS.Name = "btnCreatePROMPTS";
             this.btnCreatePROMPTS.Size = new System.Drawing.Size(128, 23);
             this.btnCreatePROMPTS.TabIndex = 4;
@@ -104,7 +105,7 @@
             // 
             // btnCreateWORDS
             // 
-            this.btnCreateWORDS.Location = new System.Drawing.Point(109, 153);
+            this.btnCreateWORDS.Location = new System.Drawing.Point(109, 182);
             this.btnCreateWORDS.Name = "btnCreateWORDS";
             this.btnCreateWORDS.Size = new System.Drawing.Size(128, 23);
             this.btnCreateWORDS.TabIndex = 5;
@@ -131,7 +132,7 @@
             // 
             // btnCreateMFC
             // 
-            this.btnCreateMFC.Location = new System.Drawing.Point(109, 240);
+            this.btnCreateMFC.Location = new System.Drawing.Point(109, 269);
             this.btnCreateMFC.Name = "btnCreateMFC";
             this.btnCreateMFC.Size = new System.Drawing.Size(128, 23);
             this.btnCreateMFC.TabIndex = 7;
@@ -141,7 +142,7 @@
             // 
             // btnTestSCP
             // 
-            this.btnTestSCP.Location = new System.Drawing.Point(192, 269);
+            this.btnTestSCP.Location = new System.Drawing.Point(192, 298);
             this.btnTestSCP.Name = "btnTestSCP";
             this.btnTestSCP.Size = new System.Drawing.Size(148, 23);
             this.btnTestSCP.TabIndex = 9;
@@ -151,7 +152,7 @@
             // 
             // btnCreateTrainingSCP
             // 
-            this.btnCreateTrainingSCP.Location = new System.Drawing.Point(28, 269);
+            this.btnCreateTrainingSCP.Location = new System.Drawing.Point(28, 298);
             this.btnCreateTrainingSCP.Name = "btnCreateTrainingSCP";
             this.btnCreateTrainingSCP.Size = new System.Drawing.Size(128, 23);
             this.btnCreateTrainingSCP.TabIndex = 8;
@@ -161,7 +162,7 @@
             // 
             // btnCreateFolder
             // 
-            this.btnCreateFolder.Location = new System.Drawing.Point(14, 211);
+            this.btnCreateFolder.Location = new System.Drawing.Point(14, 240);
             this.btnCreateFolder.Name = "btnCreateFolder";
             this.btnCreateFolder.Size = new System.Drawing.Size(158, 23);
             this.btnCreateFolder.TabIndex = 6;
@@ -171,7 +172,7 @@
             // 
             // btnDeleteFolder
             // 
-            this.btnDeleteFolder.Location = new System.Drawing.Point(178, 211);
+            this.btnDeleteFolder.Location = new System.Drawing.Point(178, 240);
             this.btnDeleteFolder.Name = "btnDeleteFolder";
             this.btnDeleteFolder.Size = new System.Drawing.Size(163, 23);
             this.btnDeleteFolder.TabIndex = 10;
@@ -181,7 +182,7 @@
             // 
             // btnCreateHmmdefs
             // 
-            this.btnCreateHmmdefs.Location = new System.Drawing.Point(29, 385);
+            this.btnCreateHmmdefs.Location = new System.Drawing.Point(376, 117);
             this.btnCreateHmmdefs.Name = "btnCreateHmmdefs";
             this.btnCreateHmmdefs.Size = new System.Drawing.Size(312, 23);
             this.btnCreateHmmdefs.TabIndex = 11;
@@ -191,7 +192,7 @@
             // 
             // btnCreateMacros
             // 
-            this.btnCreateMacros.Location = new System.Drawing.Point(29, 356);
+            this.btnCreateMacros.Location = new System.Drawing.Point(377, 91);
             this.btnCreateMacros.Name = "btnCreateMacros";
             this.btnCreateMacros.Size = new System.Drawing.Size(312, 23);
             this.btnCreateMacros.TabIndex = 10;
@@ -201,7 +202,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(28, 298);
+            this.button1.Location = new System.Drawing.Point(28, 327);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(312, 23);
             this.button1.TabIndex = 12;
@@ -211,7 +212,7 @@
             // 
             // btnInitModelHmm0
             // 
-            this.btnInitModelHmm0.Location = new System.Drawing.Point(29, 327);
+            this.btnInitModelHmm0.Location = new System.Drawing.Point(377, 66);
             this.btnInitModelHmm0.Name = "btnInitModelHmm0";
             this.btnInitModelHmm0.Size = new System.Drawing.Size(312, 23);
             this.btnInitModelHmm0.TabIndex = 13;
@@ -221,7 +222,7 @@
             // 
             // btnTrainHmm1_3
             // 
-            this.btnTrainHmm1_3.Location = new System.Drawing.Point(29, 428);
+            this.btnTrainHmm1_3.Location = new System.Drawing.Point(377, 145);
             this.btnTrainHmm1_3.Name = "btnTrainHmm1_3";
             this.btnTrainHmm1_3.Size = new System.Drawing.Size(312, 23);
             this.btnTrainHmm1_3.TabIndex = 14;
@@ -231,7 +232,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(109, 182);
+            this.button4.Location = new System.Drawing.Point(109, 211);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(131, 23);
             this.button4.TabIndex = 15;
@@ -241,7 +242,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(29, 470);
+            this.button5.Location = new System.Drawing.Point(376, 174);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(311, 23);
             this.button5.TabIndex = 16;
@@ -251,7 +252,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(28, 522);
+            this.button6.Location = new System.Drawing.Point(376, 204);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(312, 23);
             this.button6.TabIndex = 17;
@@ -261,7 +262,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(28, 551);
+            this.button7.Location = new System.Drawing.Point(376, 233);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(312, 23);
             this.button7.TabIndex = 18;
@@ -271,7 +272,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(28, 580);
+            this.button8.Location = new System.Drawing.Point(376, 262);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(312, 23);
             this.button8.TabIndex = 19;
@@ -281,7 +282,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(28, 609);
+            this.button9.Location = new System.Drawing.Point(376, 291);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(312, 23);
             this.button9.TabIndex = 20;
@@ -291,7 +292,7 @@
             // 
             // btnTrainHMM11_12
             // 
-            this.btnTrainHMM11_12.Location = new System.Drawing.Point(28, 638);
+            this.btnTrainHMM11_12.Location = new System.Drawing.Point(376, 320);
             this.btnTrainHMM11_12.Name = "btnTrainHMM11_12";
             this.btnTrainHMM11_12.Size = new System.Drawing.Size(312, 23);
             this.btnTrainHMM11_12.TabIndex = 21;
@@ -299,11 +300,22 @@
             this.btnTrainHMM11_12.UseVisualStyleBackColor = true;
             this.btnTrainHMM11_12.Click += new System.EventHandler(this.btnTrainHMM11_12_Click);
             // 
+            // btnCreateFulllist
+            // 
+            this.btnCreateFulllist.Location = new System.Drawing.Point(109, 124);
+            this.btnCreateFulllist.Name = "btnCreateFulllist";
+            this.btnCreateFulllist.Size = new System.Drawing.Size(128, 23);
+            this.btnCreateFulllist.TabIndex = 22;
+            this.btnCreateFulllist.Text = "monophone0 --> fulllist";
+            this.btnCreateFulllist.UseVisualStyleBackColor = true;
+            this.btnCreateFulllist.Click += new System.EventHandler(this.btnCreateFulllist_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(368, 682);
+            this.ClientSize = new System.Drawing.Size(712, 364);
+            this.Controls.Add(this.btnCreateFulllist);
             this.Controls.Add(this.btnTrainHMM11_12);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -330,7 +342,7 @@
             this.Controls.Add(this.tbTrainFilePath);
             this.Controls.Add(this.btnDi2Mn);
             this.Name = "Form1";
-            this.Text = "Lab2 by Alex Huynh";
+            this.Text = "Lab2 by Alex Huynh, Master Minh & HVTan";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +375,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button btnTrainHMM11_12;
+        private System.Windows.Forms.Button btnCreateFulllist;
     }
 }
 

@@ -101,7 +101,6 @@ namespace Lab2
             fDICT.WriteLine();
             fDICT.Close();
 
-
             MessageBox.Show("Create DICT for " + TrainFileCount + " files successfully!", "Info");
         }
 
@@ -445,6 +444,54 @@ namespace Lab2
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12);
             MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void btnCreateFulllist_Click(object sender, EventArgs e)
+        {
+            string[] monophones = System.IO.File.ReadAllLines("monophones0");
+            StreamWriter fFulllist = new StreamWriter("fulllist");
+            int n = monophones.Length;
+            //Method 1
+            /*
+            for (int i = 0; i < n; ++i)
+            {
+                fFulllist.WriteLine(monophones[i]);
+                for (int j = 0; j < n - 1; ++j)
+                {
+                    fFulllist.WriteLine("{0}-{1}", monophones[i], monophones[j]);
+                    fFulllist.WriteLine("{0}+{1}", monophones[i], monophones[j]);
+                    for (int k = 0; k < n; ++k)
+                    {
+                        fFulllist.WriteLine("{0}-{1}+{2}", monophones[i], monophones[j], monophones[k]);
+                    }
+                }
+            }
+            */
+
+            //Method 2
+            // Monophone
+            for (int i = 0; i < n; ++i)
+                fFulllist.WriteLine(monophones[i]);
+            fFulllist.WriteLine("sp");
+            //Biphone
+            for (int i = 0; i < n; ++i)                            
+                for (int j = 0; j < n - 1; ++j)                
+                    fFulllist.WriteLine("{0}-{1}", monophones[i], monophones[j]);
+            for (int j = 0; j < n-1; ++j)
+                fFulllist.WriteLine("{0}-{1}", monophones[n - 1], monophones[j]);
+            for (int i = 0; i < n-1; ++i)
+                for (int j = 0; j < n; ++j)
+                    fFulllist.WriteLine("{0}+{1}", monophones[i], monophones[j]);
+            for (int j = 0; j < n-1; ++j)
+                fFulllist.WriteLine("{0}+{1}", monophones[n-1], monophones[j]);
+            //Triphone
+            for (int i = 0; i < n; ++i)                
+                for (int j = 0; j < n - 1; ++j)                    
+                    for (int k = 0; k < n; ++k)
+                        fFulllist.WriteLine("{0}-{1}+{2}", monophones[i], monophones[j], monophones[k]);                
+
+            fFulllist.Close();
+            MessageBox.Show("Create fulllist successfully!", "Info");
         }
     }
 }
