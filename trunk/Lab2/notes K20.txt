@@ -1,0 +1,136 @@
+-------------------------- Chuan bi moi truong ----------------------------------------
+1. Tao bien moi truong chi den thu muc bin cua HTK
+2. Gia su thu muc goc bai tap la D:\Bai tap 2
+3. Cai ActivePerl-5.12.3
+
+-------------------------- Chuan bi du lieu bang tay ----------------------------------
+
+1. Chuan bi 550 file wav de training, 50 file wave de testing (co san)
+
+2. Chuan bi file prompts telex : "telex_prompts.txt" (co san)
+
+3. Chuan bi file grammar dinh nghia ngu phap bang ngon ngu chinh qui: "gram.txt" (bang tay)
+
+4. Chuan bi file "proto" : file mau de huan luyen cho mo hinh HMM (co san truoc)
+
+5. File "script.bat" : chua cac command de thuc hien tat ca cac lenh cho bai tap (bang tay)
+
+6. Chuan bi file "initdict.txt" : la tu dien full ban dau (co san)
+
+7. Chuan bi "mkphones0.led" va "mkphones1.led" (bang tay)
+
+8. Sua lai so thu tu trong file "telex_prompts.txt" giong nhu so thu tu ten file wave
+
+9. Chuan bi file "sil.hed" dung cho training o buoc tao mo hinh sp
+
+10. Chuan bi file "mktri.led" de tao triphoned
+
+-------------------------- Chuan bi du lieu bang tool HTK hoac Perl -------------------
+
+1. Tao file "wordlist.txt" : chua tat ca cac tu trong file "telex_prompts.txt"
+
+	:\>perl pl\prompts2wlist.pl txt\telex_prompts.txt txt\wordlist.txt
+	
+2. Tao file "monophones.txt" va "mydict.txt" tu file "wordlist.txt" va "initdict.txt"
+	
+	:\>HDMan -m -w txt\wordlist.txt -n ph\monophones.txt -l log\dict.log txt\mydict.txt initdict.txt
+	
+3. Tao file "monophones0.txt" va "monophones1.txt" tu "monophones.txt"
+	
+	:\>perl pl\mkMonophones.pl ph\monophones.txt ph\monophones0.txt ph\monophones1.txt
+	
+4. Tao file "words.mlf" tu file "telex_prompts.txt"
+
+	:\>Perl pl\prompts2mlf.pl mlf\words.mlf txt\telex_prompts.txt
+	
+5. Tao 2 file "phones0.mlf" va "phones1.mlf" : phones0 chi co "sil" nhung phones1 co them "sp"
+
+	:\>HLEd -l * -d txt\mydict.txt -i mlf\phones0.mlf ins\mkphones0.led mlf\words.mlf
+	:\>HLEd -l * -d txt\mydict.txt -i mlf\phones1.mlf ins\mkphones1.led mlf\words.mlf
+	
+	Note: hoi lai xem co bat buoc sau moi tu trong dict.txt la phai co sp o cuoi cung ko ???
+	
+6. Tao file "wdnet" dua vao file gram.txt
+	:\>HParse txt\gram.txt wdnet
+	
+7. Tao file "listwavmfc.scp" : chi duong dan cho cac file wave va cac file mfc tuong ung cho file wave do 
+	:\>perl pl\listwavmfc.pl wav listwavmfc.scp
+	
+8. Tao danh sach file .mfc tuong ung cho tung file .wav
+	:\>HCopy -T 1 -C cfg\HCopy.cfg -S listwavmfc.scp
+	
+9. Tao file "train.scp" : chua danh sach duong dan cac file .mfc
+	:\>perl pl\mkTrainFile.pl mfc train.scp
+	
+-------------------------------- Gian doan huan luyen ---------------------------------------------
+	
+1. Huan luyen tong quat : tao thu muc hmm0 va chuan bi truoc file "proto"
+	:\>HCompV -C cfg\HCompV.cfg -f 0.01 -m -S train.scp -M hmm0 proto
+	:\>perl pl\mkMacrosFile.pl hmm0\vFloors hmm0\macros
+	:\>perl pl\mkHmmdefsFile.pl hmm0\proto ph\monophones0.txt hmm0\hmmdefs
+	
+2. Huan luyen 3 lan dua tren buoc hmm0 va 550 file scp du lieu
+	:\>HERest -T 1 -C cfg\HERest.cfg -I mlf\phones0.mlf -S train.scp -H hmm0\macros -H hmm0\hmmdefs -M hmm1 ph\monophones0.txt
+	:\>HERest -C cfg\HERest.cfg -I mlf\phones0.mlf -S train.scp -H hmm1\macros -H hmm1\hmmdefs -M hmm2 ph\monophones0.txt
+	:\>HERest -C cfg\HERest.cfg -I mlf\phones0.mlf -S train.scp -H hmm2\macros -H hmm2\hmmdefs -M hmm3 ph\monophones0.txt
+	
+3. Xay dung mo hinh sp tu file "sil.hed" va hieu chinh mo hinh sp
+	:\>HHEd -H hmm3\macros -H hmm3\hmmdefs -M hmm4 ins\sil.hed ph\monophones0.txt
+	:\>perl pl\makesp.pl hmm4\hmmdefs hmm5\hmmdefs hmm4\macros hmm5\macros
+	
+4. Trainning mo hinh sp o buoc tren (thuc hien 2 lan)
+	:\>HERest -C cfg\HERest.cfg -I mlf\phones1.mlf -S train.scp -H hmm5\macros -H hmm5\hmmdefs -M hmm6 ph\monophones1.txt
+	:\>HERest -C cfg\HERest.cfg -I mlf\phones1.mlf -S train.scp -H hmm6\macros -H hmm6\hmmdefs -M hmm7 ph\monophones1.txt
+	
+5. Clone file phones1.mlf thanh file aligned.mlf
+	:\>copy mlf\phones1.mlf mlf\aligned.mlf
+	
+6. Training 2 buoc nua
+	:\>HERest.exe -B -C cfg\HERest.cfg -I mlf\aligned.mlf -s stats -S train.scp -H hmm7\macros -H hmm7\hmmdefs -M hmm8 ph\monophones1.txt
+	:\>HERest.exe -B -C cfg\HERest.cfg -I mlf\aligned.mlf -s stats -S train.scp -H hmm8\macros -H hmm8\hmmdefs -M hmm9 ph\monophones1.txt
+
+7. Tao triphones,wintri.mlf tu aligned.mlf
+	:\>HLEd -n ph\triphones1 -l * -i mlf\wintri.mlf ins\mktri.led mlf\aligned.mlf
+	
+8. Tao "mktri.hed"
+	:\>perl pl\mkTriHed.pl ph\monophones1.txt ph\triphones1 ins\mktri.hed
+	
+9. Tao mo hinh HMM moi theo triphones1
+	:\>HHEd -H hmm9\macros -H hmm9\hmmdefs -M hmm10 ins\mktri.hed ph\monophones1.txt
+	
+10. Training 2 vong
+	:\>HERest -B -C cfg\HERest.cfg -I mlf\wintri.mlf -s stats -S train.scp -H hmm10\macros -H hmm10\hmmdefs -M hmm11 ph\triphones1
+	:\>HERest -B -C cfg\HERest.cfg -I mlf\wintri.mlf -s stats -S train.scp -H hmm11\macros -H hmm11\hmmdefs -M hmm12 ph\triphones1
+	
+11. Tao full list + full hmm
+	:\>perl pl\mkFullList.pl ph\monophones0.txt fulllist
+	:\>perl pl\mkTree.pl 350 ph\monophones0.txt ins\tree.hed
+	
+12. Tao mo hinh HMM moi
+	:\>HHEd -H hmm12\macros -H hmm12\hmmdefs -M hmm13 ins\tree.hed ph\triphones1
+	
+13. Training 2 vong
+	:\>HERest -B -C cfg\HERest.cfg -I mlf\wintri.mlf -s stats -S train.scp -H hmm13\macros -H hmm13\hmmdefs -M hmm14 tiedlist
+	:\>HERest -B -C cfg\HERest.cfg -I mlf\wintri.mlf -s stats -S train.scp -H hmm14\macros -H hmm14\hmmdefs -M hmm15 tiedlist
+	
+--------------------------------- Giai doan testing ----------------------------------------------------------
+
+1. Tao file "listwavmfc.scp" : chi duong dan cho cac file wave va cac file mfc tuong ung cho file wave do 
+	:\>perl pl\listwavmfc.pl test\wav listwavmfc_test.scp
+	
+2. Tao danh sach file .mfc tuong ung cho tung file .wav
+	:\>HCopy -T 1 -C cfg\HCopy.cfg -S listwavmfc_test.scp
+	
+3. Tao file "test.scp" : chua danh sach duong dan cac file .mfc
+	:\>perl pl\mkTrainFile.pl mfc test\test.scp	
+
+4. Testing
+	:\>HVite -T 1 -C cfg\HVite.cfg -H hmm15\macros -H hmm15\hmmdefs -S test\test.scp -i test\recout.mlf -w wdnet txt\mydict.txt tiedlist
+	:\>HResults -f -t -I mlf\words.mlf tiedlist test\recout.mlf > test\result
+
+
+	
+
+	
+
+	

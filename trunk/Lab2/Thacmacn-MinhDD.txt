@@ -1,4 +1,0 @@
-Hien tai tool hien tai chi dung generate 1 luc file train.
-Trong khi yeu cau cua thay la folder generate dict va prompt, words.mlf se la gom 280 file train + n file se test. 
-Nhu vay phai sua lai ten thu tu file ko? Vi du trong truong hop cua tui, tui dung file tu 200-220 chang han. Vay phai rename cac file tu 221 => 300 
-thanh 220 - 280? DOng thoi them cac file test va danh tu 281 len? tool nay no chi lam vs so thu tu lien tuc va tang dan

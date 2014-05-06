@@ -1,2 +1,0 @@
-$chuso = moojt | hai | ba | boosn | nawm | sasu | bary | tasm | chisn | khoong; 
-($chuso)
