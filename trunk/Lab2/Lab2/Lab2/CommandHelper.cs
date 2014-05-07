@@ -19,6 +19,8 @@ namespace Lab2
                 _process = new Process();
                 ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.RedirectStandardOutput = true;
+                startInfo.UseShellExecute = false;
                 startInfo.FileName = "cmd.exe";
                 _process.StartInfo = startInfo;
                 _process.Exited += ProcessOnExited;
@@ -29,7 +31,7 @@ namespace Lab2
 
         static void _process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            _output = e.Data;
+            //_output = e.Data;
         }
 
         public static string GetOutput()
@@ -42,8 +44,10 @@ namespace Lab2
             var process = GetProcess();
             process.StartInfo.Arguments = "/C " + command;
             process.Start();
+            process.BeginOutputReadLine();
             process.WaitForExit();
-            //_output = process.StandardOutput.ReadToEnd();
+            
+            _output = process.StandardOutput.ReadToEnd();
 
         }
 
