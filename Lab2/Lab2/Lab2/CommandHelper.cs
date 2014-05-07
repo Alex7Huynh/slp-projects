@@ -22,8 +22,14 @@ namespace Lab2
                 startInfo.FileName = "cmd.exe";
                 _process.StartInfo = startInfo;
                 _process.Exited += ProcessOnExited;
+                _process.OutputDataReceived += _process_OutputDataReceived;
             }
             return _process;
+        }
+
+        static void _process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            _output = e.Data;
         }
 
         public static string GetOutput()

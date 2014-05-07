@@ -464,26 +464,26 @@ namespace Lab2
             fMFC.Close();
 
             // create gram txt
-            StreamReader reader = new StreamReader("gram-source.txt");
-            string txtGram = reader.ReadToEnd();
-            var words = txtGram.Split(' ').ToList();
-            string result = "$(tu) = {0}";
-            string txt = string.Empty;
-            int iCount = 0;
-            foreach (var word in words)
-            {
-                txt += Word.ConvertUnicodeToTelex(word);
-                if (iCount < words.Count)
-                {
-                    txt += " | ";
-                }
-            }
-            StreamWriter gramWriter = new StreamWriter("gram.txt");
-            result = string.Format(result, txt);
-            gramWriter.WriteLine(result);
-            gramWriter.WriteLine("$(tu)");
+            //StreamReader reader = new StreamReader("gram-source.txt");
+            //string txtGram = reader.ReadToEnd();
+            //var words = txtGram.Split(' ').ToList();
+            //string result = "$(tu) = {0}";
+            //string txt = string.Empty;
+            //int iCount = 0;
+            //foreach (var word in words)
+            //{
+            //    txt += Word.ConvertUnicodeToTelex(word);
+            //    if (iCount < words.Count)
+            //    {
+            //        txt += " | ";
+            //    }
+            //}
+            //StreamWriter gramWriter = new StreamWriter("gram.txt");
+            //result = string.Format(result, txt);
+            //gramWriter.WriteLine(result);
+            //gramWriter.WriteLine("$(tu)");
             //gramWriter.WriteLine("(SENT-START $(tu) SENT-END)");
-            gramWriter.Close();
+            //gramWriter.Close();
             // change the dict
             //StreamReader dictReader = new StreamReader("DICT");
             //string dictText = dictReader.ReadToEnd();
