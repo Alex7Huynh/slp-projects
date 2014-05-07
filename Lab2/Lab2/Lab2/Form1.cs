@@ -199,31 +199,15 @@ namespace Lab2
             fTraining.Close();
             MessageBox.Show("Create train.scp successfully!", "Info");
         }
-        private void btnTestSCP_Click(object sender, EventArgs e)
-        {
-            StreamWriter fTest = new StreamWriter("test.scp");
-            string TestFilePath = tbTestFilePath.Text;
-            string lastFolder = TestFilePath.Substring(TestFilePath.LastIndexOf('\\') + 1);
-
-            string[] files = System.IO.Directory.GetFiles(TestFilePath, "*.wav");
-            int TrainFileCount = files.Length;
-
-            for (int i = 0; i < TrainFileCount; ++i)
-            {
-                string filename = files[i].Replace(TestFilePath, "");
-                filename = filename.Replace("wav", "mfc");
-                fTest.WriteLine("MFCTest" + filename);
-            }
-            fTest.Close();
-            MessageBox.Show("Create test.scp successfully!", "Info");
-        }
-
+        
         private void btnCreateFolder_Click(object sender, EventArgs e)
         {
             string TrainFilePath = tbTrainFilePath.Text;
             TrainFilePath = TrainFilePath.Substring(0, TrainFilePath.LastIndexOf('\\'));            
             
             Directory.CreateDirectory(TrainFilePath + "\\mfc");
+            Directory.CreateDirectory(TrainFilePath + "\\MFCTest");
+            
             for (int i = 0; i <= 15; ++i)
             {
                 Directory.CreateDirectory(TrainFilePath + "\\hmm" + i);
@@ -238,6 +222,7 @@ namespace Lab2
             try
             {
                 Directory.Delete(TrainFilePath + "\\mfc", true);
+                Directory.Delete(TrainFilePath + "\\MFCTest", true);
                 for (int i = 0; i <= 15; ++i)
                 {
                     Directory.Delete(TrainFilePath + "\\hmm" + i);
@@ -444,6 +429,50 @@ namespace Lab2
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12);
             MessageBox.Show("Run successfully!", "Info");
+        }        
+
+        private void createFullList()
+        {
+            string[] monophones = System.IO.File.ReadAllLines("monophones0");
+            StreamWriter fFulllist = new StreamWriter("fulllist");
+            int n = monophones.Length;
+
+            // Monophone
+            for (int i = 0; i < n; ++i)
+                fFulllist.WriteLine(monophones[i]);
+            fFulllist.WriteLine("sp");
+            // Biphone
+            for (int i = 0; i < n - 1; ++i)
+                for (int j = 0; j < n; ++j)
+                    fFulllist.WriteLine("{0}-{1}", monophones[i], monophones[j]);
+            for (int j = 0; j < n - 1; ++j)
+                fFulllist.WriteLine("{0}-{1}", monophones[n - 1], monophones[j]);
+            for (int i = 0; i < n - 1; ++i)
+                for (int j = 0; j < n; ++j)
+                    fFulllist.WriteLine("{0}+{1}", monophones[i], monophones[j]);
+            for (int j = 0; j < n - 1; ++j)
+                fFulllist.WriteLine("{0}+{1}", monophones[n - 1], monophones[j]);
+            // Triphone
+            for (int i = 0; i < n; ++i)
+                for (int j = 0; j < n - 1; ++j)
+                    for (int k = 0; k < n; ++k)
+                        fFulllist.WriteLine("{0}-{1}+{2}", monophones[i], monophones[j], monophones[k]);
+
+            fFulllist.Close();
+        }
+
+        private void btnTrainHMM13_Click(object sender, EventArgs e)
+        {
+            createFullList();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void btnTrainHMM14_15_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15);
+            MessageBox.Show("Run successfully!", "Info");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -495,86 +524,69 @@ namespace Lab2
             //    dictWriter.WriteLine("SENT-START  []	sil");
             //    dictWriter.WriteLine("SENT-END	[]	sil");
             //}
-            
+
             // parse gram
-            var src = Application.StartupPath + "\\words.mlf";
-            var dest = Application.StartupPath;
-            File.Copy(src, Path.Combine(dest, "recout.mlf"));
+            //var src = Application.StartupPath + "\\words.mlf";
+            //var dest = Application.StartupPath;
+            //File.Copy(src, Path.Combine(dest, "recout.mlf"));
             CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN);
-            MessageBox.Show("Run successfully!", "Info");
-
-        }
-
+            MessageBox.Show("Create mfcc-test.scp and wdnet successfully", "Info");
+        }        
+        
         private void button3_Click(object sender, EventArgs e)
         {
             StreamWriter test = new StreamWriter("test.mlf");
-            test.Close();
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT);
-            MessageBox.Show("Run successfully!", "Info");
+            test.WriteLine("#!MLF!#");
 
-        }
+            string[] chuso = { "KHOONG", "MOOJT", "HAI", "BA", "BOOSN", "NAWM", "SASU", "BARY", "TASM", "CHISN" };            
+            string TestFilePath = tbTestFilePath.Text;
+            string[] files = System.IO.Directory.GetFiles(TestFilePath, "*.wav");
 
-        private void createFullList()
-        {
-            string[] monophones = System.IO.File.ReadAllLines("monophones0");
-            StreamWriter fFulllist = new StreamWriter("fulllist");
-            int n = monophones.Length;
-            //Method 1
-            /*
-            for (int i = 0; i < n; ++i)
+            for (int i = 0; i < files.Length; ++i)
             {
-                fFulllist.WriteLine(monophones[i]);
-                for (int j = 0; j < n - 1; ++j)
-                {
-                    fFulllist.WriteLine("{0}-{1}", monophones[i], monophones[j]);
-                    fFulllist.WriteLine("{0}+{1}", monophones[i], monophones[j]);
-                    for (int k = 0; k < n; ++k)
-                    {
-                        fFulllist.WriteLine("{0}-{1}+{2}", monophones[i], monophones[j], monophones[k]);
-                    }
-                }
+                string filename = files[i].Replace(TestFilePath, "");
+                filename = filename.Replace(".wav", ".lab");
+                //test.WriteLine("\"MFCTest" + filename + "\"");
+                test.WriteLine("\"*" + filename.Replace('\\','/') + "\"");                
+
+                string so = files[i].Substring(files[i].IndexOf(".wav") - 1, 1);
+                so = chuso[int.Parse(so)];
+                test.WriteLine(so);
+                test.WriteLine(".");
             }
-            */
-
-            //Method 2
-            // Monophone
-            for (int i = 0; i < n; ++i)
-                fFulllist.WriteLine(monophones[i]);
-            fFulllist.WriteLine("sp");
-            //Biphone
-            for (int i = 0; i < n; ++i)
-                for (int j = 0; j < n - 1; ++j)
-                    fFulllist.WriteLine("{0}-{1}", monophones[i], monophones[j]);
-            for (int j = 0; j < n - 1; ++j)
-                fFulllist.WriteLine("{0}-{1}", monophones[n - 1], monophones[j]);
-            for (int i = 0; i < n - 1; ++i)
-                for (int j = 0; j < n; ++j)
-                    fFulllist.WriteLine("{0}+{1}", monophones[i], monophones[j]);
-            for (int j = 0; j < n - 1; ++j)
-                fFulllist.WriteLine("{0}+{1}", monophones[n - 1], monophones[j]);
-            //Triphone
-            for (int i = 0; i < n; ++i)
-                for (int j = 0; j < n - 1; ++j)
-                    for (int k = 0; k < n; ++k)
-                        fFulllist.WriteLine("{0}-{1}+{2}", monophones[i], monophones[j], monophones[k]);
-
-            fFulllist.Close();
+            test.Close();
+            MessageBox.Show("Create test.mlf successfully!", "Info");
         }
 
-        private void btnTrainHMM13_Click(object sender, EventArgs e)
+        private void btnTestSCP_Click(object sender, EventArgs e)
         {
-            createFullList();
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13);
+            StreamWriter fTest = new StreamWriter("test.scp");
+            string TestFilePath = tbTestFilePath.Text;
+            string lastFolder = TestFilePath.Substring(TestFilePath.LastIndexOf('\\') + 1);
+
+            string[] files = System.IO.Directory.GetFiles(TestFilePath, "*.wav");
+            int TrainFileCount = files.Length;
+
+            for (int i = 0; i < TrainFileCount; ++i)
+            {
+                string filename = files[i].Replace(TestFilePath, "");
+                filename = filename.Replace("wav", "mfc");
+                fTest.WriteLine("MFCTest" + filename);
+            }
+            fTest.Close();
+            MessageBox.Show("Create test.scp successfully!", "Info");
+        }
+
+        private void btnCreateRecout_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN);
             MessageBox.Show("Run successfully!", "Info");
         }
 
-        private void btnTrainHMM14_15_Click(object sender, EventArgs e)
+        private void btnGetResult_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15);
-            MessageBox.Show("Run successfully!", "Info");
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT);
         }
     }
 }
