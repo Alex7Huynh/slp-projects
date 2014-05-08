@@ -60,8 +60,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnTrainHMM14_15 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnCreateRecout = new System.Windows.Forms.Button();
             this.btnGetResult = new System.Windows.Forms.Button();
+            this.btnCreateRecout = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -146,7 +146,7 @@
             this.btnCreateMFC.Location = new System.Drawing.Point(6, 215);
             this.btnCreateMFC.Name = "btnCreateMFC";
             this.btnCreateMFC.Size = new System.Drawing.Size(165, 23);
-            this.btnCreateMFC.TabIndex = 7;
+            this.btnCreateMFC.TabIndex = 9;
             this.btnCreateMFC.Text = "Create mfcc.scp";
             this.btnCreateMFC.UseVisualStyleBackColor = true;
             this.btnCreateMFC.Click += new System.EventHandler(this.btnCreateMFC_Click);
@@ -156,7 +156,7 @@
             this.btnTestSCP.Location = new System.Drawing.Point(6, 46);
             this.btnTestSCP.Name = "btnTestSCP";
             this.btnTestSCP.Size = new System.Drawing.Size(192, 23);
-            this.btnTestSCP.TabIndex = 9;
+            this.btnTestSCP.TabIndex = 25;
             this.btnTestSCP.Text = "Create test.scp";
             this.btnTestSCP.UseVisualStyleBackColor = true;
             this.btnTestSCP.Click += new System.EventHandler(this.btnTestSCP_Click);
@@ -166,7 +166,7 @@
             this.btnCreateTrainingSCP.Location = new System.Drawing.Point(6, 243);
             this.btnCreateTrainingSCP.Name = "btnCreateTrainingSCP";
             this.btnCreateTrainingSCP.Size = new System.Drawing.Size(165, 23);
-            this.btnCreateTrainingSCP.TabIndex = 8;
+            this.btnCreateTrainingSCP.TabIndex = 10;
             this.btnCreateTrainingSCP.Text = "Create train.scp";
             this.btnCreateTrainingSCP.UseVisualStyleBackColor = true;
             this.btnCreateTrainingSCP.Click += new System.EventHandler(this.btnCreateTrainingSCP_Click);
@@ -176,7 +176,7 @@
             this.btnCreateFolder.Location = new System.Drawing.Point(6, 159);
             this.btnCreateFolder.Name = "btnCreateFolder";
             this.btnCreateFolder.Size = new System.Drawing.Size(165, 23);
-            this.btnCreateFolder.TabIndex = 6;
+            this.btnCreateFolder.TabIndex = 7;
             this.btnCreateFolder.Text = "Create folders (mfc, hmm0..15)";
             this.btnCreateFolder.UseVisualStyleBackColor = true;
             this.btnCreateFolder.Click += new System.EventHandler(this.btnCreateFolder_Click);
@@ -186,7 +186,7 @@
             this.btnDeleteFolder.Location = new System.Drawing.Point(6, 187);
             this.btnDeleteFolder.Name = "btnDeleteFolder";
             this.btnDeleteFolder.Size = new System.Drawing.Size(165, 23);
-            this.btnDeleteFolder.TabIndex = 10;
+            this.btnDeleteFolder.TabIndex = 8;
             this.btnDeleteFolder.Text = "Delete folders (mfc, hmm0..15)";
             this.btnDeleteFolder.UseVisualStyleBackColor = true;
             this.btnDeleteFolder.Click += new System.EventHandler(this.btnDeleteFolder_Click);
@@ -196,7 +196,7 @@
             this.btnCreateHmmdefs.Location = new System.Drawing.Point(14, 74);
             this.btnCreateHmmdefs.Name = "btnCreateHmmdefs";
             this.btnCreateHmmdefs.Size = new System.Drawing.Size(261, 23);
-            this.btnCreateHmmdefs.TabIndex = 11;
+            this.btnCreateHmmdefs.TabIndex = 14;
             this.btnCreateHmmdefs.Text = "Step 8: monophones0, proto (hmm0) --> hmmdefs";
             this.btnCreateHmmdefs.UseVisualStyleBackColor = true;
             this.btnCreateHmmdefs.Click += new System.EventHandler(this.btnCreateHmmdefs_Click);
@@ -206,7 +206,7 @@
             this.btnCreateMacros.Location = new System.Drawing.Point(14, 46);
             this.btnCreateMacros.Name = "btnCreateMacros";
             this.btnCreateMacros.Size = new System.Drawing.Size(261, 23);
-            this.btnCreateMacros.TabIndex = 10;
+            this.btnCreateMacros.TabIndex = 13;
             this.btnCreateMacros.Text = "Step 8: proto, vFloors (hmm0) --> macros";
             this.btnCreateMacros.UseVisualStyleBackColor = true;
             this.btnCreateMacros.Click += new System.EventHandler(this.btnCreateMacros_Click);
@@ -216,7 +216,7 @@
             this.button1.Location = new System.Drawing.Point(6, 272);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(165, 23);
-            this.button1.TabIndex = 12;
+            this.button1.TabIndex = 11;
             this.button1.Text = "Create MFC";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -226,7 +226,7 @@
             this.btnInitModelHmm0.Location = new System.Drawing.Point(14, 19);
             this.btnInitModelHmm0.Name = "btnInitModelHmm0";
             this.btnInitModelHmm0.Size = new System.Drawing.Size(261, 23);
-            this.btnInitModelHmm0.TabIndex = 13;
+            this.btnInitModelHmm0.TabIndex = 12;
             this.btnInitModelHmm0.Text = "Step7: Init Model (hmm0)";
             this.btnInitModelHmm0.UseVisualStyleBackColor = true;
             this.btnInitModelHmm0.Click += new System.EventHandler(this.btnInitModelHmm0_Click);
@@ -236,7 +236,7 @@
             this.btnTrainHmm1_3.Location = new System.Drawing.Point(15, 103);
             this.btnTrainHmm1_3.Name = "btnTrainHmm1_3";
             this.btnTrainHmm1_3.Size = new System.Drawing.Size(260, 23);
-            this.btnTrainHmm1_3.TabIndex = 14;
+            this.btnTrainHmm1_3.TabIndex = 15;
             this.btnTrainHmm1_3.Text = "Step 9: Run Train (3 times) to HMM3";
             this.btnTrainHmm1_3.UseVisualStyleBackColor = true;
             this.btnTrainHmm1_3.Click += new System.EventHandler(this.btnTrainHmm1_3_Click);
@@ -246,7 +246,7 @@
             this.button4.Location = new System.Drawing.Point(6, 131);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(165, 23);
-            this.button4.TabIndex = 15;
+            this.button4.TabIndex = 6;
             this.button4.Text = "Create phones.mlf (2 file)";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -257,7 +257,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(261, 23);
             this.button5.TabIndex = 16;
-            this.button5.Text = "Step 10: Copy HMM3 -> HMM4, add sp to hmmdefs";
+            this.button5.Text = "Step 10: Copy hmm3 -> hmm4, add sp to hmmdefs";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -267,7 +267,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(261, 23);
             this.button6.TabIndex = 17;
-            this.button6.Text = "Step 11: Connect sil & sp";
+            this.button6.Text = "Step 11: Connect sil && sp";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -316,8 +316,8 @@
             this.btnTrainingHMM13.Location = new System.Drawing.Point(15, 300);
             this.btnTrainingHMM13.Name = "btnTrainingHMM13";
             this.btnTrainingHMM13.Size = new System.Drawing.Size(260, 23);
-            this.btnTrainingHMM13.TabIndex = 0;
-            this.btnTrainingHMM13.Text = "Step 16: Create fulllist & Training to hmm13";
+            this.btnTrainingHMM13.TabIndex = 22;
+            this.btnTrainingHMM13.Text = "Step 16: Create fulllist && Training to hmm13";
             this.btnTrainingHMM13.Click += new System.EventHandler(this.btnTrainHMM13_Click);
             // 
             // btnPrepareDataTest
@@ -325,7 +325,7 @@
             this.btnPrepareDataTest.Location = new System.Drawing.Point(6, 19);
             this.btnPrepareDataTest.Name = "btnPrepareDataTest";
             this.btnPrepareDataTest.Size = new System.Drawing.Size(193, 23);
-            this.btnPrepareDataTest.TabIndex = 22;
+            this.btnPrepareDataTest.TabIndex = 24;
             this.btnPrepareDataTest.Text = "Prepare data (MFCTest), parse gram";
             this.btnPrepareDataTest.UseVisualStyleBackColor = true;
             this.btnPrepareDataTest.Click += new System.EventHandler(this.button2_Click);
@@ -335,7 +335,7 @@
             this.btnCreateTestMLF.Location = new System.Drawing.Point(6, 75);
             this.btnCreateTestMLF.Name = "btnCreateTestMLF";
             this.btnCreateTestMLF.Size = new System.Drawing.Size(192, 23);
-            this.btnCreateTestMLF.TabIndex = 23;
+            this.btnCreateTestMLF.TabIndex = 26;
             this.btnCreateTestMLF.Text = "Create test.mlf";
             this.btnCreateTestMLF.UseVisualStyleBackColor = true;
             this.btnCreateTestMLF.Click += new System.EventHandler(this.button3_Click);
@@ -385,7 +385,7 @@
             this.btnTrainHMM14_15.Location = new System.Drawing.Point(14, 329);
             this.btnTrainHMM14_15.Name = "btnTrainHMM14_15";
             this.btnTrainHMM14_15.Size = new System.Drawing.Size(261, 23);
-            this.btnTrainHMM14_15.TabIndex = 22;
+            this.btnTrainHMM14_15.TabIndex = 23;
             this.btnTrainHMM14_15.Text = "Step 17: Training twices to hmm15";
             this.btnTrainHMM14_15.Click += new System.EventHandler(this.btnTrainHMM14_15_Click);
             // 
@@ -403,25 +403,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test";
             // 
-            // btnCreateRecout
-            // 
-            this.btnCreateRecout.Location = new System.Drawing.Point(6, 103);
-            this.btnCreateRecout.Name = "btnCreateRecout";
-            this.btnCreateRecout.Size = new System.Drawing.Size(192, 23);
-            this.btnCreateRecout.TabIndex = 24;
-            this.btnCreateRecout.Text = "Create recout.mlf";
-            this.btnCreateRecout.UseVisualStyleBackColor = true;
-            this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecout_Click);
-            // 
             // btnGetResult
             // 
             this.btnGetResult.Location = new System.Drawing.Point(6, 131);
             this.btnGetResult.Name = "btnGetResult";
             this.btnGetResult.Size = new System.Drawing.Size(192, 23);
-            this.btnGetResult.TabIndex = 25;
+            this.btnGetResult.TabIndex = 28;
             this.btnGetResult.Text = "Get result";
             this.btnGetResult.UseVisualStyleBackColor = true;
             this.btnGetResult.Click += new System.EventHandler(this.btnGetResult_Click);
+            // 
+            // btnCreateRecout
+            // 
+            this.btnCreateRecout.Location = new System.Drawing.Point(6, 103);
+            this.btnCreateRecout.Name = "btnCreateRecout";
+            this.btnCreateRecout.Size = new System.Drawing.Size(192, 23);
+            this.btnCreateRecout.TabIndex = 27;
+            this.btnCreateRecout.Text = "Create recout.mlf";
+            this.btnCreateRecout.UseVisualStyleBackColor = true;
+            this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecout_Click);
             // 
             // Form1
             // 
