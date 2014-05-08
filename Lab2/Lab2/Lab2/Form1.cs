@@ -54,11 +54,9 @@ namespace Lab2
                 fMonophone0.WriteLine(word);
                 fMonophone1.WriteLine(word);
             }
-            fMonophone0.WriteLine("sil");
-            //fMonophone0.WriteLine("");
+            fMonophone0.WriteLine("sil");            
             fMonophone1.WriteLine("sil");
-            fMonophone1.WriteLine("sp");
-            //fMonophone1.WriteLine("");
+            fMonophone1.WriteLine("sp");            
 
             fMonophone0.Close();
             fMonophone1.Close();
@@ -268,7 +266,7 @@ namespace Lab2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_MFC);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_MFC, false);
             if (string.IsNullOrEmpty(CommandHelper.GetOutput()))
             {
                 MessageBox.Show("Create MFCC successfully!", "Info");
@@ -277,7 +275,7 @@ namespace Lab2
 
         private void btnInitModelHmm0_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD, false);
             if (string.IsNullOrEmpty(CommandHelper.GetOutput()))
             {
                 MessageBox.Show("Run HMM0 successfully!", "Info");
@@ -286,16 +284,16 @@ namespace Lab2
 
         private void btnTrainHmm1_3_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
@@ -371,14 +369,14 @@ namespace Lab2
 
         private void button6_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
@@ -387,16 +385,16 @@ namespace Lab2
             var src = Application.StartupPath + "\\phones1.mlf ";
             var dest = Application.StartupPath;
             File.Copy(src, Path.Combine(dest, "aligned.mlf"));
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9, false);
             MessageBox.Show("Run successfully!", "Info");
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_CREATEWINTRI);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_CREATEWINTRI, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10, false);
             UpdateFileWintri();
             MessageBox.Show("Run successfully!", "Info");
         }
@@ -426,8 +424,8 @@ namespace Lab2
 
         private void btnTrainHMM11_12_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12, false);
             MessageBox.Show("Run successfully!", "Info");
         }        
 
@@ -464,14 +462,14 @@ namespace Lab2
         private void btnTrainHMM13_Click(object sender, EventArgs e)
         {
             createFullList();
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
         private void btnTrainHMM14_15_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
@@ -529,8 +527,8 @@ namespace Lab2
             //var src = Application.StartupPath + "\\words.mlf";
             //var dest = Application.StartupPath;
             //File.Copy(src, Path.Combine(dest, "recout.mlf"));
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM, false);
             MessageBox.Show("Create mfcc-test.scp and wdnet successfully", "Info");
         }        
         
@@ -580,13 +578,14 @@ namespace Lab2
 
         private void btnCreateRecout_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
         private void btnGetResult_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT, true);
+            MessageBox.Show(CommandHelper.GetOutput(), "Result");
         }
     }
 }
