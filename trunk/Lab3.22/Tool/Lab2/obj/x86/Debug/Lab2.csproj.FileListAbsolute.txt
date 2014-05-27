@@ -1,0 +1,33 @@
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\bin\Debug\Lab2.exe
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\bin\Debug\Lab2.pdb
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\Lab2.Form1.resources
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\Lab2.exe
+C:\Users\Alex\Documents\Visual Studio 2010\Projects\Lab2\Lab2\obj\x86\Debug\Lab2.pdb
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.exe
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.pdb
+E:\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.exe
+E:\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.pdb
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Form1.resources
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.exe
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.pdb
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.exe
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\bin\Debug\Lab2.pdb
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.csprojResolveAssemblyReference.cache
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Form1.resources
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
+D:\Studying\XLNNNoi_Projects\slp-projects\Lab2\Lab2\Lab2\obj\x86\Debug\Lab2.csproj.GenerateResource.Cache
+E:\slp-projects\Lab3.22\Tool\Lab2\obj\x86\Debug\Lab2.exe
+E:\slp-projects\Lab3.22\Tool\Lab2\obj\x86\Debug\Lab2.pdb
+E:\slp-projects\Lab3.22\Tool\Lab2\bin\Debug\Lab2.exe
+E:\slp-projects\Lab3.22\Tool\Lab2\bin\Debug\Lab2.pdb
+E:\slp-projects\Lab3.22\Tool\Lab2\obj\x86\Debug\Lab2.Form1.resources
+E:\slp-projects\Lab3.22\Tool\Lab2\obj\x86\Debug\Lab2.Properties.Resources.resources
+E:\slp-projects\Lab3.22\Tool\Lab2\obj\x86\Debug\Lab2.csproj.GenerateResource.Cache

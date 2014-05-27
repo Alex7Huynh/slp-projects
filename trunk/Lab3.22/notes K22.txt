@@ -1,0 +1,44 @@
+htk - nhan dang lien tuc
+
+yeu cau toi thieu:
+- chay duoc prj 2
+
+cac buoc thuc hien:
+1. xd he thong asr theo crossword triphones
+2. xay dung n-gram
+3. nhan dang
+
+B1. xay dung ASR theo crossword triphones
+- internal word triphones: 
+    mot sp hai  :   m+o m-o+t o-t sp ....a-i
+
+- crossword triphones:
+  sil mot sp hai sil:  sil-m+o m-o+t t-sp+h
+
+- cach xay dung: dung cac file config khac (cung cap)
+
+B2. xay dung n-gram:
+- chuan bi data: lay tap tet huan luyen + test lam thanh 1 file nhu sau:
+<s> mot hai ba bon nam </s>
+LNewMap  Ten empty.wmap ~gnew
+LGPrep -b 500000 -n 3 -d lm  empty.wmap abc.txt ~ginit
+LBuild -c 2 0 -c 3 0 -n 3  lm/wmap lmModel lm/gram.0
+
+
+arpa format uu cho mo hinnh ngon ngu:
+
+b3. nhan dang: 
+- dung Hdecode:
+
+HDecode -H hmm15/macros -H hmm15/hmmdefs  -S test.scp -t 220.0 220.0 -C config.hdecode -i recout.mlf -w lmModel -p 0.0 -s 5.0 dict tiedlist
+
+
+
+
+luu y:
+1. bao nhiu mo hinh gauss trog hmm? 
+2. perplexity
+LPlex -n 3 -t lmModel test.txt
+
+
+  
