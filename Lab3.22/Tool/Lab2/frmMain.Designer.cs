@@ -1,6 +1,6 @@
 ﻿namespace Lab2
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -62,18 +62,15 @@
             this.btnCreateFulllist = new System.Windows.Forms.Button();
             this.btnTrainHMM14_15 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnGetResult = new System.Windows.Forms.Button();
-            this.btnCreateRecout = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.txtNGram = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnGetResult = new System.Windows.Forms.Button();
+            this.txtNGram = new System.Windows.Forms.TextBox();
+            this.btnCreateRecout = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -286,7 +283,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(261, 23);
             this.button7.TabIndex = 18;
-            this.button7.Text = "Step 12: Training twices to hmm7";
+            this.button7.Text = "Step 12: Training twice to hmm7";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -296,7 +293,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(261, 23);
             this.button8.TabIndex = 19;
-            this.button8.Text = "Step 13: Training  twices to hmm9";
+            this.button8.Text = "Step 13: Training  twice to hmm9";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -316,7 +313,7 @@
             this.btnTrainHMM11_12.Name = "btnTrainHMM11_12";
             this.btnTrainHMM11_12.Size = new System.Drawing.Size(261, 23);
             this.btnTrainHMM11_12.TabIndex = 21;
-            this.btnTrainHMM11_12.Text = "Step 15: Training twices to hmm12";
+            this.btnTrainHMM11_12.Text = "Step 15: Training twice to hmm12";
             this.btnTrainHMM11_12.UseVisualStyleBackColor = true;
             this.btnTrainHMM11_12.Click += new System.EventHandler(this.btnTrainHMM11_12_Click);
             // 
@@ -335,7 +332,7 @@
             this.btnPrepareDataTest.Name = "btnPrepareDataTest";
             this.btnPrepareDataTest.Size = new System.Drawing.Size(193, 23);
             this.btnPrepareDataTest.TabIndex = 24;
-            this.btnPrepareDataTest.Text = "Prepare data (MFCTest), parse gram";
+            this.btnPrepareDataTest.Text = "Prepare data (MFCTest)";
             this.btnPrepareDataTest.UseVisualStyleBackColor = true;
             this.btnPrepareDataTest.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -351,7 +348,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnCreateLmtrain);
             this.groupBox1.Controls.Add(this.btnCreateDICT);
             this.groupBox1.Controls.Add(this.btnDi2Mn);
             this.groupBox1.Controls.Add(this.btnCreatePROMPTS);
@@ -364,16 +360,16 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(22, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(181, 369);
+            this.groupBox1.Size = new System.Drawing.Size(181, 410);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prepare Data";
             // 
             // btnCreateLmtrain
             // 
-            this.btnCreateLmtrain.Location = new System.Drawing.Point(6, 340);
+            this.btnCreateLmtrain.Location = new System.Drawing.Point(6, 103);
             this.btnCreateLmtrain.Name = "btnCreateLmtrain";
-            this.btnCreateLmtrain.Size = new System.Drawing.Size(165, 23);
+            this.btnCreateLmtrain.Size = new System.Drawing.Size(192, 23);
             this.btnCreateLmtrain.TabIndex = 12;
             this.btnCreateLmtrain.Text = "Create lmtrain.txt";
             this.btnCreateLmtrain.UseVisualStyleBackColor = true;
@@ -422,21 +418,45 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.btnCreateLmtrain);
+            this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnGetResult);
+            this.groupBox3.Controls.Add(this.txtNGram);
             this.groupBox3.Controls.Add(this.btnCreateRecout);
             this.groupBox3.Controls.Add(this.btnPrepareDataTest);
+            this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.btnCreateTestMLF);
             this.groupBox3.Controls.Add(this.btnTestSCP);
             this.groupBox3.Location = new System.Drawing.Point(502, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 164);
+            this.groupBox3.Size = new System.Drawing.Size(212, 410);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test";
             // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(6, 244);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(192, 23);
+            this.button10.TabIndex = 32;
+            this.button10.Text = "Evaluation via Perflexity";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "n-gram number:";
+            // 
             // btnGetResult
             // 
-            this.btnGetResult.Location = new System.Drawing.Point(6, 131);
+            this.btnGetResult.Location = new System.Drawing.Point(6, 215);
             this.btnGetResult.Name = "btnGetResult";
             this.btnGetResult.Size = new System.Drawing.Size(192, 23);
             this.btnGetResult.TabIndex = 28;
@@ -444,9 +464,18 @@
             this.btnGetResult.UseVisualStyleBackColor = true;
             this.btnGetResult.Click += new System.EventHandler(this.btnGetResult_Click);
             // 
+            // txtNGram
+            // 
+            this.txtNGram.Location = new System.Drawing.Point(94, 133);
+            this.txtNGram.Name = "txtNGram";
+            this.txtNGram.Size = new System.Drawing.Size(100, 20);
+            this.txtNGram.TabIndex = 30;
+            this.txtNGram.Text = "2";
+            this.txtNGram.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNGram_KeyPress);
+            // 
             // btnCreateRecout
             // 
-            this.btnCreateRecout.Location = new System.Drawing.Point(6, 103);
+            this.btnCreateRecout.Location = new System.Drawing.Point(6, 187);
             this.btnCreateRecout.Name = "btnCreateRecout";
             this.btnCreateRecout.Size = new System.Drawing.Size(192, 23);
             this.btnCreateRecout.TabIndex = 27;
@@ -454,74 +483,21 @@
             this.btnCreateRecout.UseVisualStyleBackColor = true;
             this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecout_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button10);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.txtNGram);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Location = new System.Drawing.Point(502, 242);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 240);
-            this.groupBox4.TabIndex = 27;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Continous Regconition";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 54);
+            this.button2.Location = new System.Drawing.Point(7, 159);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(192, 23);
             this.button2.TabIndex = 28;
-            this.button2.Text = "Step 2 : Build NGram";
+            this.button2.Text = "Init && build n-gram model";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 83);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(192, 23);
-            this.button3.TabIndex = 29;
-            this.button3.Text = "Step 3 : Regconition";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // txtNGram
-            // 
-            this.txtNGram.Location = new System.Drawing.Point(94, 28);
-            this.txtNGram.Name = "txtNGram";
-            this.txtNGram.Size = new System.Drawing.Size(100, 20);
-            this.txtNGram.TabIndex = 30;
-            this.txtNGram.Text = "2";
-            this.txtNGram.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNGram_KeyPress);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 31);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "N-Gram number";
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(4, 109);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(192, 23);
-            this.button10.TabIndex = 32;
-            this.button10.Text = "Evaluation via Perflexcity";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 494);
-            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -531,14 +507,13 @@
             this.Controls.Add(this.tbTrainFilePath);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Lab2 by Alex Huynh, Master Minh & HVTan";
+            this.Name = "frmMain";
+            this.Text = "MTT Tool by Alex Huynh, Master Minh & HVTan";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,8 +557,6 @@
         private System.Windows.Forms.Button btnCreateRecout;
         private System.Windows.Forms.Button btnCreateLmtrain;
         private System.Windows.Forms.Button btnCreateFulllist;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNGram;

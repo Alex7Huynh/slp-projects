@@ -11,9 +11,9 @@ using System.IO;
 
 namespace Lab2
 {
-    public partial class Form1 : Form
+    public partial class frmMain : Form
     {
-        public Form1()
+        public frmMain()
         {
             InitializeComponent();
         }
@@ -470,8 +470,8 @@ namespace Lab2
             fMFC.Close();
 
             CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC, false);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM, false);
-            MessageBox.Show("Create mfcc-test.scp and wdnet successfully", "Info");
+            //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM, false);
+            MessageBox.Show("Create mfcc-test.scp successfully", "Info");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -522,7 +522,8 @@ namespace Lab2
 
         private void btnCreateRecout_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
+            //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
             MessageBox.Show("Run successfully!", "Info");
         }
 
@@ -550,7 +551,7 @@ namespace Lab2
                 for (int j = 0; j < words.Length - 1; ++j)                                    
                     newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";                
                 newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
-                fPROMPTS.WriteLine("<s>" + newSentence + "</s>");
+                fPROMPTS.WriteLine("<s> " + newSentence + " </s>");
             }
             for (int i = 0; i < filesTest.Length; ++i)
             {
@@ -600,14 +601,7 @@ namespace Lab2
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram), false);
-        }
-
-        private void button3_Click_1(object sender, EventArgs e)
-        {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_REGCONITION_HDECODE, false);
-            MessageBox.Show("Success!", "Result");
-
-        }
+        }      
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -619,12 +613,6 @@ namespace Lab2
             }
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_PERFEXCITY, numberOfGram), true);
             MessageBox.Show(CommandHelper.GetOutput(), "Result");
-
         }
-
-
-              
-
-        
     }
 }

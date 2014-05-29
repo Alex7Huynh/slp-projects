@@ -67,7 +67,7 @@ namespace Lab2
         public const string CMD_LAB3_STEP2_BUILD_NGRAM_INIT = "HTKProgram\\LGPrep -b 500000 -n {0} -d lm  empty.wmap lmtrain.txt";
         public const string CMD_LAB3_STEP2_BUILD_NGRAM_BUILD = "HTKProgram\\LBuild -c 2 0 -c 3 0 -n {0}  lm/wmap lmModel lm/gram.0";
 
-        public const string CMD_LAB3_STEP3_REGCONITION_HDECODE =
+        public const string CMD_LAB3_STEP3_RECOGNITION_HDECODE =
             "HTKProgram\\HDecode -H hmm15/macros -H hmm15/hmmdefs  -S test.scp -t 220.0 220.0 -C config\\config.hdecode -i recout.mlf -w lmModel -p 0.0 -s 5.0 dict tiedlist";
 
         public const string CMD_LAB3_PERFEXCITY = "HTKProgram\\LPlex -n {0} -t lmModel test.txt";
