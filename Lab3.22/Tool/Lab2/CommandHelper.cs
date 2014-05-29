@@ -30,7 +30,8 @@ namespace Lab2
                 _process.OutputDataReceived += _process_OutputDataReceived;
 
             }
-            else {
+            else
+            {
                 startInfo.RedirectStandardOutput = bPrint;
                 _process.StartInfo = startInfo;
             }
@@ -55,8 +56,8 @@ namespace Lab2
             process.Start();
             //process.BeginOutputReadLine();
             process.WaitForExit();
-            
-            if(bPrint)
+
+            if (bPrint)
                 _output = process.StandardOutput.ReadToEnd();
 
         }

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Lab2
 {
@@ -24,10 +20,11 @@ namespace Lab2
             output2File(lstWord);
             MessageBox.Show("Create 2 files MONOPHONES successfully!", "Info");
         }
+
         public List<String> makeDict2Monophone(string fileName)
         {
-            string[] lines = System.IO.File.ReadAllLines(fileName);
-            List<String> lstWord = new List<string>();
+            string[] lines = File.ReadAllLines(fileName);
+            var lstWord = new List<string>();
             foreach (string line in lines)
             {
                 string[] words = Regex.Split(line, " ");
@@ -44,10 +41,11 @@ namespace Lab2
             lstWord.Sort();
             return lstWord;
         }
+
         public void output2File(List<String> lstWord)
         {
-            StreamWriter fMonophone0 = new StreamWriter("monophones0");
-            StreamWriter fMonophone1 = new StreamWriter("monophones1");
+            var fMonophone0 = new StreamWriter("monophones0");
+            var fMonophone1 = new StreamWriter("monophones1");
 
             foreach (string word in lstWord)
             {
@@ -67,14 +65,14 @@ namespace Lab2
             string TrainFilePath = tbTrainFilePath.Text;
             //int TrainFileCount = int.Parse(tbTrainFileCount.Text);
             //string path = "E:\\sn0040\\train";
-            string[] files = System.IO.Directory.GetFiles(TrainFilePath, "*.txt");
+            string[] files = Directory.GetFiles(TrainFilePath, "*.txt");
             int TrainFileCount = files.Length;
 
-            List<String> lstWord = new List<string>();
+            var lstWord = new List<string>();
 
             for (int i = 0; i < TrainFileCount; ++i)
             {
-                string[] lines = System.IO.File.ReadAllLines(files[i]);
+                string[] lines = File.ReadAllLines(files[i]);
                 string sentence = lines[0];
                 string[] words = sentence.Split(' ');
                 for (int j = 0; j < words.Length; ++j)
@@ -90,14 +88,14 @@ namespace Lab2
             lstWord = lstWord.Distinct().ToList();
             // MINH add code here for add new line
             lstWord.Sort();
-            StreamWriter fDICT = new StreamWriter("DICT");
+            var fDICT = new StreamWriter("DICT");
             for (int i = 0; i < lstWord.Count; ++i)
             {
                 fDICT.WriteLine(lstWord[i]);
             }
             fDICT.WriteLine("SENT-START	[]	sil");
             fDICT.WriteLine("SENT-END	[]	sil");
-            
+
             fDICT.Close();
 
             MessageBox.Show("Create DICT for " + TrainFileCount + " files successfully!", "Info");
@@ -107,15 +105,15 @@ namespace Lab2
         {
             string TrainFilePath = tbTrainFilePath.Text;
             string lastFolder = TrainFilePath.Substring(TrainFilePath.LastIndexOf('\\') + 1);
-            string[] files = System.IO.Directory.GetFiles(TrainFilePath, "*.txt");
+            string[] files = Directory.GetFiles(TrainFilePath, "*.txt");
             int TrainFileCount = files.Length;
-            StreamWriter fPROMPTS = new StreamWriter("PROMPTS");
+            var fPROMPTS = new StreamWriter("PROMPTS");
             for (int i = 0; i < TrainFileCount; ++i)
             {
                 string filename = files[i].Replace(TrainFilePath, "");
                 filename = filename.Remove(0, 1);
 
-                string[] lines = System.IO.File.ReadAllLines(files[i]);
+                string[] lines = File.ReadAllLines(files[i]);
                 string newSentence = "";
                 string sentence = lines[0];
                 string[] words = sentence.Split(' ');
@@ -133,11 +131,11 @@ namespace Lab2
 
         private void btnCreateWORDS_Click(object sender, EventArgs e)
         {
-            StreamWriter fWORDS = new StreamWriter("WORDS.MLF");
+            var fWORDS = new StreamWriter("WORDS.MLF");
             fWORDS.WriteLine("#!MLF!#");
 
             string TrainFilePath = tbTrainFilePath.Text;
-            string[] files = System.IO.Directory.GetFiles(TrainFilePath, "*.txt");
+            string[] files = Directory.GetFiles(TrainFilePath, "*.txt");
             int TrainFileCount = files.Length;
 
             for (int i = 0; i < TrainFileCount; ++i)
@@ -148,7 +146,7 @@ namespace Lab2
 
                 fWORDS.WriteLine("\"*/" + filename + "\"");
 
-                string[] lines = System.IO.File.ReadAllLines(files[i]);
+                string[] lines = File.ReadAllLines(files[i]);
                 string sentence = lines[0];
                 string[] words = sentence.Split(' ');
                 for (int j = 0; j < words.Length; ++j)
@@ -164,11 +162,11 @@ namespace Lab2
 
         private void btnCreateMFC_Click(object sender, EventArgs e)
         {
-            StreamWriter fMFC = new StreamWriter("mfcc.scp");
+            var fMFC = new StreamWriter("mfcc.scp");
             string TrainFilePath = tbTrainFilePath.Text;
             string lastFolder = TrainFilePath.Substring(TrainFilePath.LastIndexOf('\\') + 1);
 
-            string[] files = System.IO.Directory.GetFiles(TrainFilePath, "*.wav");
+            string[] files = Directory.GetFiles(TrainFilePath, "*.wav");
             int TrainFileCount = files.Length;
 
             for (int i = 0; i < TrainFileCount; ++i)
@@ -180,13 +178,14 @@ namespace Lab2
             fMFC.Close();
             MessageBox.Show("Create mfcc.scp successfully!", "Info");
         }
+
         private void btnCreateTrainingSCP_Click(object sender, EventArgs e)
         {
-            StreamWriter fTraining = new StreamWriter("train.scp");
+            var fTraining = new StreamWriter("train.scp");
             string TrainFilePath = tbTrainFilePath.Text;
             string lastFolder = TrainFilePath.Substring(TrainFilePath.LastIndexOf('\\') + 1);
 
-            string[] files = System.IO.Directory.GetFiles(TrainFilePath, "*.wav");
+            string[] files = Directory.GetFiles(TrainFilePath, "*.wav");
             int TrainFileCount = files.Length;
 
             for (int i = 0; i < TrainFileCount; ++i)
@@ -234,11 +233,12 @@ namespace Lab2
             {
             }
         }
+
         private void btnCreateMacros_Click(object sender, EventArgs e)
         {
-            string[] proto = System.IO.File.ReadAllLines("hmm0\\proto");
-            string[] vFloors = System.IO.File.ReadAllLines("hmm0\\vFloors");
-            StreamWriter fMacros = new StreamWriter("hmm0\\macros");
+            string[] proto = File.ReadAllLines("hmm0\\proto");
+            string[] vFloors = File.ReadAllLines("hmm0\\vFloors");
+            var fMacros = new StreamWriter("hmm0\\macros");
             for (int i = 0; i < 3; ++i)
             {
                 fMacros.WriteLine(proto[i]);
@@ -250,11 +250,12 @@ namespace Lab2
             fMacros.Close();
             MessageBox.Show("Create macros successfully!", "Info");
         }
+
         private void btnCreateHmmdefs_Click(object sender, EventArgs e)
         {
-            StreamWriter fHmmdefs = new StreamWriter("hmm0\\hmmdefs");
-            string[] proto = System.IO.File.ReadAllLines("hmm0\\proto");
-            string[] phones = System.IO.File.ReadAllLines("monophones0");
+            var fHmmdefs = new StreamWriter("hmm0\\hmmdefs");
+            string[] proto = File.ReadAllLines("hmm0\\proto");
+            string[] phones = File.ReadAllLines("monophones0");
             for (int i = 0; i < phones.Length; ++i)
             {
                 fHmmdefs.WriteLine("~h \"" + phones[i] + "\"");
@@ -306,16 +307,16 @@ namespace Lab2
             int num3;
             File.Copy("HMM3/hmmdefs", "HMM4/hmmdefs", true);
             File.Copy("HMM3/macros", "HMM4/macros", true);
-            using (StreamReader reader = new StreamReader("HMM4/hmmdefs"))
+            using (var reader = new StreamReader("HMM4/hmmdefs"))
             {
                 str = reader.ReadToEnd();
             }
             int index = str.IndexOf("sil");
             string str2 = str.Substring(index - 4);
             index = str2.IndexOf("<STATE> 3");
-            int num2 = str2.IndexOf("<STATE>", (int)(index + 0x16));
+            int num2 = str2.IndexOf("<STATE>", index + 0x16);
             string str3 = str2.Substring(index + 0x15, num2 - (index + 0x15));
-            StreamWriter writer = new StreamWriter("HMM4/hmmdefs");
+            var writer = new StreamWriter("HMM4/hmmdefs");
             writer.Write(str);
             writer.WriteLine("~h \"sp\"");
             writer.WriteLine("<BEGINHMM>");
@@ -326,8 +327,8 @@ namespace Lab2
             writer.WriteLine("<TRANSP> 3");
             index = str2.IndexOf("<TRANSP> 5");
             num2 = str2.IndexOf("<ENDHMM>");
-            string[] strArray = str2.Substring(index + 11, num2 - (index + 11)).Split(new char[] { '\n' });
-            string[] strArray2 = strArray[0].Split(new char[] { ' ' });
+            string[] strArray = str2.Substring(index + 11, num2 - (index + 11)).Split(new[] {'\n'});
+            string[] strArray2 = strArray[0].Split(new[] {' '});
             string str4 = " ";
             for (num3 = 1; num3 <= 3; num3++)
             {
@@ -335,10 +336,10 @@ namespace Lab2
             }
             str4 = str4.Substring(0, str4.Length - 1);
             writer.WriteLine(str4);
-            strArray2 = strArray[2].Split(new char[] { ' ' });
+            strArray2 = strArray[2].Split(new[] {' '});
             str4 = " " + strArray2[1] + " " + strArray2[3] + " " + strArray2[4];
             writer.WriteLine(str4);
-            strArray2 = strArray[4].Split(new char[] { ' ' });
+            strArray2 = strArray[4].Split(new[] {' '});
             str4 = " ";
             for (num3 = 1; num3 <= 3; num3++)
             {
@@ -349,7 +350,6 @@ namespace Lab2
             writer.Close();
 
             MessageBox.Show("Run successfully!", "Info");
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -367,13 +367,12 @@ namespace Lab2
 
         private void button8_Click(object sender, EventArgs e)
         {
-            var src = Application.StartupPath + "\\phones1.mlf ";
-            var dest = Application.StartupPath;
+            string src = Application.StartupPath + "\\phones1.mlf ";
+            string dest = Application.StartupPath;
             File.Copy(src, Path.Combine(dest, "aligned.mlf"));
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9, false);
             MessageBox.Show("Run successfully!", "Info");
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -387,13 +386,13 @@ namespace Lab2
         private void UpdateFileWintri()
         {
             string str;
-            using (StreamReader reader = new StreamReader("wintri.mlf"))
+            using (var reader = new StreamReader("wintri.mlf"))
             {
                 str = reader.ReadToEnd();
             }
 
-            string[] strArray = str.Split(new char[] { '\n' });
-            StreamWriter writer = new StreamWriter("wintri.mlf");
+            string[] strArray = str.Split(new[] {'\n'});
+            var writer = new StreamWriter("wintri.mlf");
             foreach (string strTmp in strArray)
             {
                 string tmp = strTmp.Trim();
@@ -413,12 +412,12 @@ namespace Lab2
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12, false);
             MessageBox.Show("Run successfully!", "Info");
         }
-  
+
         private void btnCreateFulllist_Click(object sender, EventArgs e)
         {
-            string[] monophones = System.IO.File.ReadAllLines("monophones1");
-                        
-            StreamWriter fFulllist = new StreamWriter("fulllist");
+            string[] monophones = File.ReadAllLines("monophones1");
+
+            var fFulllist = new StreamWriter("fulllist");
             int n = monophones.Length;
 
             string tmp = monophones[n - 2];
@@ -438,9 +437,9 @@ namespace Lab2
             fFulllist.Close();
             MessageBox.Show("Create hmmdefs successfully!", "Info");
         }
+
         private void btnTrainHMM13_Click(object sender, EventArgs e)
         {
-            
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13, false);
             MessageBox.Show("Run successfully!", "Info");
         }
@@ -455,13 +454,13 @@ namespace Lab2
         private void button2_Click(object sender, EventArgs e)
         {
             // create mfcc - test
-            StreamWriter fMFC = new StreamWriter("mfcc-test.scp");
+            var fMFC = new StreamWriter("mfcc-test.scp");
             string testFilePath = tbTestFilePath.Text;
             string lastFolder = testFilePath.Substring(testFilePath.LastIndexOf('\\') + 1);
 
-            string[] files = System.IO.Directory.GetFiles(testFilePath, "*.wav");
+            string[] files = Directory.GetFiles(testFilePath, "*.wav");
 
-            foreach (var file in files)
+            foreach (string file in files)
             {
                 string filename = file.Replace(testFilePath, "");
                 string filename2 = filename.Replace("wav", "mfc");
@@ -476,25 +475,25 @@ namespace Lab2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            StreamWriter test = new StreamWriter("test.mlf");
+            var test = new StreamWriter("test.mlf");
             test.WriteLine("#!MLF!#");
 
-            
+
             string TestFilePath = tbTestFilePath.Text;
-            string[] filesTest = System.IO.Directory.GetFiles(TestFilePath, "*.txt");
-            
+            string[] filesTest = Directory.GetFiles(TestFilePath, "*.txt");
+
             for (int i = 0; i < filesTest.Length; ++i)
             {
                 string filename = filesTest[i].Replace(TestFilePath, "");
                 filename = filename.Replace(".txt", ".lab");
                 test.WriteLine("\"*" + filename.Replace('\\', '/') + "\"");
 
-                string[] lines = System.IO.File.ReadAllLines(filesTest[i]);                
+                string[] lines = File.ReadAllLines(filesTest[i]);
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length; ++j)
                     test.WriteLine(Word.ConvertUnicodeToTelex(words[j]));
-                
-                
+
+
                 test.WriteLine(".");
             }
             test.Close();
@@ -503,11 +502,11 @@ namespace Lab2
 
         private void btnTestSCP_Click(object sender, EventArgs e)
         {
-            StreamWriter fTest = new StreamWriter("test.scp");
+            var fTest = new StreamWriter("test.scp");
             string TestFilePath = tbTestFilePath.Text;
             string lastFolder = TestFilePath.Substring(TestFilePath.LastIndexOf('\\') + 1);
 
-            string[] files = System.IO.Directory.GetFiles(TestFilePath, "*.wav");
+            string[] files = Directory.GetFiles(TestFilePath, "*.wav");
             int TrainFileCount = files.Length;
 
             for (int i = 0; i < TrainFileCount; ++i)
@@ -538,24 +537,24 @@ namespace Lab2
             string TrainFilePath = tbTrainFilePath.Text;
             string TestFilePath = tbTestFilePath.Text;
 
-            string[] filesTrain = System.IO.Directory.GetFiles(TrainFilePath, "*.txt");
-            string[] filesTest = System.IO.Directory.GetFiles(TestFilePath, "*.txt");
+            string[] filesTrain = Directory.GetFiles(TrainFilePath, "*.txt");
+            string[] filesTest = Directory.GetFiles(TestFilePath, "*.txt");
 
-            StreamWriter fPROMPTS = new StreamWriter("lmtrain.txt");
+            var fPROMPTS = new StreamWriter("lmtrain.txt");
 
             for (int i = 0; i < filesTrain.Length; ++i)
             {
-                string[] lines = System.IO.File.ReadAllLines(filesTrain[i]);
-                string newSentence = "";                
+                string[] lines = File.ReadAllLines(filesTrain[i]);
+                string newSentence = "";
                 string[] words = lines[0].Split(' ');
-                for (int j = 0; j < words.Length - 1; ++j)                                    
-                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";                
+                for (int j = 0; j < words.Length - 1; ++j)
+                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
                 newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fPROMPTS.WriteLine("<s> " + newSentence + " </s>");
             }
             for (int i = 0; i < filesTest.Length; ++i)
             {
-                string[] lines = System.IO.File.ReadAllLines(filesTest[i]);
+                string[] lines = File.ReadAllLines(filesTest[i]);
                 string newSentence = "";
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
@@ -570,7 +569,7 @@ namespace Lab2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var currentpath = Directory.GetCurrentDirectory();
+            string currentpath = Directory.GetCurrentDirectory();
             tbTestFilePath.Text = currentpath + "\\Test";
             tbTrainFilePath.Text = currentpath + "\\Train";
         }
@@ -586,26 +585,29 @@ namespace Lab2
             }
             else
             {
-                e.Handled = e.KeyChar != (char)Keys.Back;
+                e.Handled = e.KeyChar != (char) Keys.Back;
             }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            var numberOfGram = txtNGram.Text;
+            string numberOfGram = txtNGram.Text;
             if (string.IsNullOrEmpty(numberOfGram))
             {
                 MessageBox.Show("Please input value");
                 return;
             }
-            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram), false);
-            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram), false);
-            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram), false);
-        }      
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram),
+                false);
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram),
+                false);
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram),
+                false);
+        }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            var numberOfGram = txtNGram.Text;
+            string numberOfGram = txtNGram.Text;
             if (string.IsNullOrEmpty(numberOfGram))
             {
                 MessageBox.Show("Please input value");
@@ -613,6 +615,24 @@ namespace Lab2
             }
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_PERFEXCITY, numberOfGram), true);
             MessageBox.Show(CommandHelper.GetOutput(), "Result");
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            var fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            if (string.IsNullOrEmpty(fbd.SelectedPath))
+                return;
+            tbTrainFilePath.Text = fbd.SelectedPath;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var fbd = new FolderBrowserDialog();
+            DialogResult result = fbd.ShowDialog();
+            if (string.IsNullOrEmpty(fbd.SelectedPath))
+                return;
+            tbTestFilePath.Text = fbd.SelectedPath;
         }
     }
 }

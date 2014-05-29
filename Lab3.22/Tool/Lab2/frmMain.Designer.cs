@@ -68,6 +68,8 @@
             this.txtNGram = new System.Windows.Forms.TextBox();
             this.btnCreateRecout = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -85,9 +87,10 @@
             // 
             // tbTrainFilePath
             // 
+            this.tbTrainFilePath.Enabled = false;
             this.tbTrainFilePath.Location = new System.Drawing.Point(113, 12);
             this.tbTrainFilePath.Name = "tbTrainFilePath";
-            this.tbTrainFilePath.Size = new System.Drawing.Size(601, 20);
+            this.tbTrainFilePath.Size = new System.Drawing.Size(520, 20);
             this.tbTrainFilePath.TabIndex = 0;
             this.tbTrainFilePath.Text = "E:\\sn0040\\train";
             // 
@@ -141,9 +144,10 @@
             // 
             // tbTestFilePath
             // 
+            this.tbTestFilePath.Enabled = false;
             this.tbTestFilePath.Location = new System.Drawing.Point(113, 40);
             this.tbTestFilePath.Name = "tbTestFilePath";
-            this.tbTestFilePath.Size = new System.Drawing.Size(601, 20);
+            this.tbTestFilePath.Size = new System.Drawing.Size(520, 20);
             this.tbTestFilePath.TabIndex = 1;
             this.tbTestFilePath.Text = "E:\\sn0040\\test";
             // 
@@ -493,11 +497,33 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(648, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Browse";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(648, 37);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 28;
+            this.button11.Text = "Browse";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 494);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -561,6 +587,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtNGram;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button11;
     }
 }
 
