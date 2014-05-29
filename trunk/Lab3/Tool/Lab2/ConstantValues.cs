@@ -64,9 +64,9 @@ namespace Lab2
 
         // lab 3 start here
         public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TRAIN =
-            "HSGen.exe -l -n 10 wdnet.txt dict.txt >> promptsADapt.txt";
+            "HSGen.exe -l -n 10 wdnet.txt dict >> promptsADapt.txt";
         public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TEST =
-           "HSGen.exe -l -n 10 wdnet.txt dict.txt >> promptsTest.txt";
+           "HSGen.exe -l -n 10 wdnet.txt dict >> promptsTest.txt";
         public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TRAIN =
           "HCopy.exe –C config –S codeAdapt.scp";
         public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TEST =
