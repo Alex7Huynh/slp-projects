@@ -64,9 +64,16 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnGetResult = new System.Windows.Forms.Button();
             this.btnCreateRecout = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.txtNGram = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -422,7 +429,7 @@
             this.groupBox3.Controls.Add(this.btnTestSCP);
             this.groupBox3.Location = new System.Drawing.Point(502, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 369);
+            this.groupBox3.Size = new System.Drawing.Size(212, 164);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test";
@@ -447,11 +454,74 @@
             this.btnCreateRecout.UseVisualStyleBackColor = true;
             this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecout_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button10);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.txtNGram);
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Location = new System.Drawing.Point(502, 242);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 240);
+            this.groupBox4.TabIndex = 27;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Continous Regconition";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(7, 54);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(192, 23);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "Step 2 : Build NGram";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 83);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(192, 23);
+            this.button3.TabIndex = 29;
+            this.button3.Text = "Step 3 : Regconition";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // txtNGram
+            // 
+            this.txtNGram.Location = new System.Drawing.Point(94, 28);
+            this.txtNGram.Name = "txtNGram";
+            this.txtNGram.Size = new System.Drawing.Size(100, 20);
+            this.txtNGram.TabIndex = 30;
+            this.txtNGram.Text = "2";
+            this.txtNGram.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNGram_KeyPress);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 31);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 31;
+            this.label3.Text = "N-Gram number";
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(4, 109);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(192, 23);
+            this.button10.TabIndex = 32;
+            this.button10.Text = "Evaluation via Perflexcity";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 494);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -463,9 +533,12 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Lab2 by Alex Huynh, Master Minh & HVTan";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -509,6 +582,12 @@
         private System.Windows.Forms.Button btnCreateRecout;
         private System.Windows.Forms.Button btnCreateLmtrain;
         private System.Windows.Forms.Button btnCreateFulllist;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtNGram;
+        private System.Windows.Forms.Button button10;
     }
 }
 
