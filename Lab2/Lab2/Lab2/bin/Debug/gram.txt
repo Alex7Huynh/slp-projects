@@ -1,2 +1,2 @@
-$chuso = KHOONG | MOOJT | HAI | BA | BOOSN | NAWM | SASU | BARY | TASM | CHISN; 
-($chuso)
+$(tu) = KHOONG | MOOJT | HAI | BA | BOOSN | NAWM | SASU | BARY | TASM | CHISN | 
+$(tu)
