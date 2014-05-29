@@ -607,6 +607,19 @@ namespace Lab2
 
         private void button10_Click(object sender, EventArgs e)
         {
+            var fLMTestFile = new StreamWriter("lmtest.txt");
+            string[] filesTest = Directory.GetFiles(tbTestFilePath.Text, "*.txt");
+            foreach (var fileTest in filesTest)
+            {
+                string[] lines = File.ReadAllLines(fileTest);
+                string newSentence = "";
+                string[] words = lines[0].Split(' ');
+                for (int j = 0; j < words.Length - 1; ++j)
+                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                fLMTestFile.WriteLine("<s> " + newSentence + " </s>");
+            }
+            fLMTestFile.Close();
             string numberOfGram = txtNGram.Text;
             if (string.IsNullOrEmpty(numberOfGram))
             {

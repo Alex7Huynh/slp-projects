@@ -70,7 +70,7 @@ namespace Lab2
         public const string CMD_LAB3_STEP3_RECOGNITION_HDECODE =
             "HTKProgram\\HDecode -H hmm15/macros -H hmm15/hmmdefs  -S test.scp -t 220.0 220.0 -C config\\config.hdecode -i recout.mlf -w lmModel -p 0.0 -s 5.0 dict tiedlist";
 
-        public const string CMD_LAB3_PERFEXCITY = "HTKProgram\\LPlex -n {0} -t lmModel test.txt";
+        public const string CMD_LAB3_PERFEXCITY = "HTKProgram\\LPlex -n {0} -t lmModel lmtest.txt";
 
     }
 }
