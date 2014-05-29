@@ -566,6 +566,63 @@ namespace Lab2
             fPROMPTS.Close();
             MessageBox.Show("Create lmtrain.txt successfully!", "Info");
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var currentpath = Directory.GetCurrentDirectory();
+            tbTestFilePath.Text = currentpath + "\\Test";
+            tbTrainFilePath.Text = currentpath + "\\Train";
+        }
+
+        private void txtNGram_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar))
+            {
+                if (Regex.IsMatch(txtNGram.Text, "\\D+"))
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = e.KeyChar != (char)Keys.Back;
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            var numberOfGram = txtNGram.Text;
+            if (string.IsNullOrEmpty(numberOfGram))
+            {
+                MessageBox.Show("Please input value");
+                return;
+            }
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram), false);
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram), false);
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram), false);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_REGCONITION_HDECODE, false);
+            MessageBox.Show("Success!", "Result");
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            var numberOfGram = txtNGram.Text;
+            if (string.IsNullOrEmpty(numberOfGram))
+            {
+                MessageBox.Show("Please input value");
+                return;
+            }
+            CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_PERFEXCITY, numberOfGram), true);
+            MessageBox.Show(CommandHelper.GetOutput(), "Result");
+
+        }
+
+
               
 
         
