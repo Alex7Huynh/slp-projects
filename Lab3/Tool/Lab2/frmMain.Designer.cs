@@ -62,9 +62,12 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnGetResult = new System.Windows.Forms.Button();
             this.btnCreateRecout = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -398,7 +401,7 @@
             this.groupBox3.Controls.Add(this.btnTestSCP);
             this.groupBox3.Location = new System.Drawing.Point(502, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 369);
+            this.groupBox3.Size = new System.Drawing.Size(212, 166);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test";
@@ -423,11 +426,32 @@
             this.btnCreateRecout.UseVisualStyleBackColor = true;
             this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecout_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Location = new System.Drawing.Point(508, 245);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(200, 196);
+            this.groupBox4.TabIndex = 27;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Adaption";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(1, 19);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(192, 23);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "Generated PromptList";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(725, 456);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -442,6 +466,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,6 +508,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnGetResult;
         private System.Windows.Forms.Button btnCreateRecout;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button2;
     }
 }
 

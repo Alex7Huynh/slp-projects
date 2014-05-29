@@ -587,5 +587,14 @@ namespace Lab2
             CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT, true);
             MessageBox.Show(CommandHelper.GetOutput(), "Result");
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TEST, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TEST, false);
+
+        }
     }
 }

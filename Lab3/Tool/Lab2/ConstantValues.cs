@@ -60,5 +60,18 @@ namespace Lab2
             "HVite -H hmm15/macros -H hmm15/hmmdefs -S test.scp -i recout.mlf -w wdnet -p 0.0 -s 5.0 dict tiedlist";
 
         public const string CMD_TEST_STEP2_RESULT = "HResults -I test.mlf tiedlist recout.mlf";
+
+
+        // lab 3 start here
+        public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TRAIN =
+            "HSGen.exe -l -n 10 wdnet.txt dict.txt >> promptsADapt.txt";
+        public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HGEN_TEST =
+           "HSGen.exe -l -n 10 wdnet.txt dict.txt >> promptsTest.txt";
+        public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TRAIN =
+          "HCopy.exe –C config –S codeAdapt.scp";
+        public const string CMD_STEP12_SLIDE33_PREPAREDDATA_HCOPY_TEST =
+           "HCopy.exe –C config –S codeTest.scp";
+
+
     }
 }
