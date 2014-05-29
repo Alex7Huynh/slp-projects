@@ -62,6 +62,7 @@
             this.btnCreateFulllist = new System.Windows.Forms.Button();
             this.btnTrainHMM14_15 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnCreateNewLmtrain = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnGetResult = new System.Windows.Forms.Button();
@@ -227,7 +228,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(165, 23);
             this.button1.TabIndex = 11;
-            this.button1.Text = "Create MFC";
+            this.button1.Text = "Create mfc files";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -364,7 +365,7 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Location = new System.Drawing.Point(22, 72);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(181, 410);
+            this.groupBox1.Size = new System.Drawing.Size(181, 395);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Prepare Data";
@@ -375,7 +376,7 @@
             this.btnCreateLmtrain.Name = "btnCreateLmtrain";
             this.btnCreateLmtrain.Size = new System.Drawing.Size(192, 23);
             this.btnCreateLmtrain.TabIndex = 12;
-            this.btnCreateLmtrain.Text = "Create lmtrain.txt";
+            this.btnCreateLmtrain.Text = "Create lmtrain (270+30)";
             this.btnCreateLmtrain.UseVisualStyleBackColor = true;
             this.btnCreateLmtrain.Click += new System.EventHandler(this.btnCreateLmtrain_Click);
             // 
@@ -396,7 +397,7 @@
             this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Location = new System.Drawing.Point(209, 72);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(287, 410);
+            this.groupBox2.Size = new System.Drawing.Size(287, 395);
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Train";
@@ -422,6 +423,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnCreateNewLmtrain);
             this.groupBox3.Controls.Add(this.button10);
             this.groupBox3.Controls.Add(this.btnCreateLmtrain);
             this.groupBox3.Controls.Add(this.label3);
@@ -434,16 +436,26 @@
             this.groupBox3.Controls.Add(this.btnTestSCP);
             this.groupBox3.Location = new System.Drawing.Point(502, 72);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(212, 410);
+            this.groupBox3.Size = new System.Drawing.Size(212, 395);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test";
             // 
+            // btnCreateNewLmtrain
+            // 
+            this.btnCreateNewLmtrain.Location = new System.Drawing.Point(6, 132);
+            this.btnCreateNewLmtrain.Name = "btnCreateNewLmtrain";
+            this.btnCreateNewLmtrain.Size = new System.Drawing.Size(192, 23);
+            this.btnCreateNewLmtrain.TabIndex = 33;
+            this.btnCreateNewLmtrain.Text = "Create lmtrain (270+n)";
+            this.btnCreateNewLmtrain.UseVisualStyleBackColor = true;
+            this.btnCreateNewLmtrain.Click += new System.EventHandler(this.btnCreateNewLmtrain_Click);
+            // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(6, 244);
+            this.button10.Location = new System.Drawing.Point(6, 271);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(192, 23);
+            this.button10.Size = new System.Drawing.Size(193, 23);
             this.button10.TabIndex = 32;
             this.button10.Text = "Evaluation via Perflexity";
             this.button10.UseVisualStyleBackColor = true;
@@ -452,7 +464,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 136);
+            this.label3.Location = new System.Drawing.Point(10, 165);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 31;
@@ -460,7 +472,7 @@
             // 
             // btnGetResult
             // 
-            this.btnGetResult.Location = new System.Drawing.Point(6, 215);
+            this.btnGetResult.Location = new System.Drawing.Point(6, 244);
             this.btnGetResult.Name = "btnGetResult";
             this.btnGetResult.Size = new System.Drawing.Size(192, 23);
             this.btnGetResult.TabIndex = 28;
@@ -470,7 +482,7 @@
             // 
             // txtNGram
             // 
-            this.txtNGram.Location = new System.Drawing.Point(94, 133);
+            this.txtNGram.Location = new System.Drawing.Point(98, 162);
             this.txtNGram.Name = "txtNGram";
             this.txtNGram.Size = new System.Drawing.Size(100, 20);
             this.txtNGram.TabIndex = 30;
@@ -479,7 +491,7 @@
             // 
             // btnCreateRecout
             // 
-            this.btnCreateRecout.Location = new System.Drawing.Point(6, 187);
+            this.btnCreateRecout.Location = new System.Drawing.Point(6, 215);
             this.btnCreateRecout.Name = "btnCreateRecout";
             this.btnCreateRecout.Size = new System.Drawing.Size(192, 23);
             this.btnCreateRecout.TabIndex = 27;
@@ -489,7 +501,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 159);
+            this.button2.Location = new System.Drawing.Point(6, 188);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(192, 23);
             this.button2.TabIndex = 28;
@@ -521,7 +533,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(725, 494);
+            this.ClientSize = new System.Drawing.Size(725, 473);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.groupBox3);
@@ -589,6 +601,7 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnCreateNewLmtrain;
     }
 }
 
