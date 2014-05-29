@@ -327,8 +327,8 @@ namespace Lab2
             writer.WriteLine("<TRANSP> 3");
             index = str2.IndexOf("<TRANSP> 5");
             num2 = str2.IndexOf("<ENDHMM>");
-            string[] strArray = str2.Substring(index + 11, num2 - (index + 11)).Split(new[] {'\n'});
-            string[] strArray2 = strArray[0].Split(new[] {' '});
+            string[] strArray = str2.Substring(index + 11, num2 - (index + 11)).Split(new[] { '\n' });
+            string[] strArray2 = strArray[0].Split(new[] { ' ' });
             string str4 = " ";
             for (num3 = 1; num3 <= 3; num3++)
             {
@@ -336,10 +336,10 @@ namespace Lab2
             }
             str4 = str4.Substring(0, str4.Length - 1);
             writer.WriteLine(str4);
-            strArray2 = strArray[2].Split(new[] {' '});
+            strArray2 = strArray[2].Split(new[] { ' ' });
             str4 = " " + strArray2[1] + " " + strArray2[3] + " " + strArray2[4];
             writer.WriteLine(str4);
-            strArray2 = strArray[4].Split(new[] {' '});
+            strArray2 = strArray[4].Split(new[] { ' ' });
             str4 = " ";
             for (num3 = 1; num3 <= 3; num3++)
             {
@@ -391,7 +391,7 @@ namespace Lab2
                 str = reader.ReadToEnd();
             }
 
-            string[] strArray = str.Split(new[] {'\n'});
+            string[] strArray = str.Split(new[] { '\n' });
             var writer = new StreamWriter("wintri.mlf");
             foreach (string strTmp in strArray)
             {
@@ -519,19 +519,6 @@ namespace Lab2
             MessageBox.Show("Create test.scp successfully!", "Info");
         }
 
-        private void btnCreateRecout_Click(object sender, EventArgs e)
-        {
-            //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
-            MessageBox.Show("Run successfully!", "Info");
-        }
-
-        private void btnGetResult_Click(object sender, EventArgs e)
-        {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT, true);
-            MessageBox.Show(CommandHelper.GetOutput(), "Result");
-        }
-
         private void btnCreateLmtrain_Click(object sender, EventArgs e)
         {
             string TrainFilePath = tbTrainFilePath.Text;
@@ -541,7 +528,7 @@ namespace Lab2
             string[] filesTest = Directory.GetFiles(TestFilePath, "*.txt");
 
             var fPROMPTS = new StreamWriter("lmtrain.txt");
-
+            // 270 lines
             for (int i = 0; i < filesTrain.Length; ++i)
             {
                 string[] lines = File.ReadAllLines(filesTrain[i]);
@@ -552,6 +539,7 @@ namespace Lab2
                 newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fPROMPTS.WriteLine("<s> " + newSentence + " </s>");
             }
+            // 30 lines
             for (int i = 0; i < filesTest.Length; ++i)
             {
                 string[] lines = File.ReadAllLines(filesTest[i]);
@@ -566,6 +554,61 @@ namespace Lab2
             fPROMPTS.Close();
             MessageBox.Show("Create lmtrain.txt successfully!", "Info");
         }
+
+        private void btnCreateNewLmtrain_Click(object sender, EventArgs e)
+        {
+            string[] filesTrain = Directory.GetFiles(tbTrainFilePath.Text, "*.txt");
+
+            var fLmtrain = new StreamWriter("lmtrain.txt");
+            // 270 lines
+            for (int i = 0; i < filesTrain.Length; ++i)
+            {
+                string[] lines = File.ReadAllLines(filesTrain[i]);
+                string newSentence = "";
+                string[] words = lines[0].Split(' ');
+                for (int j = 0; j < words.Length - 1; ++j)
+                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                fLmtrain.WriteLine("<s> " + newSentence + " </s>");
+            }
+            // n lines
+            string NewSentencesFile = "config/NewSentences.txt";
+            if (File.Exists(NewSentencesFile))
+            {
+                string[] newlines = File.ReadAllLines(NewSentencesFile);
+                for (int i = 0; i < newlines.Length; ++i)
+                {
+                    newlines[i] = newlines[i].Trim();
+                    if (newlines.Length != 0)
+                    {
+                        string newSentence = "";
+                        string[] words = newlines[i].Split(' ');
+                        for (int j = 0; j < words.Length - 1; ++j)
+                            newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
+                        newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                        fLmtrain.WriteLine("<s> " + newSentence + " </s>");
+                    }
+                }
+            }
+
+            fLmtrain.Close();
+            MessageBox.Show("Create lmtrain.txt successfully!", "Info");
+        }
+
+        private void btnCreateRecout_Click(object sender, EventArgs e)
+        {
+            //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
+            MessageBox.Show("Run successfully!", "Info");
+        }
+
+        private void btnGetResult_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT, true);
+            MessageBox.Show(CommandHelper.GetOutput(), "Result");
+        }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -585,7 +628,7 @@ namespace Lab2
             }
             else
             {
-                e.Handled = e.KeyChar != (char) Keys.Back;
+                e.Handled = e.KeyChar != (char)Keys.Back;
             }
         }
 
@@ -647,5 +690,7 @@ namespace Lab2
                 return;
             tbTestFilePath.Text = fbd.SelectedPath;
         }
+
+
     }
 }
