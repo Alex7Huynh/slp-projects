@@ -690,7 +690,5 @@ namespace Lab2
                 return;
             tbTestFilePath.Text = fbd.SelectedPath;
         }
-
-
     }
 }
