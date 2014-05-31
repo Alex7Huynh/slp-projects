@@ -1,0 +1,34 @@
+TONG HOP TIENG NOI
+
+->> Unit selection
+- HMM sysnthesis
+
+1. Chuan bi data
+
+1.1 train toi HMM7, tu hmm7 train them 10 vong nua, len hmm17 
+
+1.2. chay cat data
+
+-them vao dict:
+silence [] sil
+
+-chay:
+HVite -l *-o S -b silence -C config -a -H hmm17/macros -H hmm17/hmmdefs -i ketqua.mlf -m -t 250.0 -y lab -I words.mlf -S train.scp dict monophones1
+
+2. Tong hop - TTS
+
+2.1. xay dung bang tra tu file ketqua.mlf
+vd:
+xin	1	0.5	1.5	nc-trai	nc-phai 
+chafo	2	3.5	3.7	xin	bajn
+
+2.2. thuat toan unit selection
+- viet code
+- viet giao dien
+- 16Khz  1s 16000
+16000 	1
+b	0.5
+e	1.5
+1.wav -> a[b..e]
+2	b[d...f]
+
