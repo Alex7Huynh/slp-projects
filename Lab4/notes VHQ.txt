@@ -1,0 +1,34 @@
+﻿Ghi chú từ bài giảng của thầy Vũ Hải Quân, 31/05/2014
+Lab4: tổng hợp tiếng nói
+
+Yêu cầu
+- Train 300 tập tin wav.
+- Nhập vào một câu, hệ thống phát ra tiếng nói ứng với câu đó.
+- Tự nhiên: giống tiếng nói con người.
+- Dễ hiểu: người nghe có thể hiểu được dễ dàng.
+- Yêu cầu kỹ thuật: bộ nhớ, phần cứng, tốc độ xử lý,...
+
+Phase 1:
+- Input: sentence
+- Output: syllable
+- Ví dụ:
+	+ Input: nhiệt độ ở TP.HCM ngày 31/05/2014 là 37°C
+	+ Output: NHIỆT ĐỘ Ở THÀNH PHỐ HỒ CHÍ MINH NGÀY BA MƯƠI MỐT THÁNG NĂM NĂM HAI NGÀN MƯỜI BỐN LÀ BA MƯƠI BẢY ĐỘ XÊ.
+- Cần xử lý được ít nhất một trong số các trường hợp sau:
+	+ Ngày tháng năm: 13/12/2005 --> MƯỜI BA THÁNG MƯỜI HAI NĂM HAI NGÌN LẺ NĂM
+	+ Số: 105.30 --> MỘT TRĂM LẺ NĂM CHẤM BA MƯƠI
+	+ Tiền tệ: 525$ --> NĂM TRĂM HAI MƯƠI LĂM ĐÔ LA
+	+ Nhiệt độ: 37°C --> BA MƯƠI BẢY ĐỘ C
+
+Phase 2: concatenation
+- Forced alignment (HTK): nhận dạng mà biết trước kết quả.
+- Dựa vào file recout.mlf
+	+ Biết được các từ bắt đầu từ đoạn nào đến đoạn nào (2 cột đầu tiên) trong file wav.
+	+ Biết được từ đứng trước và từ đứng sau của một từ cho trước.
+
+Vấn đề:
+1. Phương pháp này so với phương pháp thu âm sẵn 5000 từ tiếng Việt?
+--> Nếu thu âm sẵn thì tiếng của một câu sẽ không tự nhiên.
+2. Từ nước ngoài? (Tôi sẽ gặp Alan Smith)
+--> Cách 1: dùng engine của nước ngoài --> Hai giọng trong 1 câu
+--> Cách 2: Letter to sound rules
