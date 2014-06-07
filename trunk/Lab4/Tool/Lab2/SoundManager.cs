@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using NAudio.Wave;
 
 namespace MTT
@@ -44,6 +45,56 @@ namespace MTT
                         writer.WriteData(buffer, 0, bytesRead);
                     }
                 }
+            }
+        }
+
+        public byte[] TrimWavByteArray(string inPath, TimeSpan cutFromStart, TimeSpan cutFromEnd)
+        {
+            byte[] buffer;
+            using (WaveFileReader reader = new WaveFileReader(inPath))
+            {
+                int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
+
+                int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
+                startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
+
+                int endBytes = (int)cutFromEnd.TotalMilliseconds * bytesPerMillisecond;
+                endBytes = endBytes - endBytes % reader.WaveFormat.BlockAlign;
+                int endPos = endBytes;//(int)reader.Length - endBytes;
+
+                reader.Position = startPos;
+                // byte[] buffer = new byte[1024];
+                while (reader.Position < endPos)
+                {
+                    int bytesRequired = (int)(endPos - reader.Position);
+                    if (bytesRequired > 0)
+                    {
+                        // int bytesToRead = Math.Min(bytesRequired, buffer.Length);
+                        buffer = new byte[bytesRequired];
+                        int bytesRead = reader.Read(buffer, 0, bytesRequired);
+                        if (bytesRead > 0)
+                        {
+                            return buffer;
+                        }
+                    }
+                }
+                return new byte[1];
+            }
+        }
+
+        public void play_Wav(string soundFile)
+        {
+            using (var wfr = new WaveFileReader(soundFile))
+            using (WaveChannel32 wc = new WaveChannel32(wfr) { PadWithZeroes = false })
+            using (var audioOutput = new DirectSoundOut())
+            {
+                audioOutput.Init(wc);
+                audioOutput.Play();
+                while (audioOutput.PlaybackState != PlaybackState.Stopped)
+                {
+                    Thread.Sleep(20);
+                }
+                audioOutput.Stop();
             }
         }
     }

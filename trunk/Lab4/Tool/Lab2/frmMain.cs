@@ -15,14 +15,14 @@ namespace MTT
         {
             InitializeComponent();
         }
-        
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             string currentpath = Directory.GetCurrentDirectory();
             tbTrainFilePath.Text = currentpath + "\\Train";
             tbTestFilePath.Text = currentpath + "\\Test";
 
-            fileManager = new FileManager(tbTrainFilePath.Text, tbTestFilePath.Text);            
+            fileManager = new FileManager(tbTrainFilePath.Text, tbTestFilePath.Text);
         }
 
         private void btnBrowseTrainPath_Click(object sender, EventArgs e)
@@ -46,6 +46,23 @@ namespace MTT
         }
 
         #region Prepare data
+        private void btnPrepareAll_Click(object sender, EventArgs e)
+        {
+            fileManager.CreateFolders();
+            fileManager.MakeDict();
+            fileManager.MakeMonophones();
+            fileManager.MakeFulllist();
+            fileManager.MakePrompts();
+            fileManager.MakeWords();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1, false);
+            fileManager.MakeMfccTrainScp();
+            fileManager.MakeTrainScp();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_MFC, false);
+            MessageBox.Show("Create all training files successfully!", "Info");
+            this.Focus();
+        }
+
         private void btnCreateFolder_Click(object sender, EventArgs e)
         {
             fileManager.CreateFolders();
@@ -87,6 +104,7 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1, false);
             MessageBox.Show("Create phones0 & phones1 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateMFC_Click(object sender, EventArgs e)
@@ -108,10 +126,38 @@ namespace MTT
             {
                 MessageBox.Show("Create MFCC train files successfully!", "Info");
             }
-        }        
+        }
+
+
         #endregion
 
         #region Build & train HMM models
+        private void btnTrainAllHmm_Click(object sender, EventArgs e)
+        {
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD, false);
+            fileManager.MakeMacrosHMM0();
+            fileManager.MakeHmmdefs();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN, false);
+            fileManager.CreateHMM4();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7, false);
+            File.Copy(Application.StartupPath + "\\phones1.mlf ", Path.Combine(Application.StartupPath, "aligned.mlf"));
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_CREATEWINTRI, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10, false);
+            fileManager.ModifyWintriMlf();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15, false);
+            this.Focus();
+        }
+
         private void btnInitModelHmm0_Click(object sender, EventArgs e)
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD, false);
@@ -119,6 +165,7 @@ namespace MTT
             {
                 MessageBox.Show("Create HMM0 successfully!", "Info");
             }
+            this.Focus();
         }
 
         private void btnCreateMacrosHmmdefs_Click(object sender, EventArgs e)
@@ -146,6 +193,7 @@ namespace MTT
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP, false);
             MessageBox.Show("Create HMM5 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM7_Click(object sender, EventArgs e)
@@ -153,16 +201,16 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7, false);
             MessageBox.Show("Create HMM6, HMM7 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM9_Click(object sender, EventArgs e)
         {
-            string src = Application.StartupPath + "\\phones1.mlf ";
-            string dest = Application.StartupPath;
-            File.Copy(src, Path.Combine(dest, "aligned.mlf"));
+            File.Copy(Application.StartupPath + "\\phones1.mlf ", Path.Combine(Application.StartupPath, "aligned.mlf"));
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM8, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP13_TRAINTOHMM9, false);
             MessageBox.Show("Create HMM8, HMM9 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM10_Click(object sender, EventArgs e)
@@ -171,6 +219,7 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP14_TRAINTOHMM10, false);
             fileManager.ModifyWintriMlf();
             MessageBox.Show("Create HMM10 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM12_Click(object sender, EventArgs e)
@@ -178,12 +227,14 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM11, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP15_TRAINTOHMM12, false);
             MessageBox.Show("Create HMM11, HMM12 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM13_Click(object sender, EventArgs e)
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP16_TRAINTOHMM13, false);
             MessageBox.Show("Create HMM13 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM15_Click(object sender, EventArgs e)
@@ -191,6 +242,7 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15, false);
             MessageBox.Show("Create HMM14, HMM15 successfully!", "Info");
+            this.Focus();
         }
         #endregion
 
@@ -261,6 +313,7 @@ namespace MTT
             //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
             MessageBox.Show("Create recout.mlf successfully!", "Info");
+            this.Focus();
         }
 
         private void btnGetResult_Click(object sender, EventArgs e)
@@ -283,6 +336,10 @@ namespace MTT
         }
         #endregion
 
-        
+        private void btnTTS_Click(object sender, EventArgs e)
+        {
+            MySentence mySentence = new MySentence(tbSentence.Text);
+            string sentence = mySentence.Standardize();
+        }
     }
 }
