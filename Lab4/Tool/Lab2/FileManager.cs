@@ -42,15 +42,15 @@ namespace MTT
         // Methods
         public bool CreateFolders()
         {
-            TrainFilePath = TrainFilePath.Substring(0, TrainFilePath.LastIndexOf('\\'));
+            string TmpTrainFilePath = TrainFilePath.Substring(0, TrainFilePath.LastIndexOf('\\'));
 
-            Directory.CreateDirectory(TrainFilePath + "\\" + MfcTrainFolder);
-            Directory.CreateDirectory(TrainFilePath + "\\" + MfcTestFolder);
-            Directory.CreateDirectory(TrainFilePath + "\\" + LanguageModelFolder);
+            Directory.CreateDirectory(TmpTrainFilePath + "\\" + MfcTrainFolder);
+            Directory.CreateDirectory(TmpTrainFilePath + "\\" + MfcTestFolder);
+            Directory.CreateDirectory(TmpTrainFilePath + "\\" + LanguageModelFolder);
 
             for (int i = 0; i <= 15; ++i)
             {
-                Directory.CreateDirectory(TrainFilePath + "\\" + HMMFolder + i);
+                Directory.CreateDirectory(TmpTrainFilePath + "\\" + HMMFolder + i);
             }
 
             return true;

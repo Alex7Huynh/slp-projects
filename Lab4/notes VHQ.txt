@@ -19,6 +19,7 @@ Phase 1:
 	+ Số: 105.30 --> MỘT TRĂM LẺ NĂM CHẤM BA MƯƠI
 	+ Tiền tệ: 525$ --> NĂM TRĂM HAI MƯƠI LĂM ĐÔ LA
 	+ Nhiệt độ: 37°C --> BA MƯƠI BẢY ĐỘ C
+	+ ...
 
 Phase 2: concatenation
 - Forced alignment (HTK): nhận dạng mà biết trước kết quả.

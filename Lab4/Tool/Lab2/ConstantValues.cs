@@ -10,7 +10,7 @@ namespace MTT
 
         public const string CMD_STEP0_CREATE_PHONE0 = "HTKProgram\\HLEd -l * -d dict -i phones0.mlf config\\mkphone0.led words.mlf";
         public const string CMD_STEP0_CREATE_PHONE1 = "HTKProgram\\HLEd -l * -d dict -i phones1.mlf config\\mkphone1.led words.mlf";
-        public const string CMD_STEP0_CREATE_MFC = "HTKProgram\\HCopy -T 1 -C config\\config.hcopy -S mfcc.scp";
+        public const string CMD_STEP0_CREATE_MFC = "HTKProgram\\HCopy -T 1 -C config\\config.hcopy -S mfcc-train.scp";
         public const string CMD_STEP7_HMM0_CMD = "HTKProgram\\HCompV -C config\\config -f 0.01 -m -S train.scp -M hmm0 config\\proto";
 
         public const string CMD_STEP9_HMM1_TRAIN =
