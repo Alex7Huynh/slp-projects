@@ -347,7 +347,7 @@
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnCreateTrainingSCP);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(23, 134);
+            this.groupBox1.Location = new System.Drawing.Point(23, 196);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(140, 340);
             this.groupBox1.TabIndex = 24;
@@ -387,7 +387,7 @@
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button8);
-            this.groupBox2.Location = new System.Drawing.Point(169, 134);
+            this.groupBox2.Location = new System.Drawing.Point(169, 196);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(287, 340);
             this.groupBox2.TabIndex = 25;
@@ -416,7 +416,7 @@
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.btnCreateTestMLF);
             this.groupBox3.Controls.Add(this.btnTestSCP);
-            this.groupBox3.Location = new System.Drawing.Point(462, 134);
+            this.groupBox3.Location = new System.Drawing.Point(462, 196);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(150, 340);
             this.groupBox3.TabIndex = 26;
@@ -514,10 +514,12 @@
             // tbSentence
             // 
             this.tbSentence.Location = new System.Drawing.Point(113, 67);
+            this.tbSentence.Multiline = true;
             this.tbSentence.Name = "tbSentence";
-            this.tbSentence.Size = new System.Drawing.Size(423, 20);
+            this.tbSentence.Size = new System.Drawing.Size(423, 83);
             this.tbSentence.TabIndex = 36;
-            this.tbSentence.Text = "nhiệt độ ở TP.HCM ngày 31/05/2014 là 37°C";
+            this.tbSentence.Text = "nhiệt độ ở TP.HCM ngày 31/05/2014 là 37°C, Vĩ độ 21.02; Kinh độ: 105.85; Nhiệt độ" +
+                " hóa sương: 25°C; Tầm nhìn: 10.0 km; Độ ẩm: 100;";
             // 
             // label4
             // 
@@ -541,7 +543,7 @@
             // btnPrepareAll
             // 
             this.btnPrepareAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnPrepareAll.Location = new System.Drawing.Point(29, 105);
+            this.btnPrepareAll.Location = new System.Drawing.Point(29, 167);
             this.btnPrepareAll.Name = "btnPrepareAll";
             this.btnPrepareAll.Size = new System.Drawing.Size(126, 23);
             this.btnPrepareAll.TabIndex = 10;
@@ -552,7 +554,7 @@
             // btnTrainAllHmm
             // 
             this.btnTrainAllHmm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnTrainAllHmm.Location = new System.Drawing.Point(183, 105);
+            this.btnTrainAllHmm.Location = new System.Drawing.Point(183, 167);
             this.btnTrainAllHmm.Name = "btnTrainAllHmm";
             this.btnTrainAllHmm.Size = new System.Drawing.Size(261, 23);
             this.btnTrainAllHmm.TabIndex = 39;
@@ -564,7 +566,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 486);
+            this.ClientSize = new System.Drawing.Size(636, 550);
             this.Controls.Add(this.btnTrainAllHmm);
             this.Controls.Add(this.btnPrepareAll);
             this.Controls.Add(this.btnTTS);
