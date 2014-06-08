@@ -44,7 +44,15 @@ namespace MTT
             tbTestFilePath.Text = fbd.SelectedPath;
             fileManager = new FileManager(tbTrainFilePath.Text, tbTestFilePath.Text);
         }
+        
+        private void btnTTS_Click(object sender, EventArgs e)
+        {
+            Standardizer standardizer = new Standardizer(tbSentence.Text);
+            string sentence = standardizer.Standardize();
+            
+            
 
+        }
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)
         {
@@ -336,10 +344,6 @@ namespace MTT
         }
         #endregion
 
-        private void btnTTS_Click(object sender, EventArgs e)
-        {
-            MySentence mySentence = new MySentence(tbSentence.Text);
-            string sentence = mySentence.Standardize();
-        }
+        
     }
 }
