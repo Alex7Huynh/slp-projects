@@ -20,7 +20,7 @@ namespace MTT
         {
             sentennce = pSentence.Trim().ToUpper();
         }
-        public string Standardize()
+        public string Standardize(bool bTelex)
         {
             // Standardize
             StandardizeNotation();
@@ -30,6 +30,9 @@ namespace MTT
             StandardizeCurrency();
             StandardizeNumber();
             StandardizeDate();
+
+            if (!bTelex)
+                return Regex.Replace(sentennce, @"\s+", " ");
 
             // Convert to Telex
             string result = "";

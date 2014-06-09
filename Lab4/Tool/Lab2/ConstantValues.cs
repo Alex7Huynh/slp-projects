@@ -7,7 +7,7 @@ namespace MTT
 {
     public static class ConstantValues
     {
-
+        // lab 2 const string
         public const string CMD_STEP0_CREATE_PHONE0 = "HTKProgram\\HLEd -l * -d dict -i phones0.mlf config\\mkphone0.led words.mlf";
         public const string CMD_STEP0_CREATE_PHONE1 = "HTKProgram\\HLEd -l * -d dict -i phones1.mlf config\\mkphone1.led words.mlf";
         public const string CMD_STEP0_CREATE_MFC = "HTKProgram\\HCopy -T 1 -C config\\config.hcopy -S mfcc-train.scp";
@@ -51,26 +51,25 @@ namespace MTT
 
         public const string CMD_STEP17_TRAINTOHMM15 =
             "HTKProgram\\HERest -B -C config\\config -I wintri.mlf -s stats -S train.scp -H hmm14/macros -H hmm14/hmmdefs -M hmm15 tiedlist";
-
-        public const string CMD_TEST_STEP1_CREATEMFCC =
-            "HTKProgram\\HCopy -T 1 -C config\\config.hcopy -S mfcc-test.scp";
-
-        public const string CMD_TEST_STEP1_PARSEGRAM = "HTKProgram\\HParse  gram.txt   wdnet";
-        public const string CMD_TEST_STEP1_RUN =
-            "HTKProgram\\HVite -H hmm15/macros -H hmm15/hmmdefs -S test.scp -i recout.mlf -w wdnet -p 0.0 -s 5.0 dict tiedlist";
-
-        public const string CMD_TEST_STEP2_RESULT = "HTKProgram\\HResults -I test.mlf tiedlist recout.mlf";
-
-
-        // lab 3 started here
+        
+        // lab 3 const string
         public const string CMD_LAB3_STEP2_BUILD_NGRAM_NEW = "HTKProgram\\LNewMap -f WFC LMName empty.wmap";
         public const string CMD_LAB3_STEP2_BUILD_NGRAM_INIT = "HTKProgram\\LGPrep -T 1 -a 100000 -b 200000 -n {0} -d lm  empty.wmap lmtrain.txt";
         public const string CMD_LAB3_STEP2_BUILD_NGRAM_BUILD = "HTKProgram\\LBuild -T 1 -c 2 0 -c 3 0 -n {0}  lm/wmap lmModel lm/gram.0";
 
         public const string CMD_LAB3_STEP3_RECOGNITION_HDECODE =
             "HTKProgram\\HDecode -H hmm15/macros -H hmm15/hmmdefs -S test.scp -t 220.0 220.0 -C config\\config.hdecode -i recout.mlf -w lmModel -p 0.0 -s 5.0 dict tiedlist";
-
+        
         public const string CMD_LAB3_PERFEXCITY = "HTKProgram\\LPlex -n {0} -t lmModel lmtest.txt";
 
+        // lab 4 const string
+        public const string CMD_LAB4_TRAIN_TO_HMM17 = "HTKProgram\\HERest -C config\\config -I phones0.mlf -S train.scp -H hmm{0}/macros -H hmm{0}/hmmdefs -M hmm{1} monophones1";
+        public const string CMD_LAB4_HVITE = "HTKProgram\\HVite -l * -o S -b silence -C config\\config -a -H hmm17/macros -H hmm17/hmmdefs -i recout.mlf -t 250.0 -I words.mlf -S train.scp dict monophones1";
+
+        // const string for test
+        public const string CMD_TEST_CREATEMFCC = "HTKProgram\\HCopy -T 1 -C config\\config.hcopy -S mfcc-test.scp";
+        public const string CMD_TEST_STEP1_PARSEGRAM = "HTKProgram\\HParse  gram.txt   wdnet";
+        public const string CMD_TEST_STEP1_RUN = "HTKProgram\\HVite -H hmm15/macros -H hmm15/hmmdefs -S test.scp -i recout.mlf -w wdnet -p 0.0 -s 5.0 dict tiedlist";
+        public const string CMD_TEST_HRESULTS = "HTKProgram\\HResults -I test.mlf tiedlist recout.mlf";
     }
 }

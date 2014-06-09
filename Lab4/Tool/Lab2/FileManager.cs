@@ -48,14 +48,14 @@ namespace MTT
             Directory.CreateDirectory(TmpTrainFilePath + "\\" + MfcTestFolder);
             Directory.CreateDirectory(TmpTrainFilePath + "\\" + LanguageModelFolder);
 
-            for (int i = 0; i <= 15; ++i)
+            for (int i = 0; i <= 17; ++i)
             {
                 Directory.CreateDirectory(TmpTrainFilePath + "\\" + HMMFolder + i);
             }
 
             return true;
         }
-        public bool MakeDict()
+        public bool MakeDict(bool bSilence)
         {
             string[] files = Directory.GetFiles(TrainFilePath, "*.txt");
             int TrainFileCount = files.Length;
@@ -90,6 +90,8 @@ namespace MTT
             }
             fDICT.WriteLine("SENT-START	[]	sil");
             fDICT.WriteLine("SENT-END	[]	sil");
+            if(bSilence)
+                fDICT.WriteLine("silence [] sil");
 
             fDICT.Close();
             return true;

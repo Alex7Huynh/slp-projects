@@ -48,16 +48,14 @@ namespace MTT
         private void btnTTS_Click(object sender, EventArgs e)
         {
             Standardizer standardizer = new Standardizer(tbSentence.Text);
-            string sentence = standardizer.Standardize();
-            
-            
-
+            string sentence = standardizer.Standardize(false);
+            MessageBox.Show(sentence, "Setence -> stardandized");
         }
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)
         {
             fileManager.CreateFolders();
-            fileManager.MakeDict();
+            fileManager.MakeDict(false);
             fileManager.MakeMonophones();
             fileManager.MakeFulllist();
             fileManager.MakePrompts();
@@ -79,7 +77,7 @@ namespace MTT
 
         private void btnCreateDICT_Click(object sender, EventArgs e)
         {
-            fileManager.MakeDict();
+            fileManager.MakeDict(false);
             MessageBox.Show("Create " + fileManager.DictFilename + " successfully!", "Info");
         }
 
@@ -115,7 +113,7 @@ namespace MTT
             this.Focus();
         }
 
-        private void btnCreateMFC_Click(object sender, EventArgs e)
+        private void btnCreateMfccTrain_Click(object sender, EventArgs e)
         {
             fileManager.MakeMfccTrainScp();
             MessageBox.Show("Create " + fileManager.MfccTrainScpFilename + " successfully!", "Info");
@@ -140,7 +138,7 @@ namespace MTT
         #endregion
 
         #region Build & train HMM models
-        private void btnTrainAllHmm_Click(object sender, EventArgs e)
+        private void btnTrainAll15Hmm_Click(object sender, EventArgs e)
         {
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD, false);
             fileManager.MakeMacrosHMM0();
@@ -164,6 +162,38 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM14, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP17_TRAINTOHMM15, false);
             this.Focus();
+        }
+        private void btnTrainAll17Hmm_Click(object sender, EventArgs e)
+        {
+            // Prepare training data
+            fileManager.CreateFolders();
+            fileManager.MakeDict(true);
+            fileManager.MakeMonophones();
+            fileManager.MakeFulllist();
+            fileManager.MakePrompts();
+            fileManager.MakeWords();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE0, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_PHONE1, false);
+            fileManager.MakeMfccTrainScp();
+            fileManager.MakeTrainScp();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP0_CREATE_MFC, false);
+
+            // Build and train all HMM0-17
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP7_HMM0_CMD, false);
+            fileManager.MakeMacrosHMM0();
+            fileManager.MakeHmmdefs();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM1_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN, false);
+            fileManager.CreateHMM4();
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP11_CONNECTSILSP, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM6, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7, false);
+            for (int i = 7; i < 17; ++i)
+            {
+                CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB4_TRAIN_TO_HMM17, i, i+1), true);
+            }
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB4_HVITE, false);
         }
 
         private void btnInitModelHmm0_Click(object sender, EventArgs e)
@@ -189,6 +219,7 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM2_TRAIN, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP9_HMM3_TRAIN, false);
             MessageBox.Show("Create HMM1, HMM2, HMM3 successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateHMM4_Click(object sender, EventArgs e)
@@ -256,23 +287,14 @@ namespace MTT
 
         #region Test
         private void btnCreateMfccTestFiles_Click(object sender, EventArgs e)
-        {
+        {            
+            fileManager.MakeTestScp();
+            fileManager.MakeTestMlf();
             fileManager.MakeMfccTestScp();
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_CREATEMFCC, false);
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_CREATEMFCC, false);
             //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_PARSEGRAM, false); // gram --> wdnet
             MessageBox.Show("Create " + fileManager.MfccTestScpFilename + " successfully", "Info");
-        }
-
-        private void btnCreateTestScp_Click(object sender, EventArgs e)
-        {
-            fileManager.MakeTestScp();
-            MessageBox.Show("Create " + fileManager.TestScpFilename + " successfully!", "Info");
-        }
-
-        private void btnCreateTestMlf_Click(object sender, EventArgs e)
-        {
-            fileManager.MakeTestMlf();
-            MessageBox.Show("Create " + fileManager.TestMlfFilename + " successfully!", "Info");
+            this.Focus();
         }
 
         private void btnCreateLmtrain_Click(object sender, EventArgs e)
@@ -314,9 +336,10 @@ namespace MTT
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram), false);
+            this.Focus();
         }
 
-        private void btnCreateRecoutMlf_Click(object sender, EventArgs e)
+        private void btnTestModel_Click(object sender, EventArgs e)
         {
             //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
@@ -326,8 +349,24 @@ namespace MTT
 
         private void btnGetResult_Click(object sender, EventArgs e)
         {
-            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP2_RESULT, true);
+            if (!File.Exists("recout.mlf"))
+            {
+                MessageBox.Show("recout.mlf not found!", "Warning");
+                return;
+            }
+            if (!File.Exists("test.mlf"))
+            {
+                MessageBox.Show("test.mlf not found!", "Warning");
+                return;
+            }
+            if (!File.Exists("tiedlist"))
+            {
+                MessageBox.Show("tiedlist not found!", "Warning");
+                return;
+            }
+            CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_HRESULTS, true);
             MessageBox.Show(CommandHelper.GetOutput(), "Result");
+            this.Focus();
         }
 
         private void btnShowPerplexity_Click(object sender, EventArgs e)
@@ -341,8 +380,11 @@ namespace MTT
             }
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_PERFEXCITY, numberOfGram), true);
             MessageBox.Show(CommandHelper.GetOutput(), "Result");
+            this.Focus();
         }
         #endregion
+
+        
 
         
     }
