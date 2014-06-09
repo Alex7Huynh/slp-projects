@@ -37,8 +37,7 @@
             this.btnCreateWORDS = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbTestFilePath = new System.Windows.Forms.TextBox();
-            this.btnCreateMFC = new System.Windows.Forms.Button();
-            this.btnTestSCP = new System.Windows.Forms.Button();
+            this.btnCreateMfccTrain = new System.Windows.Forms.Button();
             this.btnCreateTrainingSCP = new System.Windows.Forms.Button();
             this.btnCreateFolder = new System.Windows.Forms.Button();
             this.btnCreateMacrosHmmdefs = new System.Windows.Forms.Button();
@@ -54,7 +53,6 @@
             this.btnTrainHMM11_12 = new System.Windows.Forms.Button();
             this.btnTrainingHMM13 = new System.Windows.Forms.Button();
             this.btnPrepareDataTest = new System.Windows.Forms.Button();
-            this.btnCreateTestMLF = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCreateFulllist = new System.Windows.Forms.Button();
             this.btnCreateLmtrain = new System.Windows.Forms.Button();
@@ -62,7 +60,9 @@
             this.btnTrainHMM14_15 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnCreateNewLmtrain = new System.Windows.Forms.Button();
+            this.btnTrainAll15Hmm = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.btnPrepareAll = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnGetResult = new System.Windows.Forms.Button();
             this.txtNGram = new System.Windows.Forms.TextBox();
@@ -73,11 +73,12 @@
             this.tbSentence = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnTTS = new System.Windows.Forms.Button();
-            this.btnPrepareAll = new System.Windows.Forms.Button();
-            this.btnTrainAllHmm = new System.Windows.Forms.Button();
+            this.btnTrainAll17Hmm = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnDi2Mn
@@ -156,25 +157,15 @@
             this.tbTestFilePath.TabIndex = 34;
             this.tbTestFilePath.Text = "E:\\sn0040\\test";
             // 
-            // btnCreateMFC
+            // btnCreateMfccTrain
             // 
-            this.btnCreateMFC.Location = new System.Drawing.Point(6, 218);
-            this.btnCreateMFC.Name = "btnCreateMFC";
-            this.btnCreateMFC.Size = new System.Drawing.Size(126, 23);
-            this.btnCreateMFC.TabIndex = 7;
-            this.btnCreateMFC.Text = "Create mfcc.scp";
-            this.btnCreateMFC.UseVisualStyleBackColor = true;
-            this.btnCreateMFC.Click += new System.EventHandler(this.btnCreateMFC_Click);
-            // 
-            // btnTestSCP
-            // 
-            this.btnTestSCP.Location = new System.Drawing.Point(6, 46);
-            this.btnTestSCP.Name = "btnTestSCP";
-            this.btnTestSCP.Size = new System.Drawing.Size(133, 23);
-            this.btnTestSCP.TabIndex = 22;
-            this.btnTestSCP.Text = "Create test.scp";
-            this.btnTestSCP.UseVisualStyleBackColor = true;
-            this.btnTestSCP.Click += new System.EventHandler(this.btnCreateTestScp_Click);
+            this.btnCreateMfccTrain.Location = new System.Drawing.Point(6, 218);
+            this.btnCreateMfccTrain.Name = "btnCreateMfccTrain";
+            this.btnCreateMfccTrain.Size = new System.Drawing.Size(126, 23);
+            this.btnCreateMfccTrain.TabIndex = 7;
+            this.btnCreateMfccTrain.Text = "Create mfcc-train.scp";
+            this.btnCreateMfccTrain.UseVisualStyleBackColor = true;
+            this.btnCreateMfccTrain.Click += new System.EventHandler(this.btnCreateMfccTrain_Click);
             // 
             // btnCreateTrainingSCP
             // 
@@ -317,23 +308,13 @@
             // 
             // btnPrepareDataTest
             // 
-            this.btnPrepareDataTest.Location = new System.Drawing.Point(6, 19);
+            this.btnPrepareDataTest.Location = new System.Drawing.Point(6, 75);
             this.btnPrepareDataTest.Name = "btnPrepareDataTest";
             this.btnPrepareDataTest.Size = new System.Drawing.Size(134, 23);
             this.btnPrepareDataTest.TabIndex = 21;
             this.btnPrepareDataTest.Text = "Create mfc test files";
             this.btnPrepareDataTest.UseVisualStyleBackColor = true;
             this.btnPrepareDataTest.Click += new System.EventHandler(this.btnCreateMfccTestFiles_Click);
-            // 
-            // btnCreateTestMLF
-            // 
-            this.btnCreateTestMLF.Location = new System.Drawing.Point(6, 75);
-            this.btnCreateTestMLF.Name = "btnCreateTestMLF";
-            this.btnCreateTestMLF.Size = new System.Drawing.Size(133, 23);
-            this.btnCreateTestMLF.TabIndex = 23;
-            this.btnCreateTestMLF.Text = "Create test.mlf";
-            this.btnCreateTestMLF.UseVisualStyleBackColor = true;
-            this.btnCreateTestMLF.Click += new System.EventHandler(this.btnCreateTestMlf_Click);
             // 
             // groupBox1
             // 
@@ -342,12 +323,12 @@
             this.groupBox1.Controls.Add(this.btnDi2Mn);
             this.groupBox1.Controls.Add(this.btnCreatePROMPTS);
             this.groupBox1.Controls.Add(this.btnCreateWORDS);
-            this.groupBox1.Controls.Add(this.btnCreateMFC);
+            this.groupBox1.Controls.Add(this.btnCreateMfccTrain);
             this.groupBox1.Controls.Add(this.btnCreateFolder);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnCreateTrainingSCP);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(23, 196);
+            this.groupBox1.Location = new System.Drawing.Point(23, 187);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(140, 340);
             this.groupBox1.TabIndex = 24;
@@ -387,7 +368,7 @@
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button8);
-            this.groupBox2.Location = new System.Drawing.Point(169, 196);
+            this.groupBox2.Location = new System.Drawing.Point(169, 187);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(287, 340);
             this.groupBox2.TabIndex = 25;
@@ -406,7 +387,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnCreateNewLmtrain);
+            this.groupBox3.Controls.Add(this.btnTrainAll15Hmm);
             this.groupBox3.Controls.Add(this.button10);
+            this.groupBox3.Controls.Add(this.btnPrepareAll);
             this.groupBox3.Controls.Add(this.btnCreateLmtrain);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.btnGetResult);
@@ -414,9 +397,7 @@
             this.groupBox3.Controls.Add(this.btnCreateRecout);
             this.groupBox3.Controls.Add(this.btnPrepareDataTest);
             this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.btnCreateTestMLF);
-            this.groupBox3.Controls.Add(this.btnTestSCP);
-            this.groupBox3.Location = new System.Drawing.Point(462, 196);
+            this.groupBox3.Location = new System.Drawing.Point(462, 187);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(150, 340);
             this.groupBox3.TabIndex = 26;
@@ -433,6 +414,17 @@
             this.btnCreateNewLmtrain.UseVisualStyleBackColor = true;
             this.btnCreateNewLmtrain.Click += new System.EventHandler(this.btnCreateNewLmtrain_Click);
             // 
+            // btnTrainAll15Hmm
+            // 
+            this.btnTrainAll15Hmm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnTrainAll15Hmm.Location = new System.Drawing.Point(6, 46);
+            this.btnTrainAll15Hmm.Name = "btnTrainAll15Hmm";
+            this.btnTrainAll15Hmm.Size = new System.Drawing.Size(133, 23);
+            this.btnTrainAll15Hmm.TabIndex = 39;
+            this.btnTrainAll15Hmm.Text = "Build && train all HMM0-15";
+            this.btnTrainAll15Hmm.UseVisualStyleBackColor = false;
+            this.btnTrainAll15Hmm.Click += new System.EventHandler(this.btnTrainAll15Hmm_Click);
+            // 
             // button10
             // 
             this.button10.Location = new System.Drawing.Point(6, 271);
@@ -442,6 +434,17 @@
             this.button10.Text = "Show Perflexity";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.btnShowPerplexity_Click);
+            // 
+            // btnPrepareAll
+            // 
+            this.btnPrepareAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnPrepareAll.Location = new System.Drawing.Point(6, 19);
+            this.btnPrepareAll.Name = "btnPrepareAll";
+            this.btnPrepareAll.Size = new System.Drawing.Size(133, 23);
+            this.btnPrepareAll.TabIndex = 10;
+            this.btnPrepareAll.Text = "Prepare all data";
+            this.btnPrepareAll.UseVisualStyleBackColor = false;
+            this.btnPrepareAll.Click += new System.EventHandler(this.btnPrepareAll_Click);
             // 
             // label3
             // 
@@ -477,9 +480,9 @@
             this.btnCreateRecout.Name = "btnCreateRecout";
             this.btnCreateRecout.Size = new System.Drawing.Size(134, 23);
             this.btnCreateRecout.TabIndex = 28;
-            this.btnCreateRecout.Text = "Create recout.mlf";
+            this.btnCreateRecout.Text = "Test model";
             this.btnCreateRecout.UseVisualStyleBackColor = true;
-            this.btnCreateRecout.Click += new System.EventHandler(this.btnCreateRecoutMlf_Click);
+            this.btnCreateRecout.Click += new System.EventHandler(this.btnTestModel_Click);
             // 
             // button2
             // 
@@ -513,7 +516,7 @@
             // 
             // tbSentence
             // 
-            this.tbSentence.Location = new System.Drawing.Point(113, 67);
+            this.tbSentence.Location = new System.Drawing.Point(90, 16);
             this.tbSentence.Multiline = true;
             this.tbSentence.Name = "tbSentence";
             this.tbSentence.Size = new System.Drawing.Size(423, 83);
@@ -524,7 +527,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(51, 70);
+            this.label4.Location = new System.Drawing.Point(28, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 37;
@@ -532,7 +535,7 @@
             // 
             // btnTTS
             // 
-            this.btnTTS.Location = new System.Drawing.Point(549, 65);
+            this.btnTTS.Location = new System.Drawing.Point(526, 76);
             this.btnTTS.Name = "btnTTS";
             this.btnTTS.Size = new System.Drawing.Size(75, 23);
             this.btnTTS.TabIndex = 38;
@@ -540,38 +543,36 @@
             this.btnTTS.UseVisualStyleBackColor = true;
             this.btnTTS.Click += new System.EventHandler(this.btnTTS_Click);
             // 
-            // btnPrepareAll
+            // btnTrainAll17Hmm
             // 
-            this.btnPrepareAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnPrepareAll.Location = new System.Drawing.Point(29, 167);
-            this.btnPrepareAll.Name = "btnPrepareAll";
-            this.btnPrepareAll.Size = new System.Drawing.Size(126, 23);
-            this.btnPrepareAll.TabIndex = 10;
-            this.btnPrepareAll.Text = "***Prepare all data";
-            this.btnPrepareAll.UseVisualStyleBackColor = false;
-            this.btnPrepareAll.Click += new System.EventHandler(this.btnPrepareAll_Click);
+            this.btnTrainAll17Hmm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnTrainAll17Hmm.Location = new System.Drawing.Point(526, 19);
+            this.btnTrainAll17Hmm.Name = "btnTrainAll17Hmm";
+            this.btnTrainAll17Hmm.Size = new System.Drawing.Size(75, 51);
+            this.btnTrainAll17Hmm.TabIndex = 40;
+            this.btnTrainAll17Hmm.Text = "Prepare data, build all HMM0-17";
+            this.btnTrainAll17Hmm.UseVisualStyleBackColor = false;
+            this.btnTrainAll17Hmm.Click += new System.EventHandler(this.btnTrainAll17Hmm_Click);
             // 
-            // btnTrainAllHmm
+            // groupBox4
             // 
-            this.btnTrainAllHmm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnTrainAllHmm.Location = new System.Drawing.Point(183, 167);
-            this.btnTrainAllHmm.Name = "btnTrainAllHmm";
-            this.btnTrainAllHmm.Size = new System.Drawing.Size(261, 23);
-            this.btnTrainAllHmm.TabIndex = 39;
-            this.btnTrainAllHmm.Text = "Build && train all HMM";
-            this.btnTrainAllHmm.UseVisualStyleBackColor = false;
-            this.btnTrainAllHmm.Click += new System.EventHandler(this.btnTrainAllHmm_Click);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.btnTrainAll17Hmm);
+            this.groupBox4.Controls.Add(this.tbSentence);
+            this.groupBox4.Controls.Add(this.btnTTS);
+            this.groupBox4.Location = new System.Drawing.Point(23, 66);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(607, 112);
+            this.groupBox4.TabIndex = 41;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Lab4";
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 550);
-            this.Controls.Add(this.btnTrainAllHmm);
-            this.Controls.Add(this.btnPrepareAll);
-            this.Controls.Add(this.btnTTS);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbSentence);
+            this.ClientSize = new System.Drawing.Size(642, 535);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnBrowseTestPath);
             this.Controls.Add(this.btnBrowseTrainPath);
             this.Controls.Add(this.groupBox3);
@@ -591,6 +592,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,8 +609,7 @@
         private System.Windows.Forms.Button btnCreateWORDS;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbTestFilePath;
-        private System.Windows.Forms.Button btnCreateMFC;
-        private System.Windows.Forms.Button btnTestSCP;
+        private System.Windows.Forms.Button btnCreateMfccTrain;
         private System.Windows.Forms.Button btnCreateTrainingSCP;
         private System.Windows.Forms.Button btnCreateFolder;
         private System.Windows.Forms.Button btnCreateMacrosHmmdefs;
@@ -623,7 +625,6 @@
         private System.Windows.Forms.Button btnTrainHMM11_12;
         private System.Windows.Forms.Button btnTrainingHMM13;
         private System.Windows.Forms.Button btnPrepareDataTest;
-        private System.Windows.Forms.Button btnCreateTestMLF;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnTrainHMM14_15;
@@ -643,7 +644,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnTTS;
         private System.Windows.Forms.Button btnPrepareAll;
-        private System.Windows.Forms.Button btnTrainAllHmm;
+        private System.Windows.Forms.Button btnTrainAll15Hmm;
+        private System.Windows.Forms.Button btnTrainAll17Hmm;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 
