@@ -72,9 +72,9 @@ namespace MTT
                 string[] words = sentence.Split(' ');
                 for (int j = 0; j < words.Length; ++j)
                 {
-                    string word1 = Word.ConvertUnicodeToTelex(words[j]);
-                    string word2 = Word.ConvertUnicodeToPhone(words[j]);
-                    word2 = Word.NormalizePhone(word2);
+                    string word1 = WordConversion.ConvertUnicodeToTelex(words[j]);
+                    string word2 = WordConversion.ConvertUnicodeToPhone(words[j]);
+                    word2 = WordConversion.NormalizePhone(word2);
                     string word = word1 + "    " + word2 + " sp";
 
                     lstWord.Add(word);
@@ -184,10 +184,10 @@ namespace MTT
                 string[] words = sentence.Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
                 {
-                    string word = Word.ConvertUnicodeToTelex(words[j]);
+                    string word = WordConversion.ConvertUnicodeToTelex(words[j]);
                     newSentence += word + " ";
                 }
-                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fPROMPTS.WriteLine(lastFolder + "\\" + filename + "  " + newSentence);
             }
             fPROMPTS.Close();
@@ -217,7 +217,7 @@ namespace MTT
                 string[] words = sentence.Split(' ');
                 for (int j = 0; j < words.Length; ++j)
                 {
-                    string word = Word.ConvertUnicodeToTelex(words[j]);
+                    string word = WordConversion.ConvertUnicodeToTelex(words[j]);
                     fWORDS.WriteLine(word);
                 }
                 fWORDS.WriteLine(".");
@@ -414,7 +414,7 @@ namespace MTT
                 string[] lines = File.ReadAllLines(filesTest[i]);
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length; ++j)
-                    fTest.WriteLine(Word.ConvertUnicodeToTelex(words[j]));
+                    fTest.WriteLine(WordConversion.ConvertUnicodeToTelex(words[j]));
 
                 fTest.WriteLine(".");
             }
@@ -434,8 +434,8 @@ namespace MTT
                 string newSentence = "";
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
-                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
-                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                    newSentence += WordConversion.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fLmTrain.WriteLine("<s> " + newSentence + " </s>");
             }
             // 30 lines
@@ -445,8 +445,8 @@ namespace MTT
                 string newSentence = "";
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
-                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
-                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                    newSentence += WordConversion.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fLmTrain.WriteLine("<s> " + newSentence + " </s>");
             }
 
@@ -465,8 +465,8 @@ namespace MTT
                 string newSentence = "";
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
-                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
-                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                    newSentence += WordConversion.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fLmtrain.WriteLine("<s> " + newSentence + " </s>");
             }
             // n lines            
@@ -481,8 +481,8 @@ namespace MTT
                         string newSentence = "";
                         string[] words = newlines[i].Split(' ');
                         for (int j = 0; j < words.Length - 1; ++j)
-                            newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
-                        newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                            newSentence += WordConversion.ConvertUnicodeToTelex(words[j]) + " ";
+                        newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                         fLmtrain.WriteLine("<s> " + newSentence + " </s>");
                     }
                 }
@@ -501,8 +501,8 @@ namespace MTT
                 string newSentence = "";
                 string[] words = lines[0].Split(' ');
                 for (int j = 0; j < words.Length - 1; ++j)
-                    newSentence += Word.ConvertUnicodeToTelex(words[j]) + " ";
-                newSentence += Word.ConvertUnicodeToTelex(words[words.Length - 1]);
+                    newSentence += WordConversion.ConvertUnicodeToTelex(words[j]) + " ";
+                newSentence += WordConversion.ConvertUnicodeToTelex(words[words.Length - 1]);
                 fLmTestFile.WriteLine("<s> " + newSentence + " </s>");
             }
             fLmTestFile.Close();

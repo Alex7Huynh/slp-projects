@@ -75,6 +75,7 @@
             this.btnTTS = new System.Windows.Forms.Button();
             this.btnTrainAll17Hmm = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ckbIgnoreWords = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -328,7 +329,7 @@
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.btnCreateTrainingSCP);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(23, 187);
+            this.groupBox1.Location = new System.Drawing.Point(23, 271);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(140, 340);
             this.groupBox1.TabIndex = 24;
@@ -368,7 +369,7 @@
             this.groupBox2.Controls.Add(this.button9);
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button8);
-            this.groupBox2.Location = new System.Drawing.Point(169, 187);
+            this.groupBox2.Location = new System.Drawing.Point(169, 271);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(287, 340);
             this.groupBox2.TabIndex = 25;
@@ -397,7 +398,7 @@
             this.groupBox3.Controls.Add(this.btnCreateRecout);
             this.groupBox3.Controls.Add(this.btnPrepareDataTest);
             this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Location = new System.Drawing.Point(462, 187);
+            this.groupBox3.Location = new System.Drawing.Point(462, 271);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(150, 340);
             this.groupBox3.TabIndex = 26;
@@ -420,7 +421,7 @@
             this.btnTrainAll15Hmm.Location = new System.Drawing.Point(6, 46);
             this.btnTrainAll15Hmm.Name = "btnTrainAll15Hmm";
             this.btnTrainAll15Hmm.Size = new System.Drawing.Size(133, 23);
-            this.btnTrainAll15Hmm.TabIndex = 39;
+            this.btnTrainAll15Hmm.TabIndex = 4;
             this.btnTrainAll15Hmm.Text = "Build && train all HMM0-15";
             this.btnTrainAll15Hmm.UseVisualStyleBackColor = false;
             this.btnTrainAll15Hmm.Click += new System.EventHandler(this.btnTrainAll15Hmm_Click);
@@ -441,7 +442,7 @@
             this.btnPrepareAll.Location = new System.Drawing.Point(6, 19);
             this.btnPrepareAll.Name = "btnPrepareAll";
             this.btnPrepareAll.Size = new System.Drawing.Size(133, 23);
-            this.btnPrepareAll.TabIndex = 10;
+            this.btnPrepareAll.TabIndex = 3;
             this.btnPrepareAll.Text = "Prepare all data";
             this.btnPrepareAll.UseVisualStyleBackColor = false;
             this.btnPrepareAll.Click += new System.EventHandler(this.btnPrepareAll_Click);
@@ -519,10 +520,11 @@
             this.tbSentence.Location = new System.Drawing.Point(90, 16);
             this.tbSentence.Multiline = true;
             this.tbSentence.Name = "tbSentence";
-            this.tbSentence.Size = new System.Drawing.Size(423, 83);
+            this.tbSentence.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbSentence.Size = new System.Drawing.Size(511, 141);
             this.tbSentence.TabIndex = 36;
-            this.tbSentence.Text = "nhiệt độ ở TP.HCM ngày 31/05/2014 là 37°C, Vĩ độ 21.02; Kinh độ: 105.85; Nhiệt độ" +
-                " hóa sương: 25°C; Tầm nhìn: 10.0 km; Độ ẩm: 100;";
+            this.tbSentence.Text = "TP.HCM\r\nNgày 31/05/2014\r\nVĩ độ 21.02\r\nKinh độ: 105.85\r\nNhiệt độ hóa sương: 25°C\r\n" +
+                "Tầm nhìn: 10.0 km\r\nĐộ ẩm: 100;\r\n13 + 52 + 20 = 85";
             // 
             // label4
             // 
@@ -535,10 +537,10 @@
             // 
             // btnTTS
             // 
-            this.btnTTS.Location = new System.Drawing.Point(526, 76);
+            this.btnTTS.Location = new System.Drawing.Point(526, 164);
             this.btnTTS.Name = "btnTTS";
             this.btnTTS.Size = new System.Drawing.Size(75, 23);
-            this.btnTTS.TabIndex = 38;
+            this.btnTTS.TabIndex = 2;
             this.btnTTS.Text = "Speak";
             this.btnTTS.UseVisualStyleBackColor = true;
             this.btnTTS.Click += new System.EventHandler(this.btnTTS_Click);
@@ -546,32 +548,43 @@
             // btnTrainAll17Hmm
             // 
             this.btnTrainAll17Hmm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnTrainAll17Hmm.Location = new System.Drawing.Point(526, 19);
+            this.btnTrainAll17Hmm.Location = new System.Drawing.Point(90, 164);
             this.btnTrainAll17Hmm.Name = "btnTrainAll17Hmm";
-            this.btnTrainAll17Hmm.Size = new System.Drawing.Size(75, 51);
-            this.btnTrainAll17Hmm.TabIndex = 40;
-            this.btnTrainAll17Hmm.Text = "Prepare data, build all HMM0-17";
+            this.btnTrainAll17Hmm.Size = new System.Drawing.Size(218, 22);
+            this.btnTrainAll17Hmm.TabIndex = 0;
+            this.btnTrainAll17Hmm.Text = "Prepare data, build && train all HMM0-17";
             this.btnTrainAll17Hmm.UseVisualStyleBackColor = false;
             this.btnTrainAll17Hmm.Click += new System.EventHandler(this.btnTrainAll17Hmm_Click);
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ckbIgnoreWords);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.btnTrainAll17Hmm);
             this.groupBox4.Controls.Add(this.tbSentence);
             this.groupBox4.Controls.Add(this.btnTTS);
             this.groupBox4.Location = new System.Drawing.Point(23, 66);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(607, 112);
+            this.groupBox4.Size = new System.Drawing.Size(607, 199);
             this.groupBox4.TabIndex = 41;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Lab4";
+            // 
+            // ckbIgnoreWords
+            // 
+            this.ckbIgnoreWords.AutoSize = true;
+            this.ckbIgnoreWords.Location = new System.Drawing.Point(346, 167);
+            this.ckbIgnoreWords.Name = "ckbIgnoreWords";
+            this.ckbIgnoreWords.Size = new System.Drawing.Size(134, 17);
+            this.ckbIgnoreWords.TabIndex = 1;
+            this.ckbIgnoreWords.Text = "Ignore unknown words";
+            this.ckbIgnoreWords.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 535);
+            this.ClientSize = new System.Drawing.Size(642, 616);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnBrowseTestPath);
             this.Controls.Add(this.btnBrowseTrainPath);
@@ -647,6 +660,7 @@
         private System.Windows.Forms.Button btnTrainAll15Hmm;
         private System.Windows.Forms.Button btnTrainAll17Hmm;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox ckbIgnoreWords;
     }
 }
 

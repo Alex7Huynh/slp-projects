@@ -6,9 +6,9 @@ using System.IO;
 
 namespace MTT
 {
-    public class Word
+    public class WordConversion
     {
-		private static List<Word> lstDictionary = new List<Word>();
+		private static List<WordConversion> lstDictionary = new List<WordConversion>();
         private static Dictionary<string, string> lstUNI_TELEX = new Dictionary<string, string>();
         private static Dictionary<string, string> lstTELEX_UNI = new Dictionary<string, string>();
         private static List<string> lstConsonant = new List<string>();
@@ -31,7 +31,7 @@ namespace MTT
             set { lstUNI_TELEX = value; }
         }
 
-        public static List<Word> Dictionary
+        public static List<WordConversion> Dictionary
         {
             get { return lstDictionary; }
             set { lstDictionary = value; }
@@ -57,10 +57,11 @@ namespace MTT
             get { return strPhoneWord; }
             set { strPhoneWord = value; }
         }
-        public Word()
+
+        public WordConversion()
         {
         }
-        public Word(string uni, string telex, string phone)
+        public WordConversion(string uni, string telex, string phone)
         {
             this.strUnicodeWord = uni;
             this.strTelexWord = telex;
@@ -131,10 +132,10 @@ namespace MTT
                     strLine = sr.ReadLine();
                     if (!string.IsNullOrEmpty(strLine))
                     {
-                        Word w = new Word();
+                        WordConversion w = new WordConversion();
                         w.UnicodeWord = strLine;
-                        w.TelexWord = Word.ConvertUnicodeToTelex(strLine);
-                        w.PhoneWord = Word.ConvertUnicodeToPhone(strLine);
+                        w.TelexWord = WordConversion.ConvertUnicodeToTelex(strLine);
+                        w.PhoneWord = WordConversion.ConvertUnicodeToPhone(strLine);
                         lstDictionary.Add(w);
                         //Global.Dictionary.Add(w);
                     }
@@ -143,7 +144,7 @@ namespace MTT
             }
             return true;
         }
-		static Word()
+		static WordConversion()
 		{
 			LoadConsonant();
             LoadUNI_TELEX();
