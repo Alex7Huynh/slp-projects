@@ -24,6 +24,7 @@ namespace MTT
         {
             // Standardize
             StandardizeNotation();
+            StandardizeMathSymbol();
             StandardizePlaceNames();
             StandardizeDistance();
             StandardizeTemperature();
@@ -38,8 +39,8 @@ namespace MTT
             string result = "";
             string[] words = sentennce.Split(' ');
             for (int i = 0; i < words.Length; ++i)
-            {                
-                result += Word.ConvertUnicodeToTelex(words[i]) + " ";
+            {
+                result += WordConversion.ConvertUnicodeToTelex(words[i]) + " ";
             }
             result = result.Trim();
             result = Regex.Replace(result, @"\s+", " ");
@@ -47,18 +48,31 @@ namespace MTT
         }
 
         private void StandardizeNotation()
-        { 
+        {
             sentennce = sentennce.Replace(", ", " ");
-            sentennce = sentennce.Replace(":", " "); 
+            sentennce = sentennce.Replace(":", " ");
             sentennce = sentennce.Replace(";", " ");
             sentennce = sentennce.Replace("(", " ");
             sentennce = sentennce.Replace(")", " ");
+            sentennce = sentennce.Replace("[", " ");
+            sentennce = sentennce.Replace("]", " ");
             sentennce = sentennce.Replace(". ", " ");
             sentennce = sentennce.Trim();
+        }
+        private void StandardizeMathSymbol()
+        {
+            sentennce = sentennce.Replace("@", " A CÒNG");
+            sentennce = sentennce.Replace("#", " THĂNG");
+            sentennce = sentennce.Replace("%", " PHẦN TRĂM");
+            sentennce = sentennce.Replace("+", " CỘNG");
+            sentennce = sentennce.Replace("^", " LŨY THỪA");
+            sentennce = sentennce.Replace("=", " BẰNG");
+            sentennce = sentennce.Replace("->", " SUY RA");
         }
         private void StandardizePlaceNames()
         {
             sentennce = sentennce.Replace("BRVT", " BÀ RỊA VŨNG TÀU");
+            sentennce = sentennce.Replace("TPHCM", " THÀNH PHỐ HỒ CHÍ MINH");
             sentennce = sentennce.Replace("TP.HCM", " THÀNH PHỐ HỒ CHÍ MINH");
             sentennce = sentennce.Replace("DNA", " ĐÔNG NAM Á");
             sentennce = sentennce.Replace("ĐNA", " ĐÔNG NAM Á");
@@ -69,11 +83,10 @@ namespace MTT
             sentennce = sentennce.Replace("KM", " KÍ LÔ MÉT");
             sentennce = sentennce.Replace("NM", " NA NÔ MÉT");
 
-            sentennce = sentennce.Replace("FT", " PHÍCH");
-            sentennce = sentennce.Replace("NM", " HẢI LÝ");
+            sentennce = sentennce.Replace("FT", " PHÍCH");            
         }
 
-        private void StandardizeTemperature()        
+        private void StandardizeTemperature()
         {
             sentennce = sentennce.Replace("°F", " ĐỘ ÉP");
             sentennce = sentennce.Replace("°C", " ĐỘ XÊ");
@@ -93,32 +106,37 @@ namespace MTT
 
             sentennce = sentennce.Replace("¥", " YÊN");
             sentennce = sentennce.Replace("JPY", " YÊN");
-            
+
             sentennce = sentennce.Replace("VND", " ĐỒNG");
             sentennce = sentennce.Replace("VNĐ", " ĐỒNG");
         }
         private void StandardizeNumber()
-        {            
+        {
             string[] words = sentennce.Split(' ');
             sentennce = "";
             foreach (string s in words)
             {
                 string tmp = s;
-                int count = s.Count(f => f == '.');
-                if (count == 1) // floating point
+                if (s.Count(f => f == '.') == 1) // maybe floating point
                 {
                     string sReal = s.Split('.')[0];
                     string sDecimal = s.Split('.')[1];
-                    tmp = NumToString.convert(sReal).ToUpper() + " CHẤM " + NumToString.convert(sDecimal).ToUpper();
+                    int r,d;
+                    if (int.TryParse(sReal, out r) && int.TryParse(sDecimal, out d)) // floating point
+                    {
+                        sReal = r.ToString();
+                        sDecimal = d.ToString();
+                        tmp = NumToString.convert(sReal).ToUpper() + " CHẤM " + NumToString.convert(sDecimal).ToUpper();
+                    }
                 }
                 else
                 {
                     int n;
-                    if(int.TryParse(s, out n))  // integer
+                    if (int.TryParse(s, out n))  // integer
                     {
                         tmp = NumToString.convert(s).ToUpper();
                     }
-                    
+
                 }
                 sentennce += tmp + " ";
             }
@@ -137,14 +155,14 @@ namespace MTT
                     string sDay = s.Split('/')[0];
                     sDay = int.Parse(sDay).ToString(); // 05 -> 5
                     string sMonth = s.Split('/')[1];
-                    sMonth = int.Parse(sMonth).ToString();  
+                    sMonth = int.Parse(sMonth).ToString();
                     string sYear = s.Split('/')[2];
                     sYear = int.Parse(sYear).ToString();
 
                     tmp = " " + NumToString.convert(sDay).ToUpper();
                     tmp += " THÁNG " + NumToString.convert(sMonth).ToUpper();
                     tmp += " NĂM " + NumToString.convert(sYear).ToUpper();
-                }                
+                }
                 sentennce += tmp + " ";
             }
             sentennce = sentennce.Trim();

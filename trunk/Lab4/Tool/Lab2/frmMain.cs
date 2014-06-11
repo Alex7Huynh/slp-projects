@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using NAudio.Wave;
 
 namespace MTT
 {
@@ -44,12 +45,69 @@ namespace MTT
             tbTestFilePath.Text = fbd.SelectedPath;
             fileManager = new FileManager(tbTrainFilePath.Text, tbTestFilePath.Text);
         }
-        
+
         private void btnTTS_Click(object sender, EventArgs e)
         {
-            Standardizer standardizer = new Standardizer(tbSentence.Text);
-            string sentence = standardizer.Standardize(false);
-            MessageBox.Show(sentence, "Setence -> stardandized");
+            string sentence = tbSentence.Text.Replace("\r\n", " ");
+            Standardizer standardizer = new Standardizer(sentence);
+            //Standardizer standardizer = new Standardizer("đây là một chính phủ cá voi xanh");
+            sentence = standardizer.Standardize(true);
+            //MessageBox.Show(sentence, "Setence -> stardandized");
+
+            string[] words = sentence.Split(' ');
+            byte[] buffer = new byte[0];
+            string sample = "";
+
+            string folderTrain = tbTrainFilePath.Text;
+            folderTrain = folderTrain.Substring(folderTrain.LastIndexOf('\\')+1);
+            List<MyWord> lstWord = MyWord.ReadFile("recout.mlf", folderTrain);
+
+            for (int i = 0; i < words.Length; i++)
+            {
+                //MyWord myWord = MyWord.ReadFile("recout.mlf", w);
+                var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
+                var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
+
+                var word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
+                if (word == null)
+                    word = lstWord.FirstOrDefault(p => p.Str == words[i]);
+                if (word != null)
+                {
+                    sample = word.Filename;
+
+                    var ret = SoundManager.TrimWavByteArray(
+                        word.Filename,
+                        TimeSpan.FromMilliseconds(word.SecondStart),
+                        TimeSpan.FromMilliseconds(word.SecondEnd));
+
+                    var length = buffer.Length + ret.Length;
+                    var merge = new byte[length];
+                    System.Buffer.BlockCopy(buffer, 0, merge, 0, buffer.Length);
+                    System.Buffer.BlockCopy(ret, 0, merge, buffer.Length, ret.Length);
+                    buffer = merge;
+                }
+                else
+                {
+                    if (!ckbIgnoreWords.Checked)
+                    {
+                        MessageBox.Show("Some words are not recorded yet!", "Info");
+                        return;
+                    }
+                }
+            }
+            if (String.IsNullOrEmpty(sample))
+            {
+                MessageBox.Show("Some words cannot be parsed yet!", "Info");
+                return;
+            }
+            using (WaveFileReader reader = new WaveFileReader(sample))
+            {
+                using (WaveFileWriter writer = new WaveFileWriter("out.wav", reader.WaveFormat))
+                {
+                    writer.Write(buffer, 0, buffer.Length);
+                }
+            }
+            SoundManager.PlayWavFile("out.wav");
         }
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)
@@ -191,7 +249,7 @@ namespace MTT
             CommandHelper.ExecuteCommand(ConstantValues.CMD_STEP12_TRAINTOHMM7, false);
             for (int i = 7; i < 17; ++i)
             {
-                CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB4_TRAIN_TO_HMM17, i, i+1), true);
+                CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB4_TRAIN_TO_HMM17, i, i + 1), true);
             }
             CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB4_HVITE, false);
         }
@@ -287,7 +345,7 @@ namespace MTT
 
         #region Test
         private void btnCreateMfccTestFiles_Click(object sender, EventArgs e)
-        {            
+        {
             fileManager.MakeTestScp();
             fileManager.MakeTestMlf();
             fileManager.MakeMfccTestScp();
@@ -384,8 +442,8 @@ namespace MTT
         }
         #endregion
 
-        
 
-        
+
+
     }
 }
