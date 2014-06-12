@@ -1,0 +1,10 @@
+﻿$	ĐÔ LA
+USD	ĐÔ LA MỸ
+€	Ơ RÔ
+EURO	Ơ RÔ
+£	BẢNG ANH
+GBP	BẢNG ANH
+penny	xu
+pence	xu
+¥	YÊN
+JPY	YÊN

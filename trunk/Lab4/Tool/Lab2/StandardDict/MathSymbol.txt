@@ -1,0 +1,7 @@
+﻿@	A CÒNG
+#	THĂNG
+%	PHẦN TRĂM
++	CỘNG
+^	LŨY THỪA
+=	BẰNG
+->	SUY RA

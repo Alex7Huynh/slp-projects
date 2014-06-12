@@ -80,8 +80,7 @@ namespace MTT
                     lstWord.Add(word);
                 }
             }
-            lstWord = lstWord.Distinct().ToList();
-            // MINH add code here for add new line
+            lstWord = lstWord.Distinct().ToList();            
             lstWord.Sort();
             var fDICT = new StreamWriter(DictFilename);
             for (int i = 0; i < lstWord.Count; ++i)
