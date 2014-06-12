@@ -70,20 +70,25 @@ namespace MTT
 
                 var word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
                 if (word == null)
+                    word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
+                if (word == null)
+                    word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
+                if (word == null)
                     word = lstWord.FirstOrDefault(p => p.Str == words[i]);
+                
                 if (word != null)
                 {
                     sample = word.Filename;
 
-                    var ret = SoundManager.TrimWavByteArray(
+                    var ByteArray = SoundManager.TrimWavByteArray(
                         word.Filename,
                         TimeSpan.FromMilliseconds(word.SecondStart),
                         TimeSpan.FromMilliseconds(word.SecondEnd));
 
-                    var length = buffer.Length + ret.Length;
+                    var length = buffer.Length + ByteArray.Length;
                     var merge = new byte[length];
                     System.Buffer.BlockCopy(buffer, 0, merge, 0, buffer.Length);
-                    System.Buffer.BlockCopy(ret, 0, merge, buffer.Length, ret.Length);
+                    System.Buffer.BlockCopy(ByteArray, 0, merge, buffer.Length, ByteArray.Length);
                     buffer = merge;
                 }
                 else

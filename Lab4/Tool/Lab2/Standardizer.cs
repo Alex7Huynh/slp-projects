@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace MTT
 {
     class Standardizer
     {
+        private const string DictFolder = "StandardDict";
         string sentennce;
         public string Sentennce
         {
@@ -24,16 +26,18 @@ namespace MTT
         {
             // Standardize
             StandardizeNotation();
-            StandardizeMathSymbol();
-            StandardizePlaceNames();
-            StandardizeDistance();
-            StandardizeTemperature();
-            StandardizeCurrency();
+            string[] files = Directory.GetFiles(DictFolder, "*.txt");
+            foreach(string s in files)
+            {
+                Standardize(s);
+            }           
             StandardizeNumber();
             StandardizeDate();
 
+            sentennce = Regex.Replace(sentennce, @"\s+", " ");
+
             if (!bTelex)
-                return Regex.Replace(sentennce, @"\s+", " ");
+                return sentennce;
 
             // Convert to Telex
             string result = "";
@@ -43,7 +47,7 @@ namespace MTT
                 result += WordConversion.ConvertUnicodeToTelex(words[i]) + " ";
             }
             result = result.Trim();
-            result = Regex.Replace(result, @"\s+", " ");
+            
             return result;
         }
 
@@ -86,10 +90,17 @@ namespace MTT
             sentennce = sentennce.Replace("FT", " PHÍCH");            
         }
 
-        private void StandardizeTemperature()
+        private void Standardize(string filename)
         {
-            sentennce = sentennce.Replace("°F", " ĐỘ ÉP");
-            sentennce = sentennce.Replace("°C", " ĐỘ XÊ");
+            //sentennce = sentennce.Replace("°F", " ĐỘ ÉP");
+            //sentennce = sentennce.Replace("°C", " ĐỘ XÊ");
+            string[] lines = File.ReadAllLines(filename);
+            foreach (string line in lines)
+            {
+                string origin = line.Split('\t')[0];
+                string replaced = line.Split('\t')[1];
+                sentennce = sentennce.Replace(origin, " " + replaced);
+            }
         }
         private void StandardizeCurrency()
         {
