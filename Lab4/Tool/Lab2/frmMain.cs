@@ -48,23 +48,30 @@ namespace MTT
 
         private void btnTTS_Click(object sender, EventArgs e)
         {
+            // Remove new-line character
             string sentence = tbSentence.Text.Replace("\r\n", " ");
-            Standardizer standardizer = new Standardizer(sentence);
-            //Standardizer standardizer = new Standardizer("đây là một chính phủ cá voi xanh");
-            sentence = standardizer.Standardize(true);
-            //MessageBox.Show(sentence, "Setence -> stardandized");
-
-            string[] words = sentence.Split(' ');
+            // Normalize every words
+            Standardizer standardizer = new Standardizer(sentence);            
+            sentence = standardizer.Standardize();
+            // Convert every words to telex
+            string result = "";
+            string[] OriginWords = sentence.Split(' ');
+            for (int i = 0; i < OriginWords.Length; ++i)
+            {
+                result += WordConversion.ConvertUnicodeToTelex(OriginWords[i]) + " ";
+            }
+            result = result.Trim();
+            // Compare to lstWord from recout.mlf & get byte array
+            string[] words = result.Split(' ');
             byte[] buffer = new byte[0];
-            string sample = "";
+            string sample = ""; // sample filename to set format for out.wav
 
             string folderTrain = tbTrainFilePath.Text;
             folderTrain = folderTrain.Substring(folderTrain.LastIndexOf('\\')+1);
             List<MyWord> lstWord = MyWord.ReadFile("recout.mlf", folderTrain);
 
             for (int i = 0; i < words.Length; i++)
-            {
-                //MyWord myWord = MyWord.ReadFile("recout.mlf", w);
+            {                
                 var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
                 var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
 
@@ -100,11 +107,13 @@ namespace MTT
                     }
                 }
             }
+            // If sample file to set format for output not found
             if (String.IsNullOrEmpty(sample))
             {
                 MessageBox.Show("Some words cannot be parsed yet!", "Info");
                 return;
             }
+            // Write output wav file
             using (WaveFileReader reader = new WaveFileReader(sample))
             {
                 using (WaveFileWriter writer = new WaveFileWriter("out.wav", reader.WaveFormat))
@@ -112,7 +121,9 @@ namespace MTT
                     writer.Write(buffer, 0, buffer.Length);
                 }
             }
+            //MessageBox.Show(sentence, "Sentence -> stardandized");
             SoundManager.PlayWavFile("out.wav");
+            
         }
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)

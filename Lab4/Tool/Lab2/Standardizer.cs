@@ -22,33 +22,20 @@ namespace MTT
         {
             sentennce = pSentence.Trim().ToUpper();
         }
-        public string Standardize(bool bTelex)
+        public string Standardize()
         {
             // Standardize
             StandardizeNotation();
             string[] files = Directory.GetFiles(DictFolder, "*.txt");
-            foreach(string s in files)
+            foreach (string s in files)
             {
                 Standardize(s);
-            }           
+            }
             StandardizeNumber();
             StandardizeDate();
 
             sentennce = Regex.Replace(sentennce, @"\s+", " ");
-
-            if (!bTelex)
-                return sentennce;
-
-            // Convert to Telex
-            string result = "";
-            string[] words = sentennce.Split(' ');
-            for (int i = 0; i < words.Length; ++i)
-            {
-                result += WordConversion.ConvertUnicodeToTelex(words[i]) + " ";
-            }
-            result = result.Trim();
-            
-            return result;
+            return sentennce;
         }
 
         private void StandardizeNotation()
@@ -87,7 +74,7 @@ namespace MTT
             sentennce = sentennce.Replace("KM", " KÍ LÔ MÉT");
             sentennce = sentennce.Replace("NM", " NA NÔ MÉT");
 
-            sentennce = sentennce.Replace("FT", " PHÍCH");            
+            sentennce = sentennce.Replace("FT", " PHÍCH");
         }
 
         private void Standardize(string filename)
@@ -125,20 +112,46 @@ namespace MTT
         {
             string[] words = sentennce.Split(' ');
             sentennce = "";
-            foreach (string s in words)
+
+            for (int i = 0; i < words.Length; ++i)
             {
+                string s = words[i];
                 string tmp = s;
                 if (s.Count(f => f == '.') == 1) // maybe floating point
                 {
                     string sReal = s.Split('.')[0];
                     string sDecimal = s.Split('.')[1];
-                    int r,d;
-                    if (int.TryParse(sReal, out r) && int.TryParse(sDecimal, out d)) // floating point
+                    int l, r;
+                    if (int.TryParse(sReal, out l) && int.TryParse(sDecimal, out r)) // floating point
                     {
-                        sReal = r.ToString();
-                        sDecimal = d.ToString();
-                        tmp = NumToString.convert(sReal).ToUpper() + " CHẤM " + NumToString.convert(sDecimal).ToUpper();
+                        sReal = l.ToString();
+                        sDecimal = r.ToString();
+                        tmp = NumToString.convert(sReal).ToUpper() + " CHẤM " + NumToString.convert(sDecimal).ToUpper();                        
                     }
+                }
+                else if (s == "-")
+                {
+                    int l, r;
+                    string LeftStr = (i - 1 >= 0) ? words[i - 1] : null;
+                    string RightStr = (i + 1 < words.Length) ? words[i + 1] : null;
+                    if (int.TryParse(LeftStr, out l) && int.TryParse(RightStr, out r))
+                        tmp = " TRỪ ";
+                }
+                else if (s == "*")
+                {
+                    int l, r;
+                    string LeftStr = (i - 1 >= 0) ? words[i - 1] : null;
+                    string RightStr = (i + 1 < words.Length) ? words[i + 1] : null;
+                    if (int.TryParse(LeftStr, out l) && int.TryParse(RightStr, out r))
+                        tmp = " NHÂN ";
+                }
+                else if (s == "/")
+                {
+                    int l, r;
+                    string LeftStr = (i - 1 >= 0) ? words[i - 1] : null;
+                    string RightStr = (i + 1 < words.Length) ? words[i + 1] : null;
+                    if (int.TryParse(LeftStr, out l) && int.TryParse(RightStr, out r))
+                        tmp = " CHIA ";
                 }
                 else
                 {
