@@ -63,5 +63,14 @@ namespace MTT
             }
             return true;
         }
+
+        public static byte[] Merge(byte[] buffer, byte[] add)
+        {
+            var length = buffer.Length + add.Length;
+            var merge = new byte[length];
+            System.Buffer.BlockCopy(buffer, 0, merge, 0, buffer.Length);
+            System.Buffer.BlockCopy(add, 0, merge, buffer.Length, add.Length);
+            return merge;
+        }
     }
 }

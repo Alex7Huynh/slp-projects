@@ -252,6 +252,9 @@
     <Content Include="HTKProgram\LSubset.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="silent.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="StandardDict\Currency.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

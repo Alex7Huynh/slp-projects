@@ -52,7 +52,7 @@ namespace MTT
             // Remove new-line character
             string sentence = tbSentence.Text.Replace("\r\n", " ");
             // Normalize every words
-            Standardizer standardizer = new Standardizer(sentence);            
+            Standardizer standardizer = new Standardizer(sentence);
             sentence = standardizer.Standardize();
             // Convert every words to telex
             string result = "";
@@ -76,11 +76,17 @@ namespace MTT
             byte[] buffer = new byte[0];
             string sample = ""; // sample filename to set format for out.wav
 
+            var ByteArraySilent = SoundManager.TrimWavByteArray(
+                        "silent.wav",
+                        TimeSpan.FromMilliseconds(0),
+                        TimeSpan.FromMilliseconds(30));
+
             for (int i = 0; i < words.Length; i++)
-            {                
+            {
+                // Find left word & right word
                 var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
                 var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
-
+                // Compare words
                 var word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
                 if (word == null)
                     word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
@@ -88,7 +94,7 @@ namespace MTT
                     word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
                 if (word == null)
                     word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i]);
-                
+
                 if (word != null)
                 {
                     sample = word.Filename;
@@ -97,12 +103,8 @@ namespace MTT
                         word.Filename,
                         TimeSpan.FromMilliseconds(word.SecondStart),
                         TimeSpan.FromMilliseconds(word.SecondEnd));
-
-                    var length = buffer.Length + ByteArray.Length;
-                    var merge = new byte[length];
-                    System.Buffer.BlockCopy(buffer, 0, merge, 0, buffer.Length);
-                    System.Buffer.BlockCopy(ByteArray, 0, merge, buffer.Length, ByteArray.Length);
-                    buffer = merge;
+                    buffer = SoundManager.Merge(buffer, ByteArray);
+                    buffer = SoundManager.Merge(buffer, ByteArraySilent);                    
                 }
                 else
                 {
@@ -129,7 +131,6 @@ namespace MTT
             }
             //MessageBox.Show(sentence, "Sentence -> stardandized");
             SoundManager.PlayWavFile("out.wav");
-            
         }
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)
