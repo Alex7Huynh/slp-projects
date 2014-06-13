@@ -11,6 +11,7 @@ namespace MTT
     public partial class frmMain : Form
     {
         FileManager fileManager;
+        List<MyWord> lstRecoutWord;
 
         public frmMain()
         {
@@ -61,27 +62,32 @@ namespace MTT
                 result += WordConversion.ConvertUnicodeToTelex(OriginWords[i]) + " ";
             }
             result = result.Trim();
+
+            // Get lstRecoutWord for synthesis
+            if (lstRecoutWord == null)
+            {
+                string folderTrain = tbTrainFilePath.Text;
+                folderTrain = folderTrain.Substring(folderTrain.LastIndexOf('\\') + 1);
+                lstRecoutWord = MyWord.ReadFile("recout.mlf", folderTrain);
+            }
+
             // Compare to lstWord from recout.mlf & get byte array
             string[] words = result.Split(' ');
             byte[] buffer = new byte[0];
             string sample = ""; // sample filename to set format for out.wav
-
-            string folderTrain = tbTrainFilePath.Text;
-            folderTrain = folderTrain.Substring(folderTrain.LastIndexOf('\\')+1);
-            List<MyWord> lstWord = MyWord.ReadFile("recout.mlf", folderTrain);
 
             for (int i = 0; i < words.Length; i++)
             {                
                 var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
                 var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
 
-                var word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
+                var word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
                 if (word == null)
-                    word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
+                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
                 if (word == null)
-                    word = lstWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
+                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
                 if (word == null)
-                    word = lstWord.FirstOrDefault(p => p.Str == words[i]);
+                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i]);
                 
                 if (word != null)
                 {
@@ -268,6 +274,11 @@ namespace MTT
                 CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB4_TRAIN_TO_HMM17, i, i + 1), true);
             }
             CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB4_HVITE, false);
+
+            // Get lstRecoutWord for synthesis
+            string folderTrain = tbTrainFilePath.Text;
+            folderTrain = folderTrain.Substring(folderTrain.LastIndexOf('\\') + 1);
+            lstRecoutWord = MyWord.ReadFile("recout.mlf", folderTrain);
         }
 
         private void btnInitModelHmm0_Click(object sender, EventArgs e)
