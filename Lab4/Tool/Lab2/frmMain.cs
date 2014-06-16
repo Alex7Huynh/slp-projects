@@ -48,12 +48,10 @@ namespace MTT
         }
 
         private void btnTTS_Click(object sender, EventArgs e)
-        {
-            // Remove new-line character
-            string sentence = tbSentence.Text.Replace("\r\n", " ");
+        {            
             // Normalize every words
-            Standardizer standardizer = new Standardizer(sentence);
-            sentence = standardizer.Standardize();
+            Standardizer standardizer = new Standardizer(tbSentence.Text);
+            string sentence = standardizer.Standardize();
             // Convert every words to telex
             string result = "";
             string[] OriginWords = sentence.Split(' ');
@@ -83,35 +81,52 @@ namespace MTT
 
             for (int i = 0; i < words.Length; i++)
             {
-                // Find left word & right word
-                var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
-                var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
-                // Compare words
-                var word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
-                if (word == null)
-                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
-                if (word == null)
-                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
-                if (word == null)
-                    word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i]);
-
-                if (word != null)
+                if (words[i] == "!SP!")
                 {
-                    sample = word.Filename;
-
-                    var ByteArray = SoundManager.TrimWavByteArray(
-                        word.Filename,
-                        TimeSpan.FromMilliseconds(word.SecondStart),
-                        TimeSpan.FromMilliseconds(word.SecondEnd));
-                    buffer = SoundManager.Merge(buffer, ByteArray);
-                    buffer = SoundManager.Merge(buffer, ByteArraySilent);                    
+                    buffer = SoundManager.Merge(buffer, SoundManager.TrimWavByteArray(
+                        "silent.wav",
+                        TimeSpan.FromMilliseconds(0),
+                        TimeSpan.FromMilliseconds(100)));                    
+                }
+                else if (words[i] == "!SIL!")
+                {
+                    buffer = SoundManager.Merge(buffer, SoundManager.TrimWavByteArray(
+                        "silent.wav",
+                        TimeSpan.FromMilliseconds(0),
+                        TimeSpan.FromMilliseconds(500)));
                 }
                 else
                 {
-                    if (!ckbIgnoreWords.Checked)
+                    // Find left word & right word
+                    var leftStr = (i - 1 >= 0 ? words[i - 1] : null);
+                    var rightStr = (i + 1 < words.Count() ? words[i + 1] : null);
+                    // Compare words
+                    var word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr && p.RightStr == rightStr);
+                    if (word == null)
+                        word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.LeftStr == leftStr);
+                    if (word == null)
+                        word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i] && p.RightStr == rightStr);
+                    if (word == null)
+                        word = lstRecoutWord.FirstOrDefault(p => p.Str == words[i]);
+
+                    if (word != null)
                     {
-                        MessageBox.Show("Some words are not recorded yet!", "Info");
-                        return;
+                        sample = word.Filename;
+
+                        var ByteArray = SoundManager.TrimWavByteArray(
+                            word.Filename,
+                            TimeSpan.FromMilliseconds(word.SecondStart),
+                            TimeSpan.FromMilliseconds(word.SecondEnd));
+                        buffer = SoundManager.Merge(buffer, ByteArray);
+                        buffer = SoundManager.Merge(buffer, ByteArraySilent);
+                    }
+                    else
+                    {
+                        if (!ckbIgnoreWords.Checked)
+                        {
+                            MessageBox.Show("Some words are not recorded yet!", "Info");
+                            return;
+                        }
                     }
                 }
             }

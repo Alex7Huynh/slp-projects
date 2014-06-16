@@ -1,0 +1,10 @@
+﻿KM	KÍ LÔ MÉT
+KM/H	KÍ LÔ MÉT TRÊN GIỜ
+M/S	MÉT TRÊN GIÂY
+NM	NA NÔ MÉT
+FT	PHÍCH
+KG	KÍ LÔ GAM
+RAD	RA ĐI ĂNG
+MOL	MÔN
+HZ	HẸT
+OHM	ÔM
