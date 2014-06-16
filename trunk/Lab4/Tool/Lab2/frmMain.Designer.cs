@@ -523,9 +523,9 @@
             this.tbSentence.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbSentence.Size = new System.Drawing.Size(511, 141);
             this.tbSentence.TabIndex = 36;
-            this.tbSentence.Text = "Việt Nam TP.HCM Ngày 31/05/2014\r\nVĩ độ 21.02\r\nKinh độ: 105.85\r\nNhiệt độ hóa sương" +
-                ": 25°C\r\nTầm nhìn: 10.0 km\r\nĐộ ẩm: 100;\r\n13 + 52 + 20 = 85\r\n91 - 55 = 26\r\n41 * 2 " +
-                "= 82\r\n10 / 4 = 2.25";
+            this.tbSentence.Text = "Tới NTMK giao ĐBP, quẹo trái, trái, phải, trái, phải.\r\nViệt Nam, TP.HCM, ngày 31/" +
+                "05/2014.\r\nNhiệt độ: 25°C\r\nTầm nhìn: 10.0 km\r\n13 + 52 + 20 = 85\r\n91 - 55 = 26\r\n41" +
+                " * 2 = 82\r\n10 / 4 = 2.25";
             // 
             // label4
             // 

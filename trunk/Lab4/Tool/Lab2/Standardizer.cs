@@ -10,17 +10,17 @@ namespace MTT
     class Standardizer
     {
         private const string DictFolder = "StandardDict";
-        string sentennce;
+        string sentence;
         public string Sentennce
         {
-            get { return sentennce; }
-            set { sentennce = value; }
+            get { return sentence; }
+            set { sentence = value; }
         }
 
         public Standardizer() { }
         public Standardizer(string pSentence)
         {
-            sentennce = pSentence.Trim().ToUpper();
+            sentence = pSentence.Trim().ToUpper();
         }
         public string Standardize()
         {
@@ -34,47 +34,53 @@ namespace MTT
             StandardizeNumber();
             StandardizeDate();
 
-            sentennce = Regex.Replace(sentennce, @"\s+", " ");
-            return sentennce;
+            sentence = Regex.Replace(sentence, @"\s+", " ");
+            return sentence;
         }
 
         private void StandardizeNotation()
         {
-            sentennce = sentennce.Replace(", ", " ");
-            sentennce = sentennce.Replace(":", " ");
-            sentennce = sentennce.Replace(";", " ");
-            sentennce = sentennce.Replace("(", " ");
-            sentennce = sentennce.Replace(")", " ");
-            sentennce = sentennce.Replace("[", " ");
-            sentennce = sentennce.Replace("]", " ");
-            sentennce = sentennce.Replace(". ", " ");
-            sentennce = sentennce.Trim();
+            // Remove new-line character
+            sentence = sentence.Replace(".\r\n", ". ");
+            sentence = sentence.Replace("\r\n", ". ");
+            sentence = sentence + " ";
+
+            sentence = sentence.Replace(", ", " !SP! ");
+            sentence = sentence.Replace(". ", " !SIL! ");
+            sentence = sentence.Replace(":", " ");
+            sentence = sentence.Replace(";", " ");
+            sentence = sentence.Replace("(", " ");
+            sentence = sentence.Replace(")", " ");
+            sentence = sentence.Replace("[", " ");
+            sentence = sentence.Replace("]", " ");
+            
+            sentence = sentence.Trim();
         }
         private void StandardizeMathSymbol()
         {
-            sentennce = sentennce.Replace("@", " A CÒNG");
-            sentennce = sentennce.Replace("#", " THĂNG");
-            sentennce = sentennce.Replace("%", " PHẦN TRĂM");
-            sentennce = sentennce.Replace("+", " CỘNG");
-            sentennce = sentennce.Replace("^", " LŨY THỪA");
-            sentennce = sentennce.Replace("=", " BẰNG");
-            sentennce = sentennce.Replace("->", " SUY RA");
+            sentence = sentence.Replace("@", " A CÒNG");
+            sentence = sentence.Replace("#", " THĂNG");
+            sentence = sentence.Replace("%", " PHẦN TRĂM");
+            sentence = sentence.Replace("+", " CỘNG");
+            sentence = sentence.Replace("^", " LŨY THỪA");
+            sentence = sentence.Replace("=", " BẰNG");
+            sentence = sentence.Replace("->", " SUY RA");
         }
         private void StandardizePlaceNames()
         {
-            sentennce = sentennce.Replace("BRVT", " BÀ RỊA VŨNG TÀU");
-            sentennce = sentennce.Replace("TPHCM", " THÀNH PHỐ HỒ CHÍ MINH");
-            sentennce = sentennce.Replace("TP.HCM", " THÀNH PHỐ HỒ CHÍ MINH");
-            sentennce = sentennce.Replace("DNA", " ĐÔNG NAM Á");
-            sentennce = sentennce.Replace("ĐNA", " ĐÔNG NAM Á");
+            sentence = sentence.Replace("BRVT", " BÀ RỊA VŨNG TÀU");
+            sentence = sentence.Replace("TPHCM", " THÀNH PHỐ HỒ CHÍ MINH");
+            sentence = sentence.Replace("TP.HCM", " THÀNH PHỐ HỒ CHÍ MINH");
+            sentence = sentence.Replace("DNA", " ĐÔNG NAM Á");
+            sentence = sentence.Replace("ĐNA", " ĐÔNG NAM Á");
         }
 
         private void StandardizeDistance()
         {
-            sentennce = sentennce.Replace("KM", " KÍ LÔ MÉT");
-            sentennce = sentennce.Replace("NM", " NA NÔ MÉT");
+            sentence = sentence.Replace("KM", " KÍ LÔ MÉT");
+            sentence = sentence.Replace("NM", " NA NÔ MÉT");
 
-            sentennce = sentennce.Replace("FT", " PHÍCH");
+            sentence = sentence.Replace("FT", " PHÍCH");
         }
 
         private void Standardize(string filename)
@@ -86,32 +92,32 @@ namespace MTT
             {
                 string origin = line.Split('\t')[0];
                 string replaced = line.Split('\t')[1];
-                sentennce = sentennce.Replace(origin, " " + replaced);
+                sentence = sentence.Replace(origin, " " + replaced);
             }
         }
         private void StandardizeCurrency()
         {
-            sentennce = sentennce.Replace("$", " ĐÔ LA");
-            sentennce = sentennce.Replace("USD", " ĐÔ LA MỸ");
+            sentence = sentence.Replace("$", " ĐÔ LA");
+            sentence = sentence.Replace("USD", " ĐÔ LA MỸ");
 
-            sentennce = sentennce.Replace("€", " Ơ RÔ");
-            sentennce = sentennce.Replace("EURO", " Ơ RÔ");
+            sentence = sentence.Replace("€", " Ơ RÔ");
+            sentence = sentence.Replace("EURO", " Ơ RÔ");
 
-            sentennce = sentennce.Replace("£", " BẢNG ANH");
-            sentennce = sentennce.Replace("GBP", " BẢNG ANH");
-            sentennce = sentennce.Replace("penny", " xu");
-            sentennce = sentennce.Replace("pence", " xu");
+            sentence = sentence.Replace("£", " BẢNG ANH");
+            sentence = sentence.Replace("GBP", " BẢNG ANH");
+            sentence = sentence.Replace("penny", " xu");
+            sentence = sentence.Replace("pence", " xu");
 
-            sentennce = sentennce.Replace("¥", " YÊN");
-            sentennce = sentennce.Replace("JPY", " YÊN");
+            sentence = sentence.Replace("¥", " YÊN");
+            sentence = sentence.Replace("JPY", " YÊN");
 
-            sentennce = sentennce.Replace("VND", " ĐỒNG");
-            sentennce = sentennce.Replace("VNĐ", " ĐỒNG");
+            sentence = sentence.Replace("VND", " ĐỒNG");
+            sentence = sentence.Replace("VNĐ", " ĐỒNG");
         }
         private void StandardizeNumber()
         {
-            string[] words = sentennce.Split(' ');
-            sentennce = "";
+            string[] words = sentence.Split(' ');
+            sentence = "";
 
             for (int i = 0; i < words.Length; ++i)
             {
@@ -162,14 +168,14 @@ namespace MTT
                     }
 
                 }
-                sentennce += tmp + " ";
+                sentence += tmp + " ";
             }
-            sentennce = sentennce.Trim();
+            sentence = sentence.Trim();
         }
         private void StandardizeDate()
         {
-            string[] words = sentennce.Split(' ');
-            sentennce = "";
+            string[] words = sentence.Split(' ');
+            sentence = "";
             foreach (string s in words)
             {
                 string tmp = s;
@@ -187,9 +193,9 @@ namespace MTT
                     tmp += " THÁNG " + NumToString.convert(sMonth).ToUpper();
                     tmp += " NĂM " + NumToString.convert(sYear).ToUpper();
                 }
-                sentennce += tmp + " ";
+                sentence += tmp + " ";
             }
-            sentennce = sentennce.Trim();
+            sentence = sentence.Trim();
         }
     }
 }
