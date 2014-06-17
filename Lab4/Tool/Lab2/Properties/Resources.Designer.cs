@@ -68,5 +68,15 @@ namespace MTT.Properties {
                 return ResourceManager.GetString("Form1_btnCreateLmtrain_Click_Create_lmtrain_txt_successfully_", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap View {
+            get {
+                object obj = ResourceManager.GetObject("View", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
