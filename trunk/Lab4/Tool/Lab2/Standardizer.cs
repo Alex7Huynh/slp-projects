@@ -31,8 +31,7 @@ namespace MTT
             {
                 Standardize(s);
             }
-            StandardizeNumber();
-            StandardizeDate();
+            StandardizeNumber();            
 
             sentence = Regex.Replace(sentence, @"\s+", " ");
             return sentence;
@@ -46,8 +45,8 @@ namespace MTT
             sentence = sentence + " ";
 
             sentence = sentence.Replace(", ", " !SP! ");
-            sentence = sentence.Replace(". ", " !SIL! ");
-            sentence = sentence.Replace(":", " ");
+            sentence = sentence.Replace(": ", " !SP! ");
+            sentence = sentence.Replace(". ", " !SIL! ");            
             sentence = sentence.Replace(";", " ");
             sentence = sentence.Replace("(", " ");
             sentence = sentence.Replace(")", " ");
@@ -56,32 +55,8 @@ namespace MTT
             
             sentence = sentence.Trim();
         }
-        private void StandardizeMathSymbol()
-        {
-            sentence = sentence.Replace("@", " A CÒNG");
-            sentence = sentence.Replace("#", " THĂNG");
-            sentence = sentence.Replace("%", " PHẦN TRĂM");
-            sentence = sentence.Replace("+", " CỘNG");
-            sentence = sentence.Replace("^", " LŨY THỪA");
-            sentence = sentence.Replace("=", " BẰNG");
-            sentence = sentence.Replace("->", " SUY RA");
-        }
-        private void StandardizePlaceNames()
-        {
-            sentence = sentence.Replace("BRVT", " BÀ RỊA VŨNG TÀU");
-            sentence = sentence.Replace("TPHCM", " THÀNH PHỐ HỒ CHÍ MINH");
-            sentence = sentence.Replace("TP.HCM", " THÀNH PHỐ HỒ CHÍ MINH");
-            sentence = sentence.Replace("DNA", " ĐÔNG NAM Á");
-            sentence = sentence.Replace("ĐNA", " ĐÔNG NAM Á");
-        }
-
-        private void StandardizeDistance()
-        {
-            sentence = sentence.Replace("KM", " KÍ LÔ MÉT");
-            sentence = sentence.Replace("NM", " NA NÔ MÉT");
-
-            sentence = sentence.Replace("FT", " PHÍCH");
-        }
+        
+        
 
         private void Standardize(string filename)
         {
@@ -95,25 +70,8 @@ namespace MTT
                 sentence = sentence.Replace(origin, " " + replaced);
             }
         }
-        private void StandardizeCurrency()
-        {
-            sentence = sentence.Replace("$", " ĐÔ LA");
-            sentence = sentence.Replace("USD", " ĐÔ LA MỸ");
-
-            sentence = sentence.Replace("€", " Ơ RÔ");
-            sentence = sentence.Replace("EURO", " Ơ RÔ");
-
-            sentence = sentence.Replace("£", " BẢNG ANH");
-            sentence = sentence.Replace("GBP", " BẢNG ANH");
-            sentence = sentence.Replace("penny", " xu");
-            sentence = sentence.Replace("pence", " xu");
-
-            sentence = sentence.Replace("¥", " YÊN");
-            sentence = sentence.Replace("JPY", " YÊN");
-
-            sentence = sentence.Replace("VND", " ĐỒNG");
-            sentence = sentence.Replace("VNĐ", " ĐỒNG");
-        }
+        
+        // Integer, float, date, time, math operators
         private void StandardizeNumber()
         {
             string[] words = sentence.Split(' ');
@@ -128,11 +86,47 @@ namespace MTT
                     string sReal = s.Split('.')[0];
                     string sDecimal = s.Split('.')[1];
                     int l, r;
+
                     if (int.TryParse(sReal, out l) && int.TryParse(sDecimal, out r)) // floating point
                     {
-                        sReal = l.ToString();
-                        sDecimal = r.ToString();
+                        sReal = l.ToString();                        
                         tmp = NumToString.convert(sReal).ToUpper() + " CHẤM " + NumToString.convert(sDecimal).ToUpper();                        
+                    }
+                }
+                else if (s.Count(f => f == '/') == 2)
+                {
+                    string sDay = s.Split('/')[0];                    
+                    string sMonth = s.Split('/')[1];
+                    string sYear = s.Split('/')[2];
+                    int d, m, y;
+
+                    if (int.TryParse(sDay, out d) && int.TryParse(sMonth, out m) && int.TryParse(sYear, out y))
+                    {
+                        sDay = d.ToString();
+                        sMonth = m.ToString();
+                        sYear = y.ToString();
+
+                        tmp = " " + NumToString.convert(sDay).ToUpper();
+                        tmp += " THÁNG " + NumToString.convert(sMonth).ToUpper();
+                        tmp += " NĂM " + NumToString.convert(sYear).ToUpper() + " ";
+                    }
+                }
+                else if (s.Count(f => f == ':') == 2)
+                {
+                    string sHour = s.Split(':')[0];
+                    string sMinute = s.Split(':')[1];
+                    string sSecond = s.Split(':')[2];
+                    int h, m, sec;
+
+                    if (int.TryParse(sHour, out h) && int.TryParse(sMinute, out m) && int.TryParse(sSecond, out sec))
+                    {
+                        sHour = h.ToString();
+                        sMinute = m.ToString();
+                        sSecond = sec.ToString();
+
+                        tmp = " " + NumToString.convert(sHour).ToUpper() + " GIỜ ";
+                        tmp += NumToString.convert(sMinute).ToUpper() + " PHÚT ";
+                        tmp += NumToString.convert(sSecond).ToUpper() + " GIÂY ";
                     }
                 }
                 else if (s == "-")
@@ -178,9 +172,8 @@ namespace MTT
             sentence = "";
             foreach (string s in words)
             {
-                string tmp = s;
-                int count = s.Count(f => f == '/');
-                if (count == 2)
+                string tmp = s;                
+                if (s.Count(f => f == '/') == 2)
                 {
                     string sDay = s.Split('/')[0];
                     sDay = int.Parse(sDay).ToString(); // 05 -> 5

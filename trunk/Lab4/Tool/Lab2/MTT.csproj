@@ -144,6 +144,7 @@
     <Content Include="config\NewSentences.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\View.png" />
     <Content Include="silent.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

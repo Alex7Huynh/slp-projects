@@ -12,6 +12,7 @@ namespace MTT
     {
         FileManager fileManager;
         List<MyWord> lstRecoutWord;
+        bool bView;
 
         public frmMain()
         {
@@ -25,6 +26,35 @@ namespace MTT
             tbTestFilePath.Text = currentpath + "\\Test";
 
             fileManager = new FileManager(tbTrainFilePath.Text, tbTestFilePath.Text);
+            bView = true;
+            ChangeView(ref bView);
+        }
+        
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            ChangeView(ref bView);
+        }
+
+        private void ChangeView(ref bool bSimple)
+        {
+            if (bSimple)
+            {
+                groupBox1.Visible = false;
+                groupBox2.Visible = false;
+                groupBox3.Location = new System.Drawing.Point(650, 12);
+                bSimple = false;
+                this.Width = 810;
+                this.Height = 330;
+            }
+            else
+            {
+                groupBox1.Visible = true;
+                groupBox2.Visible = true;
+                groupBox3.Location = new System.Drawing.Point(487, 271);
+                bSimple = true;
+                this.Width = 648;
+                this.Height = 644;
+            }
         }
 
         private void btnBrowseTrainPath_Click(object sender, EventArgs e)
@@ -147,6 +177,7 @@ namespace MTT
             //MessageBox.Show(sentence, "Sentence -> stardandized");
             SoundManager.PlayWavFile("out.wav");
         }
+
         #region Prepare data
         private void btnPrepareAll_Click(object sender, EventArgs e)
         {
@@ -426,7 +457,7 @@ namespace MTT
             }
         }
 
-        private void btnInitBuildModel_Click(object sender, EventArgs e)
+        private void btnBuildTestModel_Click(object sender, EventArgs e)
         {
             string numberOfGram = txtNGram.Text;
             if (string.IsNullOrEmpty(numberOfGram))
@@ -437,16 +468,10 @@ namespace MTT
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_NEW, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_INIT, numberOfGram), false);
             CommandHelper.ExecuteCommand(string.Format(ConstantValues.CMD_LAB3_STEP2_BUILD_NGRAM_BUILD, numberOfGram), false);
-            this.Focus();
-        }
-
-        private void btnTestModel_Click(object sender, EventArgs e)
-        {
-            //CommandHelper.ExecuteCommand(ConstantValues.CMD_TEST_STEP1_RUN, false);
             CommandHelper.ExecuteCommand(ConstantValues.CMD_LAB3_STEP3_RECOGNITION_HDECODE, false);
             MessageBox.Show("Create recout.mlf successfully!", "Info");
             this.Focus();
-        }
+        }      
 
         private void btnGetResult_Click(object sender, EventArgs e)
         {
@@ -484,9 +509,6 @@ namespace MTT
             this.Focus();
         }
         #endregion
-
-
-
 
     }
 }
