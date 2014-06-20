@@ -149,7 +149,7 @@
             this.btnCreateMFC.Name = "btnCreateMFC";
             this.btnCreateMFC.Size = new System.Drawing.Size(130, 23);
             this.btnCreateMFC.TabIndex = 9;
-            this.btnCreateMFC.Text = "Create mfcc.scp";
+            this.btnCreateMFC.Text = "Create mfcc.-train.scp";
             this.btnCreateMFC.UseVisualStyleBackColor = true;
             this.btnCreateMFC.Click += new System.EventHandler(this.btnCreateMFC_Click);
             // 
@@ -219,7 +219,7 @@
             this.btnTrainHmm1_3.Name = "btnTrainHmm1_3";
             this.btnTrainHmm1_3.Size = new System.Drawing.Size(260, 23);
             this.btnTrainHmm1_3.TabIndex = 15;
-            this.btnTrainHmm1_3.Text = "Step 9: Run Train (3 times) to HMM3";
+            this.btnTrainHmm1_3.Text = "Step 9: Train (3 times) to HMM3";
             this.btnTrainHmm1_3.UseVisualStyleBackColor = true;
             this.btnTrainHmm1_3.Click += new System.EventHandler(this.btnCreateHMM3_Click);
             // 
@@ -229,7 +229,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 23);
             this.button4.TabIndex = 6;
-            this.button4.Text = "Create phones.mlf (2 file)";
+            this.button4.Text = "Create phones (MLF)";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.btnCreatePhones_Click);
             // 
@@ -269,7 +269,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(261, 23);
             this.button8.TabIndex = 19;
-            this.button8.Text = "Step 13: Train  twice to HMM9";
+            this.button8.Text = "Step 13: Train twice to HMM9";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.btnCreateHMM9_Click);
             // 
