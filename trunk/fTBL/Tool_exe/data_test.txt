@@ -1,0 +1,23 @@
+The DT
+boss NN
+parks VBZ 
+inside IN
+the DT
+bank NN
+over IN
+the DT
+street NN
+today RB
+
+The DT
+water NN
+bank NN
+was VB
+full JJ
+
+She PRP
+checks VBZ
+mail NN
+by IN
+the DT
+computer NN
