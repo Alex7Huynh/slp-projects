@@ -1,0 +1,97 @@
+University NN HOU
+is VB VSTA
+a DT
+place NN HOU
+for IN
+learning NN ABS
+
+He PRP
+stands VBZ VSTA
+across IN
+the DT
+street NN HOU
+today RB
+
+The DT
+blood NN ATR
+bank NN HOU
+was VB VSTA
+full JJ ADEG
+
+They PRP
+will MD
+enter VB VMOT
+the DT
+bank NN HOU
+tomorrow RB
+
+The DT
+coin NN ATR
+bank NN HOU
+was VB VSTA
+full JJ ADEG
+
+I PRP
+sent VBD VCOM
+a DT
+letter NN ENT
+to TO
+my JJ AREL
+dad NN HUM
+
+He PRP
+checks VB VPER
+mail NN ENT
+in IN
+the DT
+inbox NN ABS
+
+Price NN MEA
+wars NNS ABS
+between IN
+the DT
+Fast-food NN FOD
+giants NNS GRP
+are VBP VSTA
+starting VBG VCHG
+to TO
+clobber VB VCMP
+the DT
+fast-food NN FOD
+little JJ ASIZ
+guys NNS GRP
+
+When WRB
+elephants NNS ANM
+start VB VCHG
+fighting VBG VCMP
+ants NNS ANM
+get VB VSTA
+killed VBN VSTA
+
+They PRP
+would MD
+be VB VSTA
+like IN
+putting VBG VCON
+Dracula NNP
+in IN
+charge NN ACT
+of IN
+the DT
+blood NN ATR
+bank NN HOU
+
+Mr. NNP
+Peterson NNP
+as IN
+part NN PRT
+of IN
+an DT
+effort NN ABS
+to TO
+purchase VB VPOS
+a DT
+bank NN HOU
+of IN
+Scottsdale NNP
