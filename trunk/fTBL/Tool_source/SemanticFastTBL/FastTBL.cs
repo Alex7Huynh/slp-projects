@@ -74,8 +74,8 @@ namespace SemanticFastTBL
                 {
                     for (int k = 0; k < _nounSemanticRoles.Count; k++)
                     {
-                        _lstRuleTemplate.Add(new MyRuleTemplate(_lstPOS[i], _lstPOS[11], _lstPOS[j], _nounSemanticRoles[k]));
-                        _lstRuleTemplate.Add(new MyRuleTemplate(_lstPOS[i], _lstPOS[14], _lstPOS[j], _nounSemanticRoles[k]));
+                        _lstRuleTemplate.Add(new MyRuleTemplate(_lstRuleTemplate.Count, _lstPOS[i], _lstPOS[11], _lstPOS[j], _nounSemanticRoles[k]));
+                        _lstRuleTemplate.Add(new MyRuleTemplate(_lstRuleTemplate.Count, _lstPOS[i], _lstPOS[14], _lstPOS[j], _nounSemanticRoles[k]));
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace SemanticFastTBL
                     for (int k = 0; k < _verbSemanticRoles.Count; k++)
                     {
                         for (int m = 26; m <= 31; m++)
-                            _lstRuleTemplate.Add(new MyRuleTemplate(_lstPOS[i], _lstPOS[m], _lstPOS[j], _verbSemanticRoles[k]));
+                            _lstRuleTemplate.Add(new MyRuleTemplate(_lstRuleTemplate.Count, _lstPOS[i], _lstPOS[m], _lstPOS[j], _verbSemanticRoles[k]));
                     }
                 }
             }
@@ -99,7 +99,7 @@ namespace SemanticFastTBL
                     for (int k = 0; k < _adjSemanticRoles.Count; k++)
                     {
                         for (int m = 6; m <= 8; m++)
-                            _lstRuleTemplate.Add(new MyRuleTemplate(_lstPOS[i], _lstPOS[m], _lstPOS[j], _adjSemanticRoles[k]));
+                            _lstRuleTemplate.Add(new MyRuleTemplate(_lstRuleTemplate.Count, _lstPOS[i], _lstPOS[m], _lstPOS[j], _adjSemanticRoles[k]));
                     }
                 }
             }
@@ -199,17 +199,18 @@ namespace SemanticFastTBL
                         && string.Equals(nextWord.POS, rt.NextWord))
                     {
                         lst[j].Words[k].Tag = rt.Tag;
-                        if(bSave) rt.Sentence.Add(sentence);
+                        if(bSave) rt.LstSenIndex.Add(j);
                     }
                 }
             }
+            rt.LstSenIndex = rt.LstSenIndex.Distinct().ToList();
         }
         // Evaluate a rule template
         private bool Evaluate(MyRuleTemplate rt)
-        {
-            bool bFlag = false;
+        {            
             int good = 0;
             int bad = 0;
+            bool bFlag = false; // good's not increase
             for (int i = 0; i < _trainData.Count; i++)
             {
                 MySentence sentence = _trainData[i];
@@ -229,7 +230,7 @@ namespace SemanticFastTBL
                             {
                                 good++;
                                 bFlag = true;
-                                sentence.Rules.Add(rt);
+                                sentence.LstRuleIndex.Add(rt.Index);
                             }
                             else // C[s]=T[s] ∧ C[r(s)] ≠ T[s]
                             {
@@ -249,7 +250,7 @@ namespace SemanticFastTBL
             int maxScore;
             bool bBestRuleFound;
             MyRuleTemplate bestRT = new MyRuleTemplate();
-            List<MyRuleTemplate> affectRT = new List<MyRuleTemplate>();
+            List<int> affectRT = new List<int>();
             bool bFirst = true;
             do
             {
@@ -270,7 +271,7 @@ namespace SemanticFastTBL
                     else
                     {
                         // Only re-evaluate rules in affectRT
-                        if (affectRT.Any(item => item == rt))
+                        if (affectRT.Any(item => item == rt.Index))
                             Evaluate(rt);
                     }
 
@@ -299,9 +300,9 @@ namespace SemanticFastTBL
                     bestRT = _lstRuleTemplate[bestRuleIndex];
                     ApplyRuleTemplate(bestRT, _trainData, true);
                     // Find all rule templates affecting sentences which bestRT fixed
-                    foreach(MySentence sen in bestRT.Sentence)
+                    foreach(int senIndex in bestRT.LstSenIndex)
                     {
-                        affectRT.AddRange(sen.Rules);
+                        affectRT.AddRange(_trainData[senIndex].LstRuleIndex);
                     }
                     affectRT = affectRT.Distinct().ToList();
                 }
@@ -349,8 +350,8 @@ namespace SemanticFastTBL
             InitPOSList();
             InitSemanticRoles();
             GenerateRuleTemplates();
-            _trainData = LoadTrainData();
             _trainDataLabeled = LoadTrainData();
+            _trainData = LoadTrainData();            
             SetBaseLine(_trainData);
             TrainRuleTemplates();
         }
@@ -362,8 +363,7 @@ namespace SemanticFastTBL
             // Find semantic roles
             for (int i = 0; i < _lstTrainedRuleTemplate.Count; i++)
             {
-                MyRuleTemplate rt = _lstTrainedRuleTemplate[i];
-                //_testData = ApplyRuleTemplate(rt, _testData);
+                MyRuleTemplate rt = _lstTrainedRuleTemplate[i];                
                 ApplyRuleTemplate(rt, _testData, false);
             }
         }
