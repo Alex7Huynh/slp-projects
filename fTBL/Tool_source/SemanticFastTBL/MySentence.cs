@@ -6,25 +6,25 @@ using System.Text;
 namespace SemanticFastTBL
 {
     public class MySentence
-    {
+    {        
         List<MyWord> _words;
-        List<MyRuleTemplate> _rules;
+        List<int> _lstRuleIndex;
 
         public List<MyWord> Words
         {
             get { return _words; }
             set { _words = value; }
         }
-        public List<MyRuleTemplate> Rules
+        public List<int> LstRuleIndex
         {
-            get { return _rules; }
-            set { _rules = value; }
+            get { return _lstRuleIndex; }
+            set { _lstRuleIndex = value; }
         }
 
-        public MySentence() 
+        public MySentence()
         {
             _words = new List<MyWord>();
-            _rules = new List<MyRuleTemplate>();
+            _lstRuleIndex = new List<int>();
         }
     }
 }

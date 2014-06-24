@@ -8,13 +8,19 @@ namespace SemanticFastTBL
     public class MyRuleTemplate
     {
         // WORD[-1] = ? ∧ WORD[0] = ? ∧ WORD[1] = ? ==> TAG[0] <-- ?
+        int _index;        
         string _prevWord;
         string _currWord;
         string _nextWord;
         string _tag;
-        int _score;        
-        List<MySentence> _sentence;
+        int _score;
+        List<int> _lstSenIndex;
 
+        public int Index
+        {
+            get { return _index; }
+            set { _index = value; }
+        }
         public string PrevWord
         {
             get { return _prevWord; }
@@ -40,20 +46,18 @@ namespace SemanticFastTBL
             get { return _score; }
             set { _score = value; }
         }
-        public List<MySentence> Sentence
+        public List<int> LstSenIndex
         {
-            get { return _sentence; }
-            set { _sentence = value; }
+            get { return _lstSenIndex; }
+            set { _lstSenIndex = value; }
         }
 
-        public MyRuleTemplate() {
-            _score = 0;
-            _sentence = new List<MySentence>();
-        }
-        public MyRuleTemplate(string pPrevWord, string pCurrWord, string pNextWord, string pTag)
+        public MyRuleTemplate() { }
+        public MyRuleTemplate(int pIndex, string pPrevWord, string pCurrWord, string pNextWord, string pTag)
         {
             _score = 0;
-            _sentence = new List<MySentence>();
+            _lstSenIndex = new List<int>();
+            _index = pIndex;
             _prevWord = pPrevWord;
             _currWord = pCurrWord;
             _nextWord = pNextWord;
