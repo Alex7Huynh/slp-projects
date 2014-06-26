@@ -87,7 +87,7 @@
             this.btnDi2Mn.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDi2Mn.Location = new System.Drawing.Point(6, 75);
             this.btnDi2Mn.Name = "btnDi2Mn";
-            this.btnDi2Mn.Size = new System.Drawing.Size(146, 25);
+            this.btnDi2Mn.Size = new System.Drawing.Size(148, 25);
             this.btnDi2Mn.TabIndex = 2;
             this.btnDi2Mn.Text = "DICT --> monophone";
             this.btnDi2Mn.UseVisualStyleBackColor = true;
@@ -118,7 +118,7 @@
             this.btnCreateDICT.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateDICT.Location = new System.Drawing.Point(6, 47);
             this.btnCreateDICT.Name = "btnCreateDICT";
-            this.btnCreateDICT.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateDICT.Size = new System.Drawing.Size(148, 25);
             this.btnCreateDICT.TabIndex = 1;
             this.btnCreateDICT.Text = "Create DICT";
             this.btnCreateDICT.UseVisualStyleBackColor = true;
@@ -129,7 +129,7 @@
             this.btnCreatePROMPTS.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreatePROMPTS.Location = new System.Drawing.Point(6, 133);
             this.btnCreatePROMPTS.Name = "btnCreatePROMPTS";
-            this.btnCreatePROMPTS.Size = new System.Drawing.Size(146, 25);
+            this.btnCreatePROMPTS.Size = new System.Drawing.Size(148, 25);
             this.btnCreatePROMPTS.TabIndex = 4;
             this.btnCreatePROMPTS.Text = "Create PROMPTS";
             this.btnCreatePROMPTS.UseVisualStyleBackColor = true;
@@ -140,7 +140,7 @@
             this.btnCreateWORDS.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateWORDS.Location = new System.Drawing.Point(6, 161);
             this.btnCreateWORDS.Name = "btnCreateWORDS";
-            this.btnCreateWORDS.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateWORDS.Size = new System.Drawing.Size(148, 25);
             this.btnCreateWORDS.TabIndex = 5;
             this.btnCreateWORDS.Text = "Create WORDS.MLF";
             this.btnCreateWORDS.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             this.btnCreateMfccTrain.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateMfccTrain.Location = new System.Drawing.Point(6, 218);
             this.btnCreateMfccTrain.Name = "btnCreateMfccTrain";
-            this.btnCreateMfccTrain.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateMfccTrain.Size = new System.Drawing.Size(148, 25);
             this.btnCreateMfccTrain.TabIndex = 7;
             this.btnCreateMfccTrain.Text = "Create mfcc-train.scp";
             this.btnCreateMfccTrain.UseVisualStyleBackColor = true;
@@ -182,7 +182,7 @@
             this.btnCreateTrainingSCP.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateTrainingSCP.Location = new System.Drawing.Point(6, 246);
             this.btnCreateTrainingSCP.Name = "btnCreateTrainingSCP";
-            this.btnCreateTrainingSCP.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateTrainingSCP.Size = new System.Drawing.Size(148, 25);
             this.btnCreateTrainingSCP.TabIndex = 8;
             this.btnCreateTrainingSCP.Text = "Create train.scp";
             this.btnCreateTrainingSCP.UseVisualStyleBackColor = true;
@@ -193,7 +193,7 @@
             this.btnCreateFolder.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFolder.Location = new System.Drawing.Point(6, 19);
             this.btnCreateFolder.Name = "btnCreateFolder";
-            this.btnCreateFolder.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateFolder.Size = new System.Drawing.Size(148, 25);
             this.btnCreateFolder.TabIndex = 0;
             this.btnCreateFolder.Text = "Create folders";
             this.btnCreateFolder.UseVisualStyleBackColor = true;
@@ -215,7 +215,7 @@
             this.button1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(6, 275);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 25);
+            this.button1.Size = new System.Drawing.Size(148, 25);
             this.button1.TabIndex = 9;
             this.button1.Text = "Create mfc train files";
             this.button1.UseVisualStyleBackColor = true;
@@ -248,7 +248,7 @@
             this.button4.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(6, 189);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(146, 25);
+            this.button4.Size = new System.Drawing.Size(148, 25);
             this.button4.TabIndex = 6;
             this.button4.Text = "Create phones (mlf)";
             this.button4.UseVisualStyleBackColor = true;
@@ -366,7 +366,7 @@
             this.btnCreateFulllist.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCreateFulllist.Location = new System.Drawing.Point(6, 104);
             this.btnCreateFulllist.Name = "btnCreateFulllist";
-            this.btnCreateFulllist.Size = new System.Drawing.Size(146, 25);
+            this.btnCreateFulllist.Size = new System.Drawing.Size(148, 25);
             this.btnCreateFulllist.TabIndex = 3;
             this.btnCreateFulllist.Text = "Create fulllist";
             this.btnCreateFulllist.UseVisualStyleBackColor = true;
